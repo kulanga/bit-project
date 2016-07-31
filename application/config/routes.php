@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "login";
 $route['404_override'] = '';
 $route['studentx/testxxx'] = "student/home/test";
 $route['student/(:any)'] = "student/$1";
@@ -50,7 +50,7 @@ $route['admin/staff/new'] = "admin/admin_manage_user/create_staff";
 $route['admin/course/new'] = "admin/admin_manage_course/create";
 $route['admin/course/edit/(:num)'] = "admin/admin_manage_course/edit/$1";
 
-
+$route['assets/(:any)'] = 'assets/$1';
 
 
 $route['(:any)'] = "$1";

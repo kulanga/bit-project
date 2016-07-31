@@ -22,7 +22,7 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://hnde.local';
 
 /*
 |--------------------------------------------------------------------------
@@ -232,7 +232,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'MIIEowIBAAKCAQEAvBglYsRhyTO2DhkuUQyShAGJJEFfbStWKI0n6xavXgUNM2Q8';
 
 /*
 |--------------------------------------------------------------------------
@@ -365,6 +365,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
+$config['institute'] = 'HNDE';
+$config['app_name'] = 'HNDE Student Portal';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
