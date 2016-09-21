@@ -1,0 +1,955 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"subj",
+				"subject"
+			],
+			[
+				"eve",
+				"event"
+			],
+			[
+				"time",
+				"timetable"
+			],
+			[
+				"qu",
+				"query"
+			],
+			[
+				"pare",
+				"parent_event_id"
+			],
+			[
+				"save",
+				"save_events"
+			],
+			[
+				"fre",
+				"event_repeat_frequency"
+			],
+			[
+				"retp",
+				"is_repeatable"
+			],
+			[
+				"OP",
+				"option"
+			],
+			[
+				"end",
+				"end_time"
+			],
+			[
+				"bt",
+				"btn-primary"
+			],
+			[
+				"course",
+				"course_id"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"sub",
+				"subjects"
+			],
+			[
+				"cl",
+				"close"
+			],
+			[
+				"sems",
+				"semester"
+			],
+			[
+				"ta",
+				"table"
+			],
+			[
+				"cou",
+				"course_id"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"subjec",
+				"subject_id"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"sav",
+				"save_data"
+			],
+			[
+				"subject",
+				"subject_model"
+			],
+			[
+				"c",
+				"content"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"pad",
+				"padding-right"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"ac",
+				"action	Attr"
+			],
+			[
+				"co",
+				"controller_arr"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"process_",
+				"process_lecturer_login"
+			],
+			[
+				"process",
+				"process_student_login"
+			],
+			[
+				"logi",
+				"login_types"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"cr",
+				"criteria"
+			],
+			[
+				"criter",
+				"criteria_id"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"s",
+				"success"
+			],
+			[
+				"st",
+				"student_id"
+			],
+			[
+				"in",
+				"input"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "application/views/staff/assignment/create.php",
+			"settings":
+			{
+				"buffer_size": 3957,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/layout/default.php",
+			"settings":
+			{
+				"buffer_size": 5699,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/config/constants.php",
+			"settings":
+			{
+				"buffer_size": 1729,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/admin/manage_course/create.php",
+			"settings":
+			{
+				"buffer_size": 9355,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/staff/staff_assignment.php",
+			"settings":
+			{
+				"buffer_size": 420,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/config/routes.php",
+			"settings":
+			{
+				"buffer_size": 2765,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 96.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Add Repository"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/media/DATA/Projects/FL/studentPortal",
+		"/media/DATA/Projects/FL/studentPortal/application",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/staff",
+		"/media/DATA/Projects/FL/studentPortal/application/views",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course",
+		"/media/DATA/Projects/FL/studentPortal/application/views/layout",
+		"/media/DATA/Projects/FL/studentPortal/application/views/staff",
+		"/media/DATA/Projects/FL/studentPortal/application/views/staff/assignment",
+		"/media/DATA/Projects/FL/studentPortal/application/views/student",
+		"/media/DATA/Projects/FL/studentPortal/application/views/user"
+	],
+	"file_history":
+	[
+		"/media/DATA/Projects/FL/studentPortal/application/views/layout/default.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/timetable/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/staff/view_staff_timetable.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/staff/staff_assignment.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/staff/assignment/list.php",
+		"/media/DATA/Projects/FL/studentPortal/application/config/routes.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/staff_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin/admin_manage_timetable.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/staff/staff_dashboard.php",
+		"/media/DATA/Projects/FL/studentPortal/application/core/MY_Controller.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/staff/staff_timetable.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/user.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/login.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/user_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_user/create_staff.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin/admin_manage_user.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/timetable_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/staff/staff_dashboard_view.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/course_semester_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin/admin_manage_course.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/course_subject_model.php",
+		"/media/DATA/Projects/FL/studentPortal/www/assets/js/admin_course.js",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course/semster_details.php",
+		"/media/DATA/Projects/FL/studentPortal/application/config/constants.php",
+		"/media/DATA/Projects/FL/studentPortal/application/helpers/utility_helper.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/location_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/course_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_user/edit_staff.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_user/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/staff_designation_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course/create.php",
+		"/media/DATA/Projects/FL/studentPortal/www/assets/css/application.css",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin/admin_manage_subject.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/course_subjects_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/admin/admin_manage_staff.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_subject/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course/course_list.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_subject/create.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/subject_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_course/edit.php",
+		"/media/DATA/Projects/FL/studentPortal/application/libraries/Layout.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/login/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/models/user_type_model.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/layouts/default.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/layouts/admin.php",
+		"/media/DATA/Projects/FL/studentPortal/system/helpers/form_helper.php",
+		"/media/DATA/Projects/FL/studentPortal/system/helpers/url_helper.php",
+		"/home/thushan/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/thushan/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/media/DATA/Projects/FL/studentPortal/application/config/config.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/student/student_home.php",
+		"/media/DATA/Projects/FL/studentPortal/application/config/database.php",
+		"/media/DATA/Projects/FL/studentPortal/www/.htaccess",
+		"/media/DATA/Projects/FL/studentPortal/application/.htaccess",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/studnetsportal.sublime-project",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/mxeng.sublime-project",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_user/staff.php",
+		"/media/DATA/Projects/FL/studentPortal/www/assets/css/common.css",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/timetable/create.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/layouts/footer.php",
+		"/media/DATA/Projects/FL/studentPortal/application/config/autoload.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/manage_ac_user.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/admin/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/index.html",
+		"/media/DATA/Projects/FL/fbingo/application/config/routes.php",
+		"/media/DATA/Projects/FL/studentPortal/system/core/Model.php",
+		"/media/DATA/Projects/FL/fbingo/application/views/dist/edit/changepassword.php",
+		"/media/DATA/Projects/FL/fbingo/application/controllers/dist/edit.php",
+		"/media/DATA/Projects/FL/studentPortal/stu.sublime-project",
+		"/media/DATA/Projects/FL/fbingo/application/views/madmin/mainadmin/edit.php",
+		"/media/DATA/Projects/FL/fbingo/application/views/dist/dashboard/change_password",
+		"/media/DATA/Projects/FL/fbingo/sftp-config.json",
+		"/media/DATA/Projects/FL/fbingo/application/libraries/common_action.php",
+		"/media/DATA/Projects/FL/fbingo/application/controllers/dist/login.php",
+		"/media/DATA/Projects/FL/fbingo/application/libraries/madmin_action.php",
+		"/media/DATA/Projects/FL/fbingo/215a.apk",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/fbingo",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/sftp.sublime-workspace",
+		"/media/DATA/Projects/FL/studentPortal/application/views/student/login.php",
+		"/media/DATA/Projects/FL/studentPortal/application/helpers/ui_helper.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/student/student.php",
+		"/media/DATA/Projects/FL/studentPortal/application/controllers/student/home.php",
+		"/media/DATA/Projects/FL/studentPortal/www/index.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/student/home/test.php",
+		"/media/DATA/Projects/FL/studentPortal/application/views/layouts/partial/footer.php",
+		"/media/DATA/Projects/FL/studentPortal/application/core/MY_Loader.php",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/sftp.json",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/sftp-config.json",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/rating-engine.sublime-project",
+		"/media/DATA/Projects/RatingEngine/app/Models/Student.php",
+		"/media/DATA/Projects/RatingEngine/app/Models/Base.php",
+		"/media/DATA/Projects/RatingEngine/app/Http/Controllers/RatingController.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/rating/rates.blade.php",
+		"/media/DATA/Projects/RatingEngine/app/Models/StudentDetails.php",
+		"/media/DATA/Projects/RatingEngine/app/Models/Track.php",
+		"/media/DATA/Projects/RatingEngine/app/Http/Controllers/CriteriaController.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/criteria/create.blade.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/layouts/default.blade.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/welcome.blade.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/rating/inputs.blade.php",
+		"/media/DATA/Projects/RatingEngine/app/Models/RatingCriteria.php",
+		"/media/DATA/Projects/RatingEngine/app/Models/RatingCriteriaType.php",
+		"/media/DATA/Projects/RatingEngine/app/Http/routes.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/student/inputs.blade.php",
+		"/media/DATA/Projects/RatingEngine/resources/views/criteria/inputs.blade.php",
+		"/home/thushan/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/thushan/.config/sublime-text-3/Packages/User/sftp_servers/sftp"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"jQuery-File-Upload",
+			"IS_AJAX",
+			"            \n",
+			"user_type_id",
+			"login",
+			"reload_events",
+			"titbale_course_id",
+			"check_database",
+			"$semester_id",
+			"semester_id",
+			"    \n",
+			"subject_id",
+			"parent_event_id",
+			"VIEWPATH",
+			"date",
+			"$next_date = date('Y-m-d', strtotime(\"$next_date +1 Day\"));",
+			"event_end_time",
+			"event_start_time",
+			"id",
+			"subject_id",
+			"');\n",
+			"                      \n",
+			"subjects",
+			"course_subjects_model",
+			"Course_subjects_model",
+			"load_semester_container",
+			"admin_course_add_subject",
+			"reload_semester_container",
+			"admin_course_save_subject",
+			"admin_course_add_subject",
+			"});\n",
+			"response",
+			"errors",
+			"body",
+			"modal-bo",
+			"body",
+			"message",
+			"manage_subject",
+			"xxx",
+			"');",
+			"set_userdata",
+			"user",
+			"main-content-wrap",
+			"jquery.min.js",
+			"bootstrap.min.js",
+			");\n",
+			"wordwrap",
+			"session",
+			"librar",
+			"helper",
+			"action_id",
+			"subject_html",
+			"foreach",
+			"	",
+			"wrap_width",
+			"line",
+			"	",
+			"error",
+			"APPPATH",
+			"view",
+			"view_path",
+			"[a-zA-z\\s*]+[<]*",
+			"(<(.*@*)>)?",
+			"<(.*@*)>",
+			"^<(.*@*)>",
+			"<(.*@*)>",
+			" )",
+			"rate_data",
+			"value",
+			"\n	",
+			"                    </",
+			"--",
+			"\n                                ",
+			">\n",
+			"    \n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"jquery-file-upload",
+			"res",
+			"id",
+			"subject_row",
+			"    "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "application/views/staff/assignment/create.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3957,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3130,
+								3130
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "application/views/layout/default.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5699,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/config/constants.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1455,
+								1455
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/views/admin/manage_course/create.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 9355,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9355,
+								9355
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/controllers/staff/staff_assignment.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 420,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								317,
+								317
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/config/routes.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2765,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2513,
+								2513
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 498.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 187.0
+	},
+	"pinned_build_system": "",
+	"project": "stu.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"de",
+				"application/views/layout/default.php"
+			],
+			[
+				"consta",
+				"application/config/constants.php"
+			],
+			[
+				"r",
+				"application/config/routes.php"
+			],
+			[
+				"routes",
+				"application/config/routes.php"
+			],
+			[
+				"staff_model",
+				"application/models/staff_model.php"
+			],
+			[
+				"time",
+				"application/models/timetable_model.php"
+			],
+			[
+				"admin_course",
+				"www/assets/js/admin_course.js"
+			],
+			[
+				"course_model",
+				"application/models/course_model.php"
+			],
+			[
+				"course_su",
+				"application/models/course_subjects_model.php"
+			],
+			[
+				"course_sem",
+				"application/models/course_semester_model.php"
+			],
+			[
+				"course_mode",
+				"application/models/course_model.php"
+			],
+			[
+				"course",
+				"application/models/course_semester_model.php"
+			],
+			[
+				"defa",
+				"application/views/layout/default.php"
+			],
+			[
+				"admin_manage_timetable",
+				"application/controllers/admin/admin_manage_timetable.php"
+			],
+			[
+				"staff_mo",
+				"application/models/staff_model.php"
+			],
+			[
+				"user_m",
+				"application/models/user_model.php"
+			],
+			[
+				"user_model",
+				"application/models/user_model.php"
+			],
+			[
+				"app",
+				"www/assets/css/application.css"
+			],
+			[
+				"rout",
+				"application/config/routes.php"
+			],
+			[
+				"course_subjects_model",
+				"application/models/course_subjects_model.php"
+			],
+			[
+				"sems",
+				"application/views/admin/manage_course/semster_details.php"
+			],
+			[
+				"course_semester",
+				"application/models/course_semester_model.php"
+			],
+			[
+				"admin_course.js",
+				"www/assets/js/admin_course.js"
+			],
+			[
+				"course_semster",
+				"application/models/course_semester_model.php"
+			],
+			[
+				"layo",
+				"application/views/layout/default.php"
+			],
+			[
+				"route",
+				"application/config/routes.php"
+			],
+			[
+				"admin_c",
+				"www/assets/js/admin_course.js"
+			],
+			[
+				"appl",
+				"www/assets/css/application.css"
+			],
+			[
+				"layou",
+				"application/libraries/Layout.php"
+			],
+			[
+				"appli",
+				"www/assets/css/application.css"
+			],
+			[
+				"layout",
+				"application/libraries/Layout.php"
+			],
+			[
+				"config",
+				"application/config/config.php"
+			],
+			[
+				"www",
+				"www/.htaccess"
+			],
+			[
+				".ht",
+				"application/.htaccess"
+			],
+			[
+				"admin_manage_course",
+				"application/controllers/admin/admin_manage_course.php"
+			],
+			[
+				"common",
+				"www/assets/css/common.css"
+			],
+			[
+				"auto",
+				"application/config/autoload.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 332.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -12,8 +12,9 @@ class Login extends MY_Controller
 
 	function index()
 	{
-		if ($this->session->userdata('user')) {
-			redirect('user');
+		
+		if ($this->session->userdata('user_id') > 0 ) {
+			redirect('/user');
 		}
 
 		$this->layout->title('Login');
@@ -47,12 +48,13 @@ class Login extends MY_Controller
 			$session = array();
 			foreach ($result as $row) {
 				$session = array(
-					'id' => $row->id,
+					'user_id' => $row->id,
 					'user_type_id' => $row->user_type_id,
 					'username' => $row->username,
+					'email'   => $row->email,
 					'full_name' => $row->full_name
 				);
-				$this->session->set_userdata('user', $session);
+				$this->session->set_userdata($session);
 			}
 
 			return true;

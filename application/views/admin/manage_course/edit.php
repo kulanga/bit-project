@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-apply_layout($layout);
 
 ?>
 
@@ -16,12 +15,12 @@ apply_layout($layout);
             <form role="form" name="manage_ac_user_form" method="post" action="">
                 <div class="form-group">
                     <label for="course_name">Course Name <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="course_name" name="course_name"/>
+                    <input type="text" class="form-control" id="course_name" name="course_name" value="<?php echo set_value('course_name', $course_data->name)?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="code">Course Code <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="code" name="code"/>
+                    <label for="course_code">Course Code <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="course_code" name="course_code" value="<?php echo set_value('course_code', $course_data->code)?>"/>
                 </div>
 
                 <div class="form-group row">

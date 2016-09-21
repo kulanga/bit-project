@@ -7,19 +7,19 @@ class User extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('user')) {
+		if (!$this->session->userdata('user_id')) {
 			redirect('login');
 		}
 	}
 
 	public function index()
 	{
-		$this->layout->view('user/index');
+		$this->layout->view('/user/index');
 	}
 
 	function logout()
 	{
-		$this->session->sess_destroy('user');
+		$this->session->sess_destroy();
 		redirect('user');
 	}
 

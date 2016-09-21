@@ -36,8 +36,14 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
 define('VIEWPATH', APPPATH . 'views');
+
+//custom constants
+define('UPLOADS_PATH', BASEPATH . '../www/uploads');
+define('ASSIGNMENT_FILE_PATH', UPLOADS_PATH . '/assignments/assignments/');
+define('ASSIGNMENT_SUBMISSIONS_PATH', UPLOADS_PATH . '/assignments/student_submissions/');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

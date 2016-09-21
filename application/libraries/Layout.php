@@ -9,6 +9,7 @@ class Layout
     private $css_list = array(), $js_list = array();
     private $block_list, $block_new, $block_replace = false;
     private $user;
+    private $top_nav;
 
     function __construct()
     {
@@ -38,6 +39,7 @@ class Layout
         }
 
         $data['user'] = $this->user;
+        $data['top_nav'] = $this->top_nav;
 
         // Render template
         $this->block_replace = true;
@@ -81,5 +83,9 @@ class Layout
 
     function user($user) {
         $this->user = $user;
+    }
+
+    function top_nav($top_nav) {
+        $this->top_nav = $top_nav;
     }
 }

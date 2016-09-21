@@ -39,3 +39,43 @@ body > .container {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.required {
+    color:red;
+}
+.pad-left-0{
+    padding-left: 0;
+}
+#main-content-wrap{
+    margin-top: 50px;
+    overflow: hidden;
+}
+#main-content-wrap > .row {
+    background-color: #898181;
+}
+#main-content-wrap > .row > #right-container{
+    background-color: #fff;
+}
+
+#left-nav {
+    padding-right: 0;
+}
+#left-nav ul.navbar-nav{
+    width: 100%;
+}
+
+#left-nav li {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+#left-nav li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#left-nav li > a:hover, #left-nav li > a:active {
+    background-color: #ccc;
+}
+#right-container{
+    min-height: 400px;
+}
