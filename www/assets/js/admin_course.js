@@ -51,6 +51,15 @@ $(document).ready(function() {
         admin_course_save_subject($('#add_subject_form').serialize());
     });
 
+    $('#course_start_date').datetimepicker({
+        format: "dd-mm-yyyy",
+        minView : 2,
+        autoclose: true,
+        daysOfWeekDisabled: [0, 6],
+        minDate: moment().toString()
+    });
+
+
 });
 
 function save_semsters_to_course(data) {

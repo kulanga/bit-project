@@ -49,6 +49,8 @@ $route['admin/manage/staff/?(:num)?'] = "admin/admin_manage_user/staff/$1";
 $route['admin/staff/new'] = "admin/admin_manage_user/create_staff";
 $route['admin/staff/edit/(:num)'] = "admin/admin_manage_user/edit_staff/$1";
 
+$route['admin/student/list'] =  'admin/admin_manage_user/list_students';
+
 $route['admin/course'] = "admin/admin_manage_course/index";
 $route['admin/course/new'] = "admin/admin_manage_course/save_course";
 $route['admin/course/edit/(:num)'] = "admin/admin_manage_course/edit/$1";
@@ -66,6 +68,13 @@ $route['staff/my-timetable'] =  'staff/staff_timetable/index';
 $route['staff/assignment'] = 'staff/staff_assignment/index';
 $route['staff/assignment/create'] = 'staff/staff_assignment/create';
 $route['staff/assignment/edit/(:num)'] = 'staff/staff_assignment/create/$1';
+
+//student routes
+$route['student/signup'] = 'student/student_signup/signup'; 
+$route['student/home'] = 'student/student_home/index'; 
+$route['student/timetable'] = 'student/student_home/view_timetable';
+$route['student/assignment'] = 'student/student_assignment/index';
+$route['student/assignment/submit/(:num)'] = 'student/student_assignment/submit/$1';
 
 $route['assets/(:any)'] = 'assets/$1';
 

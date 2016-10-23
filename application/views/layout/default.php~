@@ -6,7 +6,8 @@
 
     <script type="text/javascript" src="<?php echo asset_url();?>js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo asset_url();?>js/bootbox.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/bootbox.min.jsx"></script>
+     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-dialog.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/moment.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.min.js"></script>
@@ -23,7 +24,6 @@
     <?php // var_dump($user);die('x');?>
     <?php echo $css_for_layout ?>
 </head>
-
 <body>
 
     <!-- Fixed navbar -->

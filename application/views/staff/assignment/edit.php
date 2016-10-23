@@ -70,11 +70,13 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="reset" class="btn btn-danger">Cancel</button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary" name="btn_create" value="update">Update</button>&nbsp;&nbsp;
-                    
                     <?php if($assignment->status == 0) {?>
+                        <button type="reset" class="btn btn-danger">Cancel</button>&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary" name="btn_create" value="update">Update</button>&nbsp;&nbsp; 
                         <button type="submit" class="btn btn-primary" name="btn_create" value="publish">Publish</button>
+                    <?php } elseif($assignment->status == 1) {?>
+                        <a href="/staff/assignment" class="btn btn-danger" name="btn_create" role="button">&nbsp;Back&nbsp;</a>&nbsp;&nbsp; 
+                        <span class="bold">*Assignment is in live.</span><br/>
                     <?php } ?>
                 </div>
             </form>

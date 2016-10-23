@@ -7,7 +7,7 @@ class Admin_dashboard extends MY_Controller {
 	}
 
 	public function index() {
-		
+	
 	}
 
 }

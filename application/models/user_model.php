@@ -10,6 +10,12 @@ class User_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function get($id = 0) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table);
+        return $query->first_row();
+    }
+
 	public function insert($data = array()) {
 		if (!$this->db->insert($this->table, $data)) {
             return false;

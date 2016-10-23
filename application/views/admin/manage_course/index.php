@@ -27,7 +27,8 @@
                         <td>&nbsp;</td>
                         <td>
                             <a href="/admin/course/edit/<?=$course->id?>" class="btn btn-sm btn-primary">Edit</a>
-                            <a></a>
+                            <a href="/admin/course/clone/<?=$course->id?>" class="btn btn-sm btn-warning">Clone</a>
+                            <a href="/admin/course/status/complete/<?=$course->id?>" class="btn btn-sm btn-danger">Complete</a>
                         </td>
                     </tr>
                 <?php } ?>

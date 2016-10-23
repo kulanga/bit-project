@@ -8,12 +8,25 @@ class User extends MY_Controller
 	{
 		parent::__construct();
 		if (!$this->session->userdata('user_id')) {
-			redirect('login');
+			redirect('/login');
 		}
 	}
 
 	public function index()
 	{
+		if($this->session->userdata('user_type_id') == 1) {
+			redirect('/admin/course');
+
+		} elseif($this->session->userdata('user_type_id') == 2) {
+			redirect('/staff/my-timetable');
+
+		} elseif($this->session->userdata('user_type_id') == 3) {
+			redirect('/student/home');
+
+		} else {
+			die('Access Denied');
+		}
+
 		$this->layout->view('/user/index');
 	}
 

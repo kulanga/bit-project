@@ -101,7 +101,7 @@
                             </div>
 
                             <div class='col-sm-6 pad-left-0 input-x datex'>
-                                <input type='text' id="event_end_time" name="event_end_time" class="form-control" placeholder="To"/>
+                                <input type='text' id="event_end_time" data-date-format="DD MMMM YYYY hh:mm A" name="event_end_time" class="form-control" placeholder="To"/>
                             </div>
                         </div>
                     </div>
@@ -183,17 +183,16 @@
         });
 
         $('#event_start_time').datetimepicker({
-            format : "hh:ii",
-            startView: 1,
-            minView : 1,
+            format : "hh:mm",
+           
             autoclose: true
         });
         
         $('#event_end_time').datetimepicker({
-            format : "hh:ii",
-            startView: 1,
-            minView : 1,
-            autoclose: true
+           toolbarPlacement:'top',
+            showTodayButton:true,
+            showClose:true,
+            sideBySide:true,
         });
 
         $('#repeat_end_date').datetimepicker({

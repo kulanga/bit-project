@@ -6,11 +6,16 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+                    <h2 class="panel-title" style="font-size:25px;">Sign In</h2>
                 </div>
                 <div class="panel-body">
 
-                    <?php echo validation_errors(); ?>
+                    <?php if(validation_errors()) {?>
+                        <div class="validation-errors">
+                            <?php echo validation_errors();?>
+                        </div>
+                    <?php } ?>
+
                     <?php echo form_open('/login/index'); ?>
                         <div class="form-group">
                             <label for="inputEmail">Username</label>
@@ -21,7 +26,9 @@
                             <label for="inputPassword">Password</label>
                             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        
+                        <a href="/student/signup" class="btn btn-warning">Signup as a Student</a>
+                        <button type="submit" style="float:right;" class="btn btn-primary">Login</button>
                     </form>
                 </div>
             </div>

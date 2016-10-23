@@ -24,8 +24,7 @@
                         <td><?=$staff->mobile_no?></td>
                         <td>
                             <a class="btn btn-sm btn-primary" href="/admin/staff/edit/<?=$staff->user_id?>">Edit&nbsp;&nbsp;<a>
-                            <a class="btn btn-sm btn-success">View timetable</a>
-                            <a class="btn btn-sm btn-info">Assign subject</a>
+                            <a class="btn btn-sm btn-success" href="">View timetable</a>
                         </td>
                     </tr>
                 <?php } ?>

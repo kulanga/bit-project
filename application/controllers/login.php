@@ -65,6 +65,3 @@ class Login extends MY_Controller
 		}
 	}
 }
-
-/* End of file login.php */
-/* Location: ./application/controllers/login.php */

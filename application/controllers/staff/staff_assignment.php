@@ -8,7 +8,14 @@ class Staff_assignment extends MY_Controller {
 	}
    
     public function index() {
-        
+        $this->load->model('assignment_model');
+        $this->load->model('course_model');
+
+        $data = array();
+        $data['courses'] = $this->course_model->get_course_list();
+        $data['assignments'] = $this->assignment_model->get_assigment_details($this->session->userdata('user_id'));
+
+        $this->layout->view('/staff/assignment/list', $data);    
     }
     
     public function create($assignment_id = 0 ) {
@@ -102,7 +109,7 @@ class Staff_assignment extends MY_Controller {
 
             $this->layout->view('/staff/assignment/edit', $data);
         } else {
-            $this->layout->view('/staff/assignment/create', $data);    
+            $this->layout->view('/staff/assignment/create', $data);
         }
     }
 
@@ -129,11 +136,11 @@ class Staff_assignment extends MY_Controller {
 
         $new_filename = $original_file_name = '';
 
-        if(!empty($_FILES['attachment']['name'])) {
-            $file_name = $_FILES['attachment']['name'];
-            $file_size = $_FILES['attachment']['size'];
-            $file_tmp = $_FILES['attachment']['tmp_name'];
-            $file_type = $_FILES['attachment']['type'];
+        if(!empty($_FILES['ass_submission_file']['name'])) {
+            $file_name = $_FILES['ass_submission_file']['name'];
+            $file_size = $_FILES['ass_submission_file']['size'];
+            $file_tmp = $_FILES['ass_submission_file']['tmp_name'];
+            $file_type = $_FILES['ass_submission_file']['type'];
 
             $file_ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
             $new_filename = $assignment_id . '-' . time() . '-' . $file_name;

@@ -7,6 +7,11 @@ class Admin_manage_course extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
 
+        //check logged in user is a admin
+        if($this->session->userdata('user_type_id') != 1 ) {
+            die('Access Denied');
+        }
+
         //set selected top nav
         $this->set_topnav('course');
 

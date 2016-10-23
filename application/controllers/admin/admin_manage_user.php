@@ -28,6 +28,7 @@ class Admin_manage_user extends MY_Controller {
         $data['designations'] = $this->staff_designation_model->get_disgnations_list();
 
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            
             $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|matches[confirm_email]|is_unique[users.email]');
             $this->form_validation->set_rules('confirm_email', 'Confirm Email', 'trim|required|xss_clean|');
@@ -60,5 +61,46 @@ class Admin_manage_user extends MY_Controller {
         $data['designations'] = $this->staff_designation_model->get_disgnations_list();
         $data['staff'] =  $this->staff_model->get_staff_profile($user_id);
         $this->layout->view('/admin/manage_user/edit_staff', $data);
+    }
+
+    public function list_students() {
+        $this->set_topnav('manage_student');
+        $this->load->model('student_model');
+        $this->load->model('course_model');
+        $data = array();
+
+      $data['courses'] = $this->course_model->get_course_list();
+
+        $params = array(
+            'keyword' => $this->input->get('keyword'),
+            'batch_id' => $this->input->get('batch_id'),
+            'user_status' => $this->input->get('user_status')
+        );
+
+        $data['students'] = $this->student_model->list_students($params);
+        $data['search_params'] = $params;
+        $this->layout->view('/admin/manage_user/list_students', $data);
+    }
+
+    public function update_user_status() {
+
+        $user_id =  $this->input->post('id');
+        $status = $this->input->post('status');
+
+        $response = array('status' => 0);
+
+        $data = array(
+            'status' => $status
+        );
+
+        $this->load->model('user_model');
+        $user = $this->user_model->get($user_id);
+
+        if($user->user_type_id == '3') {
+            $this->user_model->update($user_id, $data);
+            $response['status'] = 1;
+        }
+
+        echo json_encode($response);exit;
     }
 }

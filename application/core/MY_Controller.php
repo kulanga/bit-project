@@ -12,13 +12,26 @@ class MY_Controller extends CI_Controller
 
 		// Site global resources
 		$this->layout->title('HNDE Stduents Portal');
-		//$this->layout->js('js/jquery.min.js');
-		//$this->layout->css('css/site.css');
-		$this->layout->user($this->session->userdata);
 
+		$check_session = true;
+		if($this->uri->segment(1) == 'login') {
+			$check_session = false;
+		}
+
+		if($this->uri->uri_string() == 'student/signup') {
+			$check_session = false;
+		}
+
+
+		if($check_session && (int)$this->session->userdata('user_id') <= 0) {
+			redirect('/login');
+		}
+
+		$this->layout->user($this->session->userdata);
 	}
 
 	protected function set_topnav($top_nav) {
 		$this->layout->top_nav($top_nav);
 	}
+	
 }

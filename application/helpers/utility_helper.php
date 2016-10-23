@@ -19,4 +19,47 @@ if (!function_exists('convert_db_date_format'))
 
 }
 
+if (!function_exists('assignment_status_in_text'))
+{
+    function assignment_status_in_text($status_id) {
+        $status = '';
+
+        if($status_id == 0) {
+            $status = "Drafted";
+
+        } elseif($status_id == 1) {
+            $status = "Live";
+
+        } elseif($status_id == 2) {
+            $status = "Completed";
+        }
+
+        return $status;
+    }
+
+}
+
+
+if (!function_exists('user_status'))
+{
+    function user_status($status_id) {
+        $status = '';
+
+        if($status_id == 1) {
+            $status = "Active";
+
+        } elseif($status_id == 2) {
+            $status = "Disabled";
+
+        } elseif($status_id == 3) {
+            $status = "Deleted";
+
+        } elseif($status_id == 4) {
+            $status = "Pending Approval";
+        }
+
+        return $status;
+    }
+
+}
  
