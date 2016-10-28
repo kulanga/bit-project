@@ -22,8 +22,18 @@ class Admin_manage_course extends MY_Controller {
 
         $data = array();
         $this->load->model('course_model');
-        $data['list'] = $this->course_model->get_course_list();
-        $this->layout->view('/admin/manage_course/index', $data);
+        $this->load->model('student_model');
+        $list = $this->course_model->get_course_list();
+
+        
+        foreach($list as &$val) {
+            $val->student_count = $this->student_model->get_student_count_bycourse($val->id);
+        }
+
+        $data['list'] = $list;
+
+       $this->layout->view('/admin/manage_course/index', $data);
+
     }
 
     public function save_course($course_id = 0) {

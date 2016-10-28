@@ -54,5 +54,13 @@ class Student_model extends CI_Model
             ->get($this->table);
         return $query->first_row();
     }
+
+    public function get_student_count_bycourse($course_id) { 
+        $sql = "SELECT COUNT(id) AS student_count FROM students WHERE course_id = ? GROUP BY course_id";
+
+        $res = $this->db->query($sql, array($course_id));
+        $st = $res->first_row();
+        return is_object($st) ? $st->student_count : 0;
+    }
 	
 }

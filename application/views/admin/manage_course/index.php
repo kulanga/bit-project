@@ -18,16 +18,18 @@
             </thead>
 
             <tbody>
+           
                 <?php foreach($list as $course) {?>
                     <tr>
                         <td><?=$course->name?></td>
                         <td><?=$course->code?></td>
-                        <td><?=date('d M Y', strtotime($course->start_date))?></td>
-                        <td></td>
+                        <td><?=date('d M Y', strtotime($course->start_date))?></td>                        
+                        <td><?=$course->duration?></td>
+                        <td><?=$course->student_count?></td>
                         <td>&nbsp;</td>
                         <td>
                             <a href="/admin/course/edit/<?=$course->id?>" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="/admin/course/update-semester/<?=$course->id?>" class="btn btn-sm btn-success">Set Current Semster</a>
+                            <a href="/admin/course/settings/<?=$course->id?>" class="btn btn-sm btn-success">Set Current Semster</a>
                             <?php /*<a href="/admin/course/status/complete/<?=$course->id?>" class="btn btn-sm btn-danger">Complete</a> */?>
                         </td>
                     </tr>
