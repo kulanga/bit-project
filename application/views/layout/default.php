@@ -102,6 +102,11 @@
                                 <li><a href="/admin/staff">View Staff</a></li>
                             <?php } ?>
 
+                        <?php } elseif($user['user_type_id'] == 2) { ?>
+
+                            <?php if($top_nav == 'manage_assignment') { ?>
+                                 <li><a href="/staff/assignment/create">Create New Assignment</a></li>
+                            <?php } ?>
                         <?php } ?>
                     </ul>
                 </div>

@@ -173,4 +173,14 @@ class Admin_manage_timetable extends MY_Controller {
         echo json_encode($data);
         exit;
     }
+
+    public function delete($event_id = 0) {
+        
+        if($event_id > 0 ) {
+            $this->load->model('timetable_model');
+            $this->timetable_model->delete($event_id);
+            echo '1'; die;
+        }
+        echo '0'; die;
+    }
 }

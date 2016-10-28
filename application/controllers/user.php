@@ -13,15 +13,15 @@ class User extends MY_Controller
 	}
 
 	public function index()
-	{
-		if($this->session->userdata('user_type_id') == 1) {
+	{	
+		if($this->session->userdata('user_type_id') == 1) { //admin
 			redirect('/admin/course');
 
-		} elseif($this->session->userdata('user_type_id') == 2) {
+		} elseif($this->session->userdata('user_type_id') == 2) { //Staff
 			redirect('/staff/my-timetable');
 
-		} elseif($this->session->userdata('user_type_id') == 3) {
-			redirect('/student/home');
+		} elseif($this->session->userdata('user_type_id') == 3) { //Student
+			redirect('/student/timetable');
 
 		} else {
 			die('Access Denied');

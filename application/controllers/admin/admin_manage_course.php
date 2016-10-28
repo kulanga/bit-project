@@ -23,14 +23,17 @@ class Admin_manage_course extends MY_Controller {
         $data = array();
         $this->load->model('course_model');
         $this->load->model('student_model');
-        $list = $this->course_model->get_course_list();
 
-        
+        $params = array('status' => $this->input->get('status'));
+
+        $list = $this->course_model->get_course_list($params);
+
         foreach($list as &$val) {
             $val->student_count = $this->student_model->get_student_count_bycourse($val->id);
         }
 
         $data['list'] = $list;
+        $data['search_params']['status'] = $this->input->get('status');
 
        $this->layout->view('/admin/manage_course/index', $data);
 
@@ -59,6 +62,8 @@ class Admin_manage_course extends MY_Controller {
                 if($course_id > 0 ) {
                     $this->course_model->update($course_id, $insert);
                 } else {
+                    //set course status as draft when creating a course.
+                    $insert['status'] = 2;
                     $course_id = $this->course_model->insert($insert);
                 }
 
@@ -191,6 +196,7 @@ class Admin_manage_course extends MY_Controller {
         if(!empty($btn_save)) {
             $save_data = array();
             $save_data['current_semester_id'] = $this->input->post('current_semester_id');
+            $save_data['status'] = $this->input->post('status');
             $this->course_model->update($course_id, $save_data);
         }
 

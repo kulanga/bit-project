@@ -5,6 +5,11 @@ class Student_assignment extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
         $this->set_topnav('assignment');
+
+        //check logged in user is a student
+        if($this->session->userdata('user_type_id') != 3 ) {
+            die('Access Denied');
+        }
 	}
 
     public function index() {
@@ -19,6 +24,7 @@ class Student_assignment extends MY_Controller {
 
     public function submit($assignment_id = 0) {
         $this->load->model('assignment_model');
+        $this->load->model('assignment_submission_model');
         $this->load->model('subject_model');
         
         $data = array();
@@ -30,18 +36,21 @@ class Student_assignment extends MY_Controller {
 
             if(count($attachment) > 0 ) {
                 
-                $this->assignment_attachment_model->insert(
+                $this->assignment_submission_model->insert(
                     array(
                         'assignment_id'      => $assignment_id,
+                        'student_user_id'    => $this->session->userdata('user_id'),
                         'original_file_name' => $attachment[0],
-                        'file_name'          => $attachment[1]
+                        'file_name'          => $attachment[1],
+                        'date_submitted'     => date('Y-m-d H:i:s')
                     )
                 );
             }
         }
 
         $data['assignment'] = $this->assignment_model->get($assignment_id);
-
+        $data['assignment_submission'] = $this->assignment_submission_model->get_by_assignment_id($assignment_id, $this->session->userdata('user_id'));
+    
         if(is_object($data['assignment'])) {
             $data['subject'] = $this->subject_model->get($data['assignment']->subject_id);
         }
@@ -61,7 +70,7 @@ class Student_assignment extends MY_Controller {
             $file_size = $_FILES['attachment']['size'];
             $file_tmp = $_FILES['attachment']['tmp_name'];
             $file_type = $_FILES['attachment']['type'];
-
+         
             $file_ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
             $new_filename = $assignment_id . '-' . $stu_user_id . '-' . time() . '-' . $file_name;
             $original_file_name = $file_name;
@@ -70,8 +79,6 @@ class Student_assignment extends MY_Controller {
             rename( ASSIGNMENT_FILE_PATH . $file_name, ASSIGNMENT_FILE_PATH . $new_filename);
         }
         return empty($new_filename) ? array() : array($original_file_name, $new_filename);
-
-
     }
 
 

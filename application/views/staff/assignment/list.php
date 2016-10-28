@@ -81,7 +81,7 @@
                         <td>
                             <a class="btn btn-sm btn-primary" href="/staff/assignment/edit/<?=$assignment->id?>">Edit&nbsp;&nbsp;<a>
                             <?php if($assignment->status == 1) {?>
-                                <a class="btn btn-sm btn-success" href="#">View Submissions</a>
+                                <a class="btn btn-sm btn-success" href="/staff/staff_assignment/list_submissions/<?=$assignment->id?>">View Submissions</a>
                             <?php } ?>
                         </td>
                     </tr>

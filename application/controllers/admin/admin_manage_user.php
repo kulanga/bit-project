@@ -34,40 +34,43 @@ class Admin_manage_user extends MY_Controller {
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
             
             $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
             $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|xss_clean|numeric');
             $this->form_validation->set_rules('designation', 'Designation', 'trim|required|xss_clean|numeric');
 
             if($user_id <= 0) {
-                 $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
+                $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
                 $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|matches[confirm_password]');
                 $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|');
             }
 
             if ($this->form_validation->run()) {
                 $save_data['full_name'] = ucfirst($this->input->post('full_name'));
-                $save_data['email'] = $this->input->post('email');
+               
                 $save_data['username'] = $this->input->post('email');
                 $save_data['mobile_no'] = $this->input->post('mobile_no');
-
-                $save_data['user_type_id'] = 2;
                 
-                $staff_data = array('staff_designation_id' => $this->input->post('designation'), 'user_id' => $user_id);
 
                 if($user_id > 0 ) {
-                    $this->user_model->update($user_id, $save_data);
-                    $this->staff_model->update_by_userid($user_id, $staff_data);
-
+                    $usr = $this->user_model->get($user_id);
+                    //check user type before update
+                    if($usr->user_type_id == 2) { 
+                        $staff_data = array('staff_designation_id' => $this->input->post('designation'), 'user_id' => $user_id);
+                        $this->user_model->update($user_id, $save_data);
+                        $this->staff_model->update_by_userid($user_id, $staff_data);
+                    }
                 } else {
+                    $save_data['user_type_id'] = 2;
+                    $save_data['email'] = $this->input->post('email');
                     $save_data['password'] = md5($this->input->post('password'));
+
                     $user_id = $this->user_model->insert($save_data);
+                    $staff_data = array('staff_designation_id' => $this->input->post('designation'), 'user_id' => $user_id);
                     $this->staff_model->insert($staff_data);
                 }
-
                 redirect('/admin/staff/edit/' .  $user_id);
             }
         }
-        
+
         $this->layout->view('/admin/manage_user/create_staff', $data);
 	}
 

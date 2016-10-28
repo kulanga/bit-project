@@ -17,8 +17,32 @@ class Staff_assignment extends MY_Controller {
 
         $this->layout->view('/staff/assignment/list', $data);    
     }
+
+    public function list_submissions($assignment_id = 0) {
+
+        $this->load->model('assignment_model');
+        $this->load->model('assignment_submission_model');
+        $this->load->model('student_model');
+        $this->load->model('user_model');
+
+        $data = array();
+
+        $data['assignment'] = $this->assignment_model->get($assignment_id);
+        $data['assignment_submissions'] = $this->assignment_submission_model->get_submissions($assignment_id);
+
+        //print_r($data['assignment_submissions']);die;
+        if(count($data['assignment_submissions']) > 0 ) {
+            foreach($data['assignment_submissions'] as &$asub) {
+                $asub->student = $this->student_model->get_by_userid($asub->student_user_id);
+                $asub->student_user = $this->user_model->get($asub->student_user_id);
+            }
+        }
+
+        $this->layout->view('/staff/assignment/submissions', $data);
+
+    }
     
-    public function create($assignment_id = 0 ) {
+    public function create($assignment_id = 0) {
 
         $this->load->model('course_model');
         $this->load->model('course_subject_model');

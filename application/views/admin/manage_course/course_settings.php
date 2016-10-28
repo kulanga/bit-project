@@ -30,6 +30,15 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="current_semester_id">Status</label>
+                    <select name="status" id="status" class="form-control">
+                        <?php foreach(couser_status() as $key => $st) {?>
+                            <option <?=$course->status == $key ? 'selected="selected"' : '';?> value="<?=$key?>"><?=$st?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
                 <a type="Back" class="btn btn-danger" href="/admin/course">Exit</a>&nbsp;&nbsp;
                 <button type="submit" name="btn_save_settings" value="btn_save_settings" class="btn btn-primary">Save</button>
 

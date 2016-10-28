@@ -68,6 +68,24 @@ if (!function_exists('course_name'))
     function course_name($course) {
         return $course->name . ' ' . date('Y', strtotime($course->start_date));
     }
-
 }
+
+if (!function_exists('couser_status'))
+{
+    function couser_status($status_id = 0) {
+        $data = array(
+            1 => 'Live',
+            2 => 'Draft',
+            3 => 'Completed'
+        );
+
+        if($status_id > 0 ) {
+            return $data[$status_id];
+        } else {
+            return $data;
+        }
+    }
+}
+
+
  

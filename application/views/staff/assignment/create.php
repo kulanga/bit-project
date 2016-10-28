@@ -14,9 +14,11 @@
                 Create a Assignment
             </h2><br/>
 
-            <div class="validation-errors">
-                <?php echo validation_errors(); ?>
-            </div>
+            <?php if(validation_errors()) {?>
+                <div class="validation-errors">
+                    <?php echo validation_errors(); ?>
+                </div>
+            <?php } ?>
             
             <form role="form" name="manage_ac_user_form" method="post" action="/staff/assignment/create" enctype="multipart/form-data">
                 <div class="form-group">

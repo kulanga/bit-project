@@ -20,6 +20,12 @@ class Timetable_model extends CI_Model {
         return $this->db->insert_id();
 	}
 
+    public function delete($id = 0) {
+        $this->db->where('id', $id);
+        $this->db->delete($this->table);
+        return true;
+    }
+
 	public function update($id, $data = array()) {
         $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
@@ -38,7 +44,9 @@ class Timetable_model extends CI_Model {
             $where_lecturer_id = "t.lecturer_id = '{$lecturer_id}'";
         }
 
-        $sql  = "SELECT t.*, s.name AS subject_name, l.name AS location_name FROM $this->table t ";
+        $sql  = "SELECT t.*, s.name AS subject_name, l.name AS location_name, c.name AS course_name, c.start_date AS course_start_date
+                 FROM $this->table t ";
+        $sql .= "LEFT JOIN courses c ON c.id = t.course_id ";
         $sql .= "LEFT JOIN subjects s ON s.id = t.subject_id ";
         $sql .= "LEFT JOIN locations l ON l.id = t.location_id ";
         $sql .= "WHERE $where_course_id AND $where_lecturer_id";

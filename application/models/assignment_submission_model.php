@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Course_model extends CI_Model {
+class Assignment_submission_model extends CI_Model {
 
-	private $table = 'courses';
+	private $table = 'assignment_submissions';
 
 	public function __construct() {
 		parent::__construct();
@@ -26,20 +26,16 @@ class Course_model extends CI_Model {
         return $this->db->update($this->table, $data);
 	}
 
-    public function get_course_list($params = array()) {
+    public function get_by_assignment_id($assignment_id, $user_id) {
+        $query = $this->db->where('assignment_id', $assignment_id)
+            ->where('student_user_id', $user_id)
+            ->get($this->table);
+        return $query->first_row();
+    }
 
-        $where_status = '1';
-
-        if(!empty($params['status'])) {
-            $where_status = "courses.status = '{$params['status']}'";
-        }
-
-        $sql  = "SELECT courses.* ";
-        $sql .= "FROM courses ";
-        $sql .= "WHERE $where_status ";
-        $sql .= "ORDER BY status, name, code";
-
-        $query = $this->db->query($sql);
+    public function get_submissions($assignment_id) {
+        $query = $this->db->where('assignment_id', $assignment_id)
+                ->get($this->table);
         return $query->result();
     }
 }

@@ -5,16 +5,16 @@
 
 
 <div class="col-md-10">
-    <h3 class="text-muted">Time Table</h3>
+    <h3 class="text-muted">View Time Table</h3>
     <div>
         <div class="timetable-filters dataTable_wrapper">
-            <form method="get" action="/admin/timetable">
+            <form name="timetable_fileters_form" id="timetable_fileters_form" method="get" action="/admin/timetable">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Batch</label>
                         <select name="filter_course_id" id="filter_course_id" class="form-control">
-                            <?php foreach($courses as $course) {?>
-                                <option  value="<?=$course->id?>" <?=$course->id == $course_id ? 'selected="selected"' : '' ?>><?=$course->name . ' ' . date('Y', strtotime($course->start_date))?></option>
+                            <?php foreach($courses as $cs) {?>
+                                <option  value="<?=$cs->id?>" <?=$cs->id == $course_id ? 'selected="selected"' : '' ?>><?=course_name($cs)?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -42,13 +42,11 @@
             <div class="modal-body">
                 <div class="validation-errors" style="display:none;"></div>
                 <form id="careate_timetable_event_form" name="careate_timetable_event_form" role="form" method="post" action="/admin/admin_manage_timetable/save_event">
+                    
                     <div class="form-group col-md-6 pad-left-0">
-                        <label>Batch</label>
-                        <select name="batch_id" class="form-control">
-                            <?php foreach($courses as $course) {?>
-                                <option  value="<?=$course->id?>"><?=course_name($course)?></option>
-                            <?php } ?>
-                        </select>
+                        <label>Batch:</label><br/>
+                        <input type="hidden" name="batch_id" value="<?=$course_id?>">
+                        <span><?=course_name($course)?></span>
                     </div>
 
                     <div class="form-group col-md-6 pad-left-0">
@@ -101,7 +99,7 @@
                             </div>
 
                             <div class='col-sm-6 pad-left-0 input-x datex'>
-                                <input type='text' id="event_end_time" data-date-format="DD MMMM YYYY hh:mm A" name="event_end_time" class="form-control" placeholder="To"/>
+                                <input type='text' id="event_end_time" data-date-format="hh:mm A" data-date-start-date="<?=date('Y-m-d')?>" name="event_end_time" class="form-control" placeholder="To"/>
                             </div>
                         </div>
                     </div>
@@ -158,6 +156,9 @@
                 if(data.errors) {
                     $('#add_entries_dialog').find('.validation-errors').show();
                     $('#add_entries_dialog').find('.validation-errors').html(data.errors);
+                } else {
+                    //$('#calendar').fullCalendar('refetchEvents');
+                    window.location.href = window.location.href;
                 }
             }
 
@@ -165,6 +166,10 @@
     }
 
     $(document).ready(function() {
+
+        $('#filter_course_id').on('change', function(){
+            $('#timetable_fileters_form').submit();
+        })
 
         $('#modal-btn-save-event').on('click', function() {
             var $content = $('#careate_timetable_event_form');
@@ -187,12 +192,23 @@
 
         $('#event_start_time').datetimepicker({
             format : "hh:mm",
-            autoclose: true
+            startView: 0,
+            viewSelect: 'hour',
+            autoclose: true,
+        })
+        .on('show', function(){
+            $("#event_start_time").datetimepicker("setDate", new Date);
         });
+
         
         $('#event_end_time').datetimepicker({
             format : "hh:mm",
-            autoclose: true
+            startView: 0,
+            viewSelect: 'hour',
+            autoclose: true,
+        })
+        .on('show', function(){
+            $("#event_end_time").datetimepicker("setDate", new Date);
         });
 
         $('#repeat_end_date').datetimepicker({
@@ -242,9 +258,33 @@
                     color: '#AEE6EA',   // a non-ajax option
                     textColor: 'black' // a non-ajax option
                 }
-            ]
-       
+            ],
+
+            eventRender: function(event, element) {
+                element.find('.fc-content').prepend("<span style='float:right;margin:2px;' class='delete-event label label-danger'>X</span>" );
+                element.find(".delete-event").click(function() {
+                    bootbox.confirm("Are you sure, You want to delete this from timetable ?", function(confirm) {
+                        if(confirm) {
+                            delete_timetable_event(event._id);
+                        }
+                    });
+                });
+            }
         });
     });
+
+    function delete_timetable_event(id) {
+        $.ajax({
+            url: '/admin/admin_manage_timetable/delete/' + id,
+            type: 'get',
+            success: function(data) {
+                if(data == '1') {
+                    $('#calendar').fullCalendar('removeEvents', id);
+                } else {
+                    bootbox.alert('An error occured. Please reload page the page and try again.')
+                }
+            }
+        });
+    }
 
 </script>
