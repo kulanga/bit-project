@@ -40,13 +40,13 @@
             </div>
 
             <div class="modal-body">
-                <div class="validation-errors"></div>
+                <div class="validation-errors" style="display:none;"></div>
                 <form id="careate_timetable_event_form" name="careate_timetable_event_form" role="form" method="post" action="/admin/admin_manage_timetable/save_event">
                     <div class="form-group col-md-6 pad-left-0">
                         <label>Batch</label>
                         <select name="batch_id" class="form-control">
                             <?php foreach($courses as $course) {?>
-                                <option  value="<?=$course->id?>"><?=$course->name . ' ' . date('Y', strtotime($course->start_date))?></option>
+                                <option  value="<?=$course->id?>"><?=course_name($course)?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -155,7 +155,10 @@
             dataType: 'json',
             data: post_data,
             success: function(data) {
-
+                if(data.errors) {
+                    $('#add_entries_dialog').find('.validation-errors').show();
+                    $('#add_entries_dialog').find('.validation-errors').html(data.errors);
+                }
             }
 
         });
@@ -184,15 +187,12 @@
 
         $('#event_start_time').datetimepicker({
             format : "hh:mm",
-           
             autoclose: true
         });
         
         $('#event_end_time').datetimepicker({
-           toolbarPlacement:'top',
-            showTodayButton:true,
-            showClose:true,
-            sideBySide:true,
+            format : "hh:mm",
+            autoclose: true
         });
 
         $('#repeat_end_date').datetimepicker({

@@ -50,5 +50,18 @@ class Student_home extends MY_Controller {
         exit;
     }
 
+    public function welcome() {
+
+        $this->load->model('user_model');
+        $user_id =  $this->session->userdata('user_id');
+
+        $user = $this->user_model->get($user_id);
+
+        if(is_object($user) && $user->status == 1) {
+            redirect('student/timetable');
+        }
+        $this->layout->view('/student/home/welcome');
+    }
+
 
 }

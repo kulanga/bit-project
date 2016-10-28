@@ -26,6 +26,11 @@ class Course_semester_model extends CI_Model {
         return $this->db->update($this->table, $data);
 	}
 
+    public function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete($this->table);
+    }
+
     public function get_by_course($course_id) {
 
         $query = $this->db->where('course_id', $course_id)

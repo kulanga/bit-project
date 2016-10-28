@@ -2,7 +2,7 @@
 
 
 <div class="col-md-10">
-    <h3 class="text-muted">Students</h3>
+    <h3 class="text-muted">Manage Students</h3>
     <div class="dataTable_wrapper">
 
         <div>

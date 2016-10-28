@@ -22,6 +22,11 @@ class Staff_model extends CI_Model
         return $this->db->update($this->table, $data);
 	}
 
+    public function update_by_userid($user_id, $data = array()) {
+        $this->db->where('user_id', $user_id);
+        return $this->db->update($this->table, $data);
+    }
+
     public function get_staff_profile($user_id) {
         $query = $this->db->select('staff.*, user.full_name, user.email, user.mobile_no, sd.designation')
             ->join('users user', 'staff.user_id =  user.id', 'inner')

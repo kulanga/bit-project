@@ -33,7 +33,6 @@ class Login extends MY_Controller
 		}
 
 		$this->layout->view('login/index');
-
 	}
 
 	function check_database($password)

@@ -47,6 +47,7 @@ $route['student/(:any)'] = "student/$1";
 $route['admin/staff'] = "admin/admin_manage_user/index";
 $route['admin/manage/staff/?(:num)?'] = "admin/admin_manage_user/staff/$1";
 $route['admin/staff/new'] = "admin/admin_manage_user/create_staff";
+$route['admin/staff/update/(:num)'] = "admin/admin_manage_user/create_staff/$1";
 $route['admin/staff/edit/(:num)'] = "admin/admin_manage_user/edit_staff/$1";
 
 $route['admin/student/list'] =  'admin/admin_manage_user/list_students';
@@ -54,7 +55,7 @@ $route['admin/student/list'] =  'admin/admin_manage_user/list_students';
 $route['admin/course'] = "admin/admin_manage_course/index";
 $route['admin/course/new'] = "admin/admin_manage_course/save_course";
 $route['admin/course/edit/(:num)'] = "admin/admin_manage_course/edit/$1";
-
+$route['admin/course/settings/(:num)'] = "admin/admin_manage_course/settings/$1";
 $route['admin/course/save_semster'] = "admin/admin_manage_course/save_semster";
 
 $route['admin/subject'] = "admin/admin_manage_subject/index";
@@ -71,10 +72,12 @@ $route['staff/assignment/edit/(:num)'] = 'staff/staff_assignment/create/$1';
 
 //student routes
 $route['student/signup'] = 'student/student_signup/signup'; 
+$route['student/welcome'] = 'student/student_home/welcome';
 $route['student/home'] = 'student/student_home/index'; 
 $route['student/timetable'] = 'student/student_home/view_timetable';
 $route['student/assignment'] = 'student/student_assignment/index';
 $route['student/assignment/submit/(:num)'] = 'student/student_assignment/submit/$1';
+
 
 $route['assets/(:any)'] = 'assets/$1';
 

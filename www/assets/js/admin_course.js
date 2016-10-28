@@ -51,9 +51,40 @@ $(document).ready(function() {
         admin_course_save_subject($('#add_subject_form').serialize());
     });
 
+    $('#course_semsters_container').on('click', '.btn-remove-semster', function() {
+        course_sem_id = $(this).data('id');
+        bootbox.confirm("Are you sure, You want to delete this Semester?", function(confirm){
+            if(confirm) {
+                admin_course_remove_semster(course_sem_id);
+            }
+        })
+        
+    });
+
+    $('#course_semsters_container').on('click', '.btn-delete-semester-subject', function() {
+        course_subject_id = $(this).data('id');
+        bootbox.confirm("Are you sure, You want to delete this Subject?", function(confirm) {
+            if(confirm) {
+                admin_course_remove_subject(course_subject_id);
+            }
+        })
+        
+    })
+    
+
     $('#course_start_date').datetimepicker({
         format: "dd-mm-yyyy",
         minView : 2,
+        startDate: '-1d',
+        autoclose: true,
+        daysOfWeekDisabled: [0, 6],
+        minDate: moment().toString()
+    });
+
+     $('#semster_start_date').datetimepicker({
+        format: "dd-mm-yyyy",
+        minView : 2,
+        startDate: '-1d',
         autoclose: true,
         daysOfWeekDisabled: [0, 6],
         minDate: moment().toString()
@@ -73,6 +104,7 @@ function save_semsters_to_course(data) {
                 $('#manage_semeter_dialog').modal('hide');
                 load_semester_container();
             } else{
+                $('#manage_semeter_dialog').find('.validation-errors').show();
                 $('#manage_semeter_dialog').find('.validation-errors').html(res.errors);
             }
         }
@@ -102,6 +134,26 @@ function admin_course_add_subject() {
     $('#subjects_added').append(subject_row);
 }
 
+function admin_course_remove_semster(id) {
+    $.ajax({
+        url: '/admin/admin_manage_course/remove_semster/' + id,
+        type: 'get',
+        success: function(data) {
+            load_semester_container();
+        }
+    });
+}
+
+function admin_course_remove_subject(id) {
+    $.ajax({
+        url: '/admin/admin_manage_course/remove_subject/' + id,
+        type: 'get',
+        success: function(data) {
+            load_semester_container();
+        }
+    });
+}
+
 function admin_course_save_subject(post_data) {
     $.ajax({
         url: '/admin/admin_manage_course/add_subjects_to_semester',
@@ -113,7 +165,7 @@ function admin_course_save_subject(post_data) {
                 load_semester_container();
                 $('#add_subject_dialog').modal('hide');
             } else {
-                alert(data.errors);
+                bootbox.alert(data.errors);
             }
         }
     }); 

@@ -27,6 +27,11 @@ class Course_subject_model extends CI_Model {
         return $this->db->update($this->table, $data);
 	}
 
+    public function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete($this->table);
+    }
+
     public function check_exist($subject_id, $course_id, $semester_id) {
         $query = $this->db->select('id')
             ->from($this->table)
@@ -40,7 +45,7 @@ class Course_subject_model extends CI_Model {
     }
 
     public function get_by_semester($semester_id) { 
-        $query = $this->db->select('course_subjects.*, subjects.*')
+        $query = $this->db->select('course_subjects.*, course_subjects.id AS couser_subject_id, subjects.*')
             ->join('subjects', 'subjects.id = course_subjects.subject_id', 'left')
             ->where('course_subjects.course_semester_id', $semester_id)
             ->get('course_subjects');

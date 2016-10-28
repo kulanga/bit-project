@@ -5,14 +5,16 @@
         <div class="col-md-8">
             
             <h3 class="text-muted">
-               Update Profile.
+               Update Staff Profile.
             </h3>
 
-            <div class="validation-errors">
-                <?php echo validation_errors(); ?>
-            </div>
+            <?php if(validation_errors()) {?>
+                <div class="validation-errors">
+                    <?php echo validation_errors(); ?>
+                </div>
+            <?php } ?>
 
-            <form role="form" name="manage_ac_user_form" method="post" action="/admin/manage_user/new">
+            <form role="form" name="manage_ac_user_form" method="post" action="/admin/staff/update/<?=$staff->user_id?>">
 
                 <div class="form-group">
                     <label for="full_name">Full Name<span class="required">*</span></label>
@@ -39,8 +41,8 @@
                     </select>
                 </div>
                
-                <button type="submit" class="btn btn-danger">Exit</button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-primary">Update</button>
+                <a href="/admin/staff" class="btn btn-danger">Exit</a>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>

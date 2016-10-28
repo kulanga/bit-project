@@ -5,12 +5,14 @@
         <div class="col-md-8">
             
             <h3 class="text-muted">
-                Add New Staff Member.
+                Create Staff Member.
             </h3>
 
-            <div class="validation-errors">
-                <?php echo validation_errors(); ?>
-            </div>
+            <?php if(validation_errors()) {?>
+                <div class="validation-errors">
+                    <?php echo validation_errors(); ?>
+                </div>
+            <?php } ?>
 
             <form role="form" name="manage_ac_user_form" method="post" action="/admin/staff/new">
 
@@ -25,8 +27,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="confirm_email">Confirm Email<span class="required">*</span></label>
-                    <input type="email" class="form-control" id="confirm_email" name="confirm_email" value="<?=set_value('confirm_email')?>"/>
+                    <label for="password">Password<span class="required">*</span></label>
+                    <input type="password" class="form-control" id="password" name="password"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password<span class="required">*</span></label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password"/>
                 </div>
 
                 <div class="form-group">

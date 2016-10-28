@@ -85,7 +85,7 @@
         </div>
     </nav>
 
-    <div id="main-content-wrap" class="container-fuild">
+    <div id="main-content-wrap" class="container-fuild <?=$this->uri->segment('2') != 'welcome' ? 'main-content-wrap' : '' ?>">
         <div class="row">
             <?php if (!empty($user['user_id'])) { ?>
                 <div id="left-nav" class="col-xs-2">

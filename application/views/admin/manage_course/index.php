@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/assets/js/admin_course.js"></script>
 
 <div class="col-md-10">
-    <h3 class="text-muted">Courses</h3>
+    <h3 class="text-muted">Manage Courses</h3>
     <div class="dataTable_wrapper">
         <table class="table table-striped table-hover" id="subjects-table">
             <thead>
@@ -27,8 +27,8 @@
                         <td>&nbsp;</td>
                         <td>
                             <a href="/admin/course/edit/<?=$course->id?>" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="/admin/course/clone/<?=$course->id?>" class="btn btn-sm btn-warning">Clone</a>
-                            <a href="/admin/course/status/complete/<?=$course->id?>" class="btn btn-sm btn-danger">Complete</a>
+                            <a href="/admin/course/update-semester/<?=$course->id?>" class="btn btn-sm btn-success">Set Current Semster</a>
+                            <?php /*<a href="/admin/course/status/complete/<?=$course->id?>" class="btn btn-sm btn-danger">Complete</a> */?>
                         </td>
                     </tr>
                 <?php } ?>

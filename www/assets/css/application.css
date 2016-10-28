@@ -33,7 +33,7 @@ body > .container {
     padding-top: 50px;
 }
 
-#main-content-wrap > .row {
+.main-content-wrap > .row {
     background-color: #0099cc;
 }
 
@@ -62,10 +62,11 @@ body > .container {
 }
 
 .text-muted {
-    background-color: #ccc;
+    /*background-color: #ccc;*/
     margin-bottom: 30px;
     padding: 8px 0;
     text-align: center;
+    text-decoration: underline;
 }
 
 .bold{
@@ -82,12 +83,17 @@ body > .container {
     background-color: #ffe5e5;
     color: #ff2828;
     margin-bottom: 8px;
-    padding: 4px 9px;
+    padding: 14px 10px 1px 13px;
 }
 .red {
     color: #ff2828;
 }
 .row-login-form{margin-top:20px;}
+
+#course_semsters_container {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
 
 
 

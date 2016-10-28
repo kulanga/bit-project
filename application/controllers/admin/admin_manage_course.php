@@ -36,24 +36,24 @@ class Admin_manage_course extends MY_Controller {
    
             $this->form_validation->set_rules('course_name', 'Course name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('course_code', 'Course code', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('ccourse_duration_years', 'Years', 'trim|numeric|xss_clean');
-            $this->form_validation->set_rules('course_duration_months', 'Months', 'trim|numeric|xss_clean');
-            $this->form_validation->set_rules('start_date', 'Start Date', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('course_duration_years', 'Years in duration', 'trim|required|numeric|xss_clean');
+            $this->form_validation->set_rules('course_duration_months', 'Months in duration', 'trim|required|numeric|xss_clean');
+            $this->form_validation->set_rules('course_start_date', 'Course Start Date', 'trim|required|xss_clean');
     
             if ($this->form_validation->run() == true) {
                 $insert['name'] = $this->input->post('course_name');
                 $insert['code'] = $this->input->post('course_code');
                 $insert['duration'] = $this->input->post('course_duration_years') * 12 + $this->input->post('course_duration_months');
-                $insert['start_date'] =  $this->input->post('start_date');
+                $insert['start_date'] =  date('Y-m-d',strtotime($this->input->post('course_start_date')));
 
                 if($course_id > 0 ) {
-                    $ret = $this->course_model->update($course_id, $insert);
+                    $this->course_model->update($course_id, $insert);
                 } else {
-                    $ret = $this->course_model->insert($insert);
+                    $course_id = $this->course_model->insert($insert);
                 }
 
-                if($ret) {
-                     redirect('/admin/course/edit/' . $ret);
+                if($course_id > 0 ) {
+                     redirect('/admin/course/edit/' . $course_id);
                 }
             }
         }
@@ -156,6 +156,37 @@ class Admin_manage_course extends MY_Controller {
 
         echo json_encode($response);
         exit;
+    }
+
+    public function remove_semster($semster_id) {
+        $this->load->model('course_semester_model');
+        $this->course_semester_model->delete($semster_id);
+        echo '1';die;
+    }
+
+    public function remove_subject($subject_id) {
+        $this->load->model('course_subject_model');
+        $this->course_subject_model->delete($subject_id);
+        echo '1';die;
+    }
+
+    public function settings($course_id) {
+        $data = array();
+
+        $this->load->model('course_model');
+        $this->load->model('course_semester_model');
+
+        $btn_save = $this->input->post('btn_save_settings');
+
+        if(!empty($btn_save)) {
+            $save_data = array();
+            $save_data['current_semester_id'] = $this->input->post('current_semester_id');
+            $this->course_model->update($course_id, $save_data);
+        }
+
+        $data['course'] = $this->course_model->get($course_id);
+        $data['semesters'] = $this->course_semester_model->get_by_course($course_id);
+        $this->layout->view('/admin/manage_course/course_settings', $data);
     }
 
 }

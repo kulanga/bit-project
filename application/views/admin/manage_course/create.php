@@ -19,7 +19,7 @@
                 </div>
             <?php } ?>
             
-            <form role="form" name="manage_ac_user_form" method="post" action="/admin/course/new" style="padding-bottom:65px;">
+            <form role="form" name="manage_ac_user_form" method="post" action="/admin/admin_manage_course/save_course/<?=is_object($course) ? $course->id : '';?>" style="padding-bottom:65px;">
                 <div class="form-group">
                     <label for="course_name">Course Name <span class="required">*</span></label>
                     <input type="text" class="form-control" id="course_name" name="course_name" value="<?php echo set_value('course_name', is_object($course) ? $course->name : '')?>" required/>
@@ -33,20 +33,20 @@
                 <div class="form-group row">
                     <div class="col-md-4">
                         <label for="course_start_date">Start Date <span class="required">*</span></label>
-                        <input type="text" class="form-control col-md-3" id="course_start_date" name="start_date" value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" required/>
+                        <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date" value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" required/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="course_duration">Duration<br/>
+                        <label for="course_duration">Duration<span class="required">*</span><br/>
 
                         <div class="col-md-6 pad-left-0">
-                            <input type="number"  min="0" max="5" class="form-control" id="course_duration_years" name="course_duration"/> Years
+                            <input type="number"  min="0" max="5" value="<?=set_value('course_duration_years', is_object($course) ? floor($course->duration/12) : '')?>" class="form-control" id="course_duration_years" name="course_duration_years" placeholder="Years" />
                          </div>
 
                          <div class="col-md-6 pad-left-0">
-                             <input type="number"  min="0" max="5" class="form-control" id="course_duration_months" name="course_duration"/> Months
+                             <input type="number"  min="0" max="12" value="<?=set_value('course_duration_months', is_object($course) ? floor($course->duration%12) : '')?>" class="form-control" id="course_duration_months" name="course_duration_months" placeholder="Months" />
                          </div>
                     </div>
                 </div>
@@ -73,11 +73,12 @@
     </div>
 </div>
 
-<div id="course_semsters_container">
-    
-</div>
 
 <?php if(isset($course->id) && $course->id > 0 ) {?>
+
+    <div id="course_semsters_container">
+    
+    </div>
 
     <div class="modal fade" id="manage_semeter_dialog" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -88,12 +89,12 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="validation-errors"></div>
+                    <div class="validation-errors" style="display:none;"></div>
                     <form id="manage_semeter_form" name="manage_semeter_form" role="form" method="post" action="/admin/course/save_semster">
                         <div class="form-group">
                             <label for="semester_year">Year<span class="required">*</span></label>
                             <select class="form-control" name="semester_year" id="semester_year">
-                                <?php for($i = 1; $i < 4; $i++) { ?>
+                                <?php for($i = 1; $i <= ceil(($course->duration/12)); $i++) { ?>
                                     <option value="<?=$i?>"><?=$i?></option>
                                 <?php } ?>
                             </select>
@@ -110,8 +111,8 @@
 
                         <div class="form-group">
                             <label for="start_date">Start Date<span class="required">*</span></label>
-                             <div class="input-append date form_datetime" data-date="2013-02-21T15:25:00Z">
-                                <input id="start_date" name="start_date" size="16" type="text" value="" readonly>
+                             <div class="input-append date form_datetime" data-date-format="dd-mm-yyyy">
+                                <input id="semster_start_date" name="start_date" size="16" type="text" value="" readonly>
                                 <span class="add-on"><i class="icon-remove"></i></span>
                                 <span class="add-on"><i class="icon-calendar"></i></span>
                             </div>
@@ -148,9 +149,6 @@
                 </div>
 
                 <div class="modal-body">
-
-                    <div class="validation-errors"></div>
-
                     <form id="add_subject_form" name="add_subject_form" role="form" method="post" action="/admin/course/add_subjects_to_semester">
                         
                         <input type="hidden" id="subject_semester_id" name="subject_semester_id" value="0">
@@ -189,8 +187,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script type="text/javascript">
         var SEMESTER_DETAILS_LOAD_URL = '/admin/admin_manage_course/get_semester_details/<?=$course->id?>';

@@ -62,4 +62,12 @@ if (!function_exists('user_status'))
     }
 
 }
+
+if (!function_exists('course_name'))
+{
+    function course_name($course) {
+        return $course->name . ' ' . date('Y', strtotime($course->start_date));
+    }
+
+}
  

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding:50px 0;">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             
@@ -56,7 +56,7 @@
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" autocomplete="off"/>
                 </div>
                
-                <button type="reset" class="btn btn-danger">Cancel</button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
                 <button type="submit" name="btn_signup" value="signupcouse_id" class="btn btn-primary">Signup</button>
             </form>
         </div>

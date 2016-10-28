@@ -29,6 +29,7 @@ class Admin_manage_timetable extends MY_Controller {
         }
 
         $data['course_id'] = $course_id;
+     
         if($course_id > 0 ) {
             $data['course'] = $this->course_model->get($course_id);
             $data['lecturers'] = $this->staff_model->get_stffs();

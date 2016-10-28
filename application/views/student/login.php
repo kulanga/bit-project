@@ -1,5 +1,3 @@
-<?php  apply_layout($layout); ?>
-
 <div class="container">
 	<div class="row"><br/></div>
 	<div class="row">

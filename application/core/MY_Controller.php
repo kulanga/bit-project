@@ -28,6 +28,22 @@ class MY_Controller extends CI_Controller
 		}
 
 		$this->layout->user($this->session->userdata);
+
+		$this->show_student_welcome_page();
+	}
+
+	protected function show_student_welcome_page() {
+
+		if($this->session->userdata('user_id') > 0 && $this->session->userdata('user_type_id') == 3 && $this->uri->segment('2') != 'welcome') {
+			$this->load->model('user_model');
+			$user = $this->user_model->get($this->session->userdata('user_id'));
+
+			if(is_object($user) && $user->status == 4) {
+
+				redirect('student/welcome');
+			}
+
+		}
 	}
 
 	protected function set_topnav($top_nav) {

@@ -55,7 +55,17 @@ class Student_signup extends MY_Controller {
                     $stu_id = $this->student_model->insert($stu_data);
 
                     if($stu_id > 0 ) {
-                        redirect('/student/');
+
+                        $session = array(
+                            'user_id' => $user_id,
+                            'user_type_id' => 3,
+                            'username' =>  $user_data['username'],
+                            'email'   =>  $user_data['email'],
+                            'full_name' =>  $user_data['full_name']
+                        );
+                        $this->session->set_userdata($session);
+
+                        redirect('user', 'refresh');
                     }
                 }
             }
