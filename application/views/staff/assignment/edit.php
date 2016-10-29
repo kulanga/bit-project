@@ -66,7 +66,7 @@
                     <label for="attachment">Uploaded Attachments</span></label>
                     <ul>
                         <?php foreach($assignment_attachments as $attachment) {?>
-                            <li><?=$attachment->original_file_name?></li>
+                            <li><a href="<?= base_url() . 'uploads/assignments/assignments/' . $attachment->file_name?>"><?=$attachment->original_file_name?></a></li>
                         <?php } ?>
                     </ul>
                 </div>

@@ -34,7 +34,7 @@ class MY_Controller extends CI_Controller
 
 	protected function show_student_welcome_page() {
 
-		if($this->session->userdata('user_id') > 0 && $this->session->userdata('user_type_id') == 3 && $this->uri->segment('2') != 'welcome') {
+		if($this->session->userdata('user_id') > 0 && $this->session->userdata('user_type_id') == 3 && !in_array($this->uri->segment('2'), array('welcome', 'logout'))) {
 			$this->load->model('user_model');
 			$user = $this->user_model->get($this->session->userdata('user_id'));
 

@@ -14,7 +14,7 @@
                 </div>
             <?php } ?>
 
-            <form role="form" name="manage_ac_user_form" method="post" action="/admin/staff/update/<?=$staff->user_id?>">
+            <form role="form" name="manage_ac_user_form" method="post" action="/admin/staff/update/<?=$staff->user_id?>"/>
 
                 <div class="form-group">
                     <label for="full_name">Full Name<span class="required">*</span></label>
@@ -43,6 +43,7 @@
                
                 <a href="/admin/staff" class="btn btn-danger">Exit</a>&nbsp;&nbsp;
                 <button type="submit" class="btn btn-primary">Update</button>
+               
             </form>
         </div>
     </div>

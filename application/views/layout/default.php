@@ -49,7 +49,7 @@
                             <li class="<?php echo $top_nav == 'course' ? 'active' : '';?>">
                                 <a href="/admin/course">Manage Course</a>
                             </li>
-                            <li><a href="#">Manage Locations</a></li>
+                            <li><a href="/admin/admin_manage_location/add_location">Manage Locations</a></li>
                             <li class="<?php echo $top_nav == 'manage_timetable' ? 'active' : ''?>">
                                 <a href="/admin/timetable">Manage Timetables</a>
                             </li>

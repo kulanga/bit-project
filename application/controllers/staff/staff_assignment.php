@@ -67,7 +67,7 @@ class Staff_assignment extends MY_Controller {
             $this->form_validation->set_rules('attachment', 'Attachment', 'callback_check_upload');
 
 
-            if (!empty($_FILES['attachment']['name']) || count($attchments) == 0 ) {
+            if (empty($_FILES['attachment']['name'])){
                 $this->form_validation->set_rules('attachment', 'Attachment', 'required|callback_check_upload');
             }
 
@@ -160,11 +160,11 @@ class Staff_assignment extends MY_Controller {
 
         $new_filename = $original_file_name = '';
 
-        if(!empty($_FILES['ass_submission_file']['name'])) {
-            $file_name = $_FILES['ass_submission_file']['name'];
-            $file_size = $_FILES['ass_submission_file']['size'];
-            $file_tmp = $_FILES['ass_submission_file']['tmp_name'];
-            $file_type = $_FILES['ass_submission_file']['type'];
+        if(!empty($_FILES['attachment']['name'])) {
+            $file_name = $_FILES['attachment']['name'];
+            $file_size = $_FILES['attachment']['size'];
+            $file_tmp = $_FILES['attachment']['tmp_name'];
+            $file_type = $_FILES['attachment']['type'];
 
             $file_ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
             $new_filename = $assignment_id . '-' . time() . '-' . $file_name;
