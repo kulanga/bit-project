@@ -5,6 +5,11 @@ class Staff_timetable extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
         $this->set_topnav('manage_timetable');
+
+        //check logged in user is a student
+        if($this->session->userdata('user_type_id') != 2 ) {
+            die('Access Denied');
+        }
 	}
 
     public function index() {

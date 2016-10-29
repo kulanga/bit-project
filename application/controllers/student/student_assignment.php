@@ -59,6 +59,21 @@ class Student_assignment extends MY_Controller {
 
     }
 
+    public function view($assignment_id) {
+        $stu_user_id = $this->session->userdata('user_id');
+        $data = array();
+
+        $this->load->model('assignment_model');
+        $this->load->model('assignment_attachment_model');
+        $this->load->model('subject_model');
+
+        $data['assignment'] = $this->assignment_model->get($assignment_id);
+        $data['assignment_attachments'] = $this->assignment_attachment_model->get_by_assignment_id($assignment_id);
+        $data['subject'] = $this->subject_model->get($data['assignment']->subject_id);
+
+        $this->layout->view('/student/assignment/view', $data);
+    }
+
 
     private function save_ass_submission($assignment_id) {
         $stu_user_id = $this->session->userdata('user_id');

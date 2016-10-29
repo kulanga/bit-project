@@ -32,10 +32,10 @@
                                 } ?>
                             </td>
                             <td>
+                                <a href="/student/student_assignment/view/<?=$ass->id?>" role="button" class="btn btn-sm btn-success">View</a>
                                 <?php if($ass->status == 1) {?>
                                     <a href="/student/student_assignment/submit/<?=$ass->id?>" role="button" class="btn btn-sm btn-primary">Submit</a>
                                 <?php } else {?>
-                                    <a href="" role="button"  class="btn btn-sm btn-info" >View Submission & Status</a>
                                 <?php } ?>
                             </td>
                         </tr>

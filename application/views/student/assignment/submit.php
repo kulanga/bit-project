@@ -24,10 +24,16 @@
                     </div>
 
                     <?php if(is_object($assignment_submission) > 0 ) {?>
-                        <span class="label label-success" style="font-size:15px;">
-                            You have aready submitted the Assignment   on <?=date('d-m-Y H:i', strtotime($assignment_submission->date_submitted))?> 
-                            <a href="<?=  base_url() . 'uploads/assignments/assignments/' . $assignment_submission->file_name?>">(<?=$assignment_submission->original_file_name?>)</a>
-                        </span>
+                        <div class="form-group">
+                            <span class="label label-success" style="font-size:15px;">
+                                You have aready submitted the Assignment   on <?=date('d-m-Y H:i', strtotime($assignment_submission->date_submitted))?> 
+                                <a href="<?=  base_url() . 'uploads/assignments/assignments/' . $assignment_submission->file_name?>">(<?=$assignment_submission->original_file_name?>)</a>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <a href="/student/assignment" role="button" class="btn btn-danger">&nbsp;&nbsp;Back&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                        </div>
                     <?php } else { ?>
                     
                         <div class="form-group">
