@@ -46,6 +46,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-12">
+                        <label for="title">Title<span class="required">*</span></label>
+                        <input type="text" class="form-control col-md-3" id="title" name="title" value="<?=$assignment->title?>"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-md-4">
                         <label for="due_date">Due Date<span class="required">*</span></label>
                         <input type="text" class="form-control col-md-3" id="due_date" name="due_date" value="<?=date('d-m-Y', strtotime($assignment->due_date))?>"/>

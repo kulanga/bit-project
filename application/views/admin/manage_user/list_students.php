@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="form-group col-sm-3">
-                        <label for="batch_id">Batch</label>
+                        <label for="batch_id">Cource</label>
                         <select name="batch_id"  class="form-control">
                             <option value="">Select</option>
                             <?php foreach($courses as $course) {?>
@@ -70,8 +70,8 @@
                         <td class="stu-status"><?=user_status($student->user_status)?></td>
                         <td>
                             <a href="#" class="btn-sm btn-primary">Edit</a>
-                            <?php if($student->user_status == 4) {?>
-                                <a href="javascript:void(0)" class="btn-sm btn-success btn-approve" data-id="<?=$student->user_id;?>">Approve</a>
+                            <?php if($student->user_status == 4 ) {?>
+                                <a href="javascript:void(0)" id="btn-approve-<?=$student->user_id;?>" class="btn-sm btn-success btn-approve" data-id="<?=$student->user_id;?>">Approve</a>
                             <?php }?>
 
                             <?php if($student->user_status != 3) {?>
@@ -90,6 +90,7 @@
         $('.btn-approve').on('click', function() {
             var id = $(this).data('id');
             admin_student_update_status(id, 1, 'approve', $(this));
+
         });
 
         $('.btn-delete').on('click', function() {
@@ -98,7 +99,9 @@
             bootbox.confirm("Are you sure?", function(confirm){
                 if(confirm) {
                     admin_student_update_status(id, 3, 'delete', btn);
+
                 }
+
             })
             
         });
@@ -118,10 +121,14 @@
 
                         } else if(newstatus == 'delete') {
                             newstatus_text = 'Deleted';
+                            $('#btn-approve-'+ id).hide();
+                           
                         }
                         $('#stu-row-' + id).find('.stu-status').html(newstatus_text);
                         btn.hide();
-                    } else {
+
+                    } 
+                    else {
                         alert('An error occured. Please refresh the page and try.');
                     }
                 }

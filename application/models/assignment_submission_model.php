@@ -28,7 +28,7 @@ class Assignment_submission_model extends CI_Model {
 
     public function get_by_assignment_id($assignment_id, $user_id) {
         $query = $this->db->where('assignment_id', $assignment_id)
-            ->where('student_user_id', $user_id)
+            ->where('student_id', $user_id)
             ->get($this->table);
         return $query->first_row();
     }

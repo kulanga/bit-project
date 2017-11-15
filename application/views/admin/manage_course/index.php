@@ -37,7 +37,7 @@
                     <th>Course</th>
                     <th>Start Date</th>
                     <th>Status</th>
-                    <th style="text-align:right">Duration</th>
+                    <th style="text-align:right">Duration(Months)</th>
                     <th style="text-align:right">No of Students</th>
                     <th style="text-align:center">Action</th>
                 </tr>
@@ -47,7 +47,7 @@
            
                 <?php foreach($list as $course) {?>
                     <tr>
-                        <td><?=$course->code?> - <?=$course->name?></td>
+                        <td><?=$course->name?></td>
                         <td><?=date('d M Y', strtotime($course->start_date))?></td>
                         <td>
                             <?php if($course->status == '1') {?>
@@ -59,8 +59,8 @@
                                  <span class="label label-danger"><?=couser_status($course->status)?></span>
                             <?php }?>
                         </td>
-                        <td align="right"><?=$course->duration?></td>
-                        <td align="right"><?=$course->student_count?></td>
+                        <td align="center"><?=$course->duration?></td>
+                        <td align="center"><?=$course->student_count?></td>
                         <td align="center">
                             <a href="/admin/course/edit/<?=$course->id?>" class="btn btn-sm btn-primary">Edit</a>
                              <a href="/admin/course/settings/<?=$course->id?>" class="btn btn-sm btn-success">Settings</a>

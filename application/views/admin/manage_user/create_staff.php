@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email<span class="required">*</span></label>
+                    <label for="email">Email(As User Name)<span class="required">*</span></label>
                     <input type="email" class="form-control" id="email" name="email" value="<?=set_value('email')?>"/>
                 </div>
 

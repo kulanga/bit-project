@@ -11,16 +11,18 @@ class Student_signup extends MY_Controller {
 
         $this->load->library('form_validation');
         $this->load->model('course_model');
+        $this->load->model('course_category_model');
         $this->load->model('user_model');
         $this->load->model('student_model');
 
-        $data['courses'] = $this->course_model->get_course_list();
-
+        //$data['courses'] = $this->course_model->get_course_list();
+        $data['course_category'] = $this->course_category_model->get_course_list();
+        //print_r($data['course_category']);die;
         $cmd_post = $this->input->post('btn_signup');
 
         if($cmd_post != "") {
            
-            $this->form_validation->set_rules('reg_no', 'Student Reg No.', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('reg_no', 'Student Reg No.', 'trim|required|xss_clean|is_unique[students.reg_no]');
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
             $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|xss_clean|numeric');
@@ -33,7 +35,7 @@ class Student_signup extends MY_Controller {
                 $user_data = array(
                     'full_name' => $this->input->post('name'),
                     'email' => $this->input->post('email'),
-                    'username' => $this->input->post('email'),
+                    'username' => $this->input->post('reg_no'),
                     'mobile_no' => $this->input->post('mobile_no'),
                     'user_type_id' => 3,
                     'status' => 4, //approval is pending
@@ -49,7 +51,6 @@ class Student_signup extends MY_Controller {
                         'user_id' => $user_id,
                         'reg_no' => $this->input->post('reg_no'),
                         'course_id' => $this->input->post('course_id'),
-
                     );
 
                     $stu_id = $this->student_model->insert($stu_data);
@@ -64,6 +65,10 @@ class Student_signup extends MY_Controller {
                             'full_name' =>  $user_data['full_name']
                         );
                         $this->session->set_userdata($session);
+
+                        //send email verification email
+                        $this->load->model('user_email_verification_model');
+                        $this->user_email_verification_model->send($user_id);
 
                         redirect('user', 'refresh');
                     }

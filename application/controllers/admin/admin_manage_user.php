@@ -20,7 +20,6 @@ class Admin_manage_user extends MY_Controller {
         $this->layout->view('/admin/manage_user/index', $data);
     }
 
-
 	//create/edit accedmic user.
 	public function create_staff($user_id = 0) {
 
@@ -30,7 +29,7 @@ class Admin_manage_user extends MY_Controller {
 
         $data = array();
         $data['designations'] = $this->staff_designation_model->get_disgnations_list();
-
+       
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
             
             $this->form_validation->set_rules('full_name', 'Full Name', 'trim|required|xss_clean');
@@ -78,20 +77,23 @@ class Admin_manage_user extends MY_Controller {
 
         $this->load->model('staff_model');
         $this->load->model('staff_designation_model');
+        
 
         $data = array();
+
+
         $data['designations'] = $this->staff_designation_model->get_disgnations_list();
         $data['staff'] =  $this->staff_model->get_staff_profile($user_id);
         $this->layout->view('/admin/manage_user/edit_staff', $data);
     }
 
-    public function list_students() {
+    public function list_students() { 
         $this->set_topnav('manage_student');
         $this->load->model('student_model');
         $this->load->model('course_model');
         $data = array();
 
-      $data['courses'] = $this->course_model->get_course_list();
+        $data['courses'] = $this->course_model->get_course_list();
 
         $params = array(
             'keyword' => $this->input->get('keyword'),
@@ -119,6 +121,28 @@ class Admin_manage_user extends MY_Controller {
         $user = $this->user_model->get($user_id);
 
         if($user->user_type_id == '3') {
+            $this->user_model->update($user_id, $data);
+            $response['status'] = 1;
+        }
+
+        echo json_encode($response);exit;
+    }
+
+    public function update_staff_status() {
+
+        $user_id =  $this->input->post('id');
+        $status = $this->input->post('status');
+
+        $response = array('status' => 0);
+
+        $data = array(
+            'status' => $status
+        );
+
+        $this->load->model('user_model');
+        $user = $this->user_model->get($user_id);
+
+        if($user->user_type_id == '2') {
             $this->user_model->update($user_id, $data);
             $response['status'] = 1;
         }

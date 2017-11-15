@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <h2 class="text-muted">Add Submission</h2><br/>
+        <h2 class="text-muted">Submit Assignment</h2><br/>
 
         <div class="col-md-8">
             <?php if(validation_errors()) {?>

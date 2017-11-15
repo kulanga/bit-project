@@ -24,9 +24,10 @@
                 <div class="form-group">
                     <label for="course_id">Batch<span class="required">*</span></label>
                     <select class="form-control" name="batch_id" id="batch_id">
-                        <option value="">-</option>
+                        <option value="">Select</option>
                         <?php foreach($courses as $course) {?>
-                            <option value="<?=$course->id?>"><?=$course->name . ' ' . date('Y', strtotime($course->start_date))?></option>
+                            <option value="<?=$course->id?>" 
+                            <?php echo set_value('batch_id') == $course->id ? "selected='selected'" : ''?>><?=$course->name;?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -39,15 +40,23 @@
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-12">
+                        <label for="title">Title<span class="required">*</span></label>
+                        <input type="text" class="form-control col-md-3" id="title" name="title" placeholder="Assignment 1"  value="<?=set_value('due_date')?>"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-md-4">
                         <label for="due_date">Due Date<span class="required">*</span></label>
-                        <input type="text" class="form-control col-md-3" id="due_date" name="due_date" value=""/>
+                        <input type="text" class="form-control col-md-3" id="due_date" name="due_date" 
+                        value="<?=set_value('due_date')?>" autocomplete="off"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description<span class="required">*</span></label>
-                    <textarea class="form-control" rows="10" id="description" name="description"></textarea>
+                    <textarea class="form-control" rows="10" id="description" name="description"><?=set_value('description')?></textarea>
                 </div>
 
                 <div class="form-group">
@@ -56,7 +65,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="reset" class="btn btn-danger">Cancel</button>&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
                     <button type="submit" class="btn btn-primary" name="btn_create" value="create">Create</button>
                 </div>
             </form>
@@ -86,8 +95,7 @@
             format: "dd-mm-yyyy",
             minView : 2,
             autoclose: true,
-            daysOfWeekDisabled: [0, 6],
-            minDate: moment().toString()
+            startDate: new Date()
         });
     })
 </script>

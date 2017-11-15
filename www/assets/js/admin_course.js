@@ -12,10 +12,38 @@ $(document).ready(function() {
         subject_form.find('#subject_id').val(id);
 
         if(id > 0 ) {
-            var subject_to_edit = $('#subject-row-' + id);
+            var subject_to_edit = $('#subject-row-' + id),
+                course_cat = [],
+                cat_id = '',
+                staff_subject = [],
+                ss_id = '';
+
             subject_form.find('#subject_name').val(subject_to_edit.find('.subject-name').text());
             subject_form.find('#subject_code').val(subject_to_edit.find('.subject-code').text());
+
+            course_cat = subject_to_edit.find('.course-cat li.cc-item');
+            
+            $.each(course_cat, function(i, v) {
+                cat_id = $(v).data('cat-id');
+                $('input#course_cat_id_' + cat_id).prop('checked', true);
+            });
+
+            staff_subject = subject_to_edit.find('.assigned-to li.staff-item');
+            
+            $.each(staff_subject, function(i, v) {
+                ss_id = $(v).data('staff-id');
+                $('input#staff_' + ss_id).prop('checked', true);
+            });
         }
+    });
+
+    $('#create_subject_form').on('hidden.bs.modal', function () {
+        $('#create_subject_form .validation-errors')
+            .addClass('hide')
+            .html('');
+        //clear form on close
+        $('#create_subject_form form')[0].reset();
+
     });
 
     $('#modal-btn-save-subject').on('click', function() {
@@ -70,7 +98,6 @@ $(document).ready(function() {
         })
         
     })
-    
 
     $('#course_start_date').datetimepicker({
         format: "dd-mm-yyyy",
@@ -89,8 +116,6 @@ $(document).ready(function() {
         daysOfWeekDisabled: [0, 6],
         minDate: moment().toString()
     });
-
-
 });
 
 function save_semsters_to_course(data) {
@@ -114,7 +139,6 @@ function save_semsters_to_course(data) {
 function load_semester_container() {
     $('#course_semsters_container').load(SEMESTER_DETAILS_LOAD_URL);
 }
-
 
 function admin_course_add_subject() {
 
@@ -196,9 +220,12 @@ function save_subject(data) {
                 }
 
                 $('#create_subject_form').modal('hide');
+                window.location.href = '/admin/subject/index';
                 
             } else {
-                $('#create_subject_form .validation-errors').html(res.errors);
+                $('#create_subject_form .validation-errors')
+                    .removeClass('hide')
+                    .html(res.errors);
             }
         }
     });

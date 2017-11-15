@@ -40,7 +40,13 @@
                         <?php } ?>
                     </select>
                 </div>
-               
+
+                <div class="form-group">
+                    <label for="mobile_no">Subject<span class="required">*</span></label>
+                    
+                </div>
+
+                 
                 <a href="/admin/staff" class="btn btn-danger">Exit</a>&nbsp;&nbsp;
                 <button type="submit" class="btn btn-primary">Update</button>
                

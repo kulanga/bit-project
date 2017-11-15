@@ -20,20 +20,30 @@
             <?php } ?>
             
             <form role="form" name="manage_ac_user_form" method="post" action="/admin/admin_manage_course/save_course/<?=is_object($course) ? $course->id : '';?>" style="padding-bottom:65px;">
-                <div class="form-group">
-                    <label for="course_name">Course Name <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="course_name" name="course_name" value="<?php echo set_value('course_name', is_object($course) ? $course->name : '')?>" required/>
-                </div>
+                
 
                 <div class="form-group">
-                    <label for="course_code">Course Code <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="course_code" name="course_code" value="<?php echo set_value('course_code', is_object($course) ? $course->code : '')?>" required/>
+                    <?php if(isset($course->id) && $course->id >0) {?>
+                            <label >Course:</label> 
+                            <label ><?php  echo $course->name ?></label>                   
+                    <?php } else { ?>
+                        <label for="course_cat_id">Course Type<span class="required">*</span></label>
+                        <select name="course_cat_id" id="course_cat_id"  class="form-control">
+                            <option value="">Select</option>
+                            <?php foreach($course_category as $course_cat) {?>
+                                <option  value="<?=$course_cat->id?>" <?=$course_cat->id == set_value('course_id') ? 'selected="selected"' : '' ?>>
+                                    <?=$course_cat->name?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    <?php } ?>
                 </div>
+
 
                 <div class="form-group row">
                     <div class="col-md-4">
                         <label for="course_start_date">Start Date <span class="required">*</span></label>
-                        <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date" value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" required/>
+                        <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date" value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" autocomplete="off" required/>
                     </div>
                 </div>
 
@@ -42,11 +52,13 @@
                         <label for="course_duration">Duration<span class="required">*</span><br/>
 
                         <div class="col-md-6 pad-left-0">
-                            <input type="number"  min="0" max="5" value="<?=set_value('course_duration_years', is_object($course) ? floor($course->duration/12) : '')?>" class="form-control" id="course_duration_years" name="course_duration_years" placeholder="Years" />
+                            <span style="font-weight:normal;"><small>Years</small></span>
+                            <input type="number"  min="0" max="5" value="<?=set_value('course_duration_years', is_object($course) ? floor($course->duration/12) : '')?>" class="form-control" id="course_duration_years" name="course_duration_years"/>
                          </div>
 
                          <div class="col-md-6 pad-left-0">
-                             <input type="number"  min="0" max="12" value="<?=set_value('course_duration_months', is_object($course) ? floor($course->duration%12) : '')?>" class="form-control" id="course_duration_months" name="course_duration_months" placeholder="Months" />
+                            <span style="font-weight:normal;"><small>Months</small></span>
+                            <input type="number"  min="0" max="12" value="<?=set_value('course_duration_months', is_object($course) ? floor($course->duration%12) : '')?>" class="form-control" id="course_duration_months" name="course_duration_months"/>
                          </div>
                     </div>
                 </div>
@@ -54,7 +66,7 @@
                 <div class="form-group">
                     <a href="/admin/course" role="button" class="btn btn-danger">&nbsp;&nbsp;Exit&nbsp;&nbsp;</a>&nbsp;&nbsp;
 
-                    <?php if(isset($course->id) && $course->id > 0) {?>
+                    <?php if(isset($course->id) && $course->id > 0) { ?>
                         <button type="reset" class="btn btn-warning" data-toggle="modal" data-target="#manage_semeter_dialog">Add Semester</button>&nbsp;&nbsp;
                         <button type="submit" class="btn btn-primary" name="btn_start_create_course" value="save">Update</button>
                     <?php } else { ?>

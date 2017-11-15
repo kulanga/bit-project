@@ -13,6 +13,7 @@ class Admin_manage_timetable extends MY_Controller {
 
         $course_id = (int)$this->input->get('filter_course_id');
         $semester_id = (int)$this->input->get('semester_id');
+        $sem_id =  (int)$this->input->get('filter_semester_id');
 
         $this->load->model('course_model');
         $this->load->model('course_semester_model');
@@ -33,10 +34,15 @@ class Admin_manage_timetable extends MY_Controller {
         if($course_id > 0 ) {
             $data['course'] = $this->course_model->get($course_id);
             $data['lecturers'] = $this->staff_model->get_stffs();
+            $data['semesters'] = $this->course_semester_model->get_by_course($course_id);
+            
+            $data['current_semester_id'] = 0;
 
-            if(is_object($data['course']) && $data['course']->current_semester_id > 0) {
-                $data['semester'] = $this->course_semester_model->get($data['course']->current_semester_id);
+            if(is_object($data['course'])) {
 
+                $data['current_semester_id'] = $sem_id > 0 ? $sem_id : $data['course']->current_semester_id;
+                $data['semester'] = $this->course_semester_model->get($data['current_semester_id']);
+                // show_error($data['current_semester_id']);
                 if(is_object($data['semester'])) {
                     $data['subjects'] = $this->course_subject_model->get_by_semester($data['semester']->id);
                 }
@@ -90,7 +96,7 @@ class Admin_manage_timetable extends MY_Controller {
         $this->form_validation->set_rules('lecturer_id', 'Lecturer', 'trim|required|xss_clean');
         $this->form_validation->set_rules('event_date', 'Date', 'trim|required|xss_clean');
         $this->form_validation->set_rules('event_start_time', 'Start Time', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('event_end_time', 'End Time', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('event_end_time', 'End Time', 'trim|required|xss_clean|callback_event_end_time');
 
 
         $is_repeatable = $this->input->post('is_repeatable');
@@ -182,5 +188,18 @@ class Admin_manage_timetable extends MY_Controller {
             echo '1'; die;
         }
         echo '0'; die;
+    }
+
+    function event_end_time($event_endtime) {
+        $event_starttime = date('Y-m-d') . ' '. $this->input->post('event_start_time') . ':00';
+        $event_endtime = date('Y-m-d') . ' '. $event_endtime . ':00';
+        $event_starttime_int = strtotime($event_starttime);
+        $event_endtime_int = strtotime($event_endtime);
+
+        if ($event_endtime_int <= $event_starttime_int) {
+            $this->form_validation->set_message('event_end_time', 'End Time should be greater than Start Time');
+            return false;
+        }
+        return true;
     }
 }

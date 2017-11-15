@@ -17,7 +17,7 @@
             <form role="form" name="manage_ac_user_form" method="post" action="/admin/admin_manage_course/settings/<?=$course->id?>" style="padding-bottom:65px;">
                 <div class="form-group">
                     <label for="course_name">Course:</label>
-                    <span><?=course_name($course)?></span>
+                    <span><?=$course->name?></span>
                 </div>
 
                  <div class="form-group">

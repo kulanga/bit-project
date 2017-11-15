@@ -27,7 +27,16 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
 	}
-	
+
+	public function is_verified($user_id) {
+
+		$this->db->where('id', $user_id);
+		$query = $this->db->get($this->table);
+		
+		$row = $query->first_row();
+		return $row->is_email_verified || 0;
+
+	}
 
 	function login($username, $password)
 	{

@@ -17,7 +17,8 @@ class Login extends MY_Controller
 			redirect('/user');
 		}
 
-		$this->layout->title('Login');
+		$this->layout->title('Student Login');
+		$data = array('login_as' => 'Student');
 
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$this->load->helper(array('form'));
@@ -32,7 +33,19 @@ class Login extends MY_Controller
 			}
 		}
 
-		$this->layout->view('login/index');
+		$this->layout->view('login/index', $data);
+	}
+
+	function lecturer()
+	{
+		if ($this->session->userdata('user_id') > 0 ) {
+			redirect('/user');
+		}
+
+		$data = array('login_as' => 'Lecturer', 'is_lecturer_login' => 1);
+
+		$this->layout->title('Lecturer Login');
+		$this->layout->view('login/index', $data);
 	}
 
 	function check_database($password)

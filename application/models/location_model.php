@@ -15,7 +15,7 @@ class Location_model extends CI_Model {
 
 	public function insert($data = array()) {
 		if (!$this->db->insert($this->table, $data)) {
-            return false;
+            //return false;
         }
         return $this->db->insert_id();
 	}
@@ -24,6 +24,11 @@ class Location_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
 	}
+
+    public function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete('locations');
+    }
 
     public function get_locations() {
         $query = $this->db->order_by('name')

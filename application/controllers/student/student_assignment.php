@@ -35,11 +35,10 @@ class Student_assignment extends MY_Controller {
             $attachment = $this->save_ass_submission($assignment_id);
 
             if(count($attachment) > 0 ) {
-                
                 $this->assignment_submission_model->insert(
                     array(
                         'assignment_id'      => $assignment_id,
-                        'student_user_id'    => $this->session->userdata('user_id'),
+                        'student_id'         => $this->session->userdata('user_id'),
                         'original_file_name' => $attachment[0],
                         'file_name'          => $attachment[1],
                         'date_submitted'     => date('Y-m-d H:i:s')

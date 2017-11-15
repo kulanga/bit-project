@@ -37,7 +37,7 @@ body > .container {
     background-color: #0099cc;
 }
 
-#main-content-wrap > .row > #right-container{
+#main-content-wrap > .row > #right-container {
     background-color: #fff;
 }
 
@@ -94,6 +94,23 @@ body > .container {
     border-top: 1px solid #ccc;
     padding-top: 20px;
 }
+
+.center {
+    text-align: center;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.profile-info {
+    padding-top: 15px;
+}
+
 
 
 

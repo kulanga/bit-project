@@ -22,7 +22,7 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://hnde.local';
+$config['base_url'] = 'http://student-portal.local/';
 
 /*
 |--------------------------------------------------------------------------
@@ -365,9 +365,21 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+//Email config
+$config['email'] = array(
+    'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://smtp.gmail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'hndeportal',
+    'smtp_pass' => 'Test@1234',
+    'mailtype'  => 'html',
+    'charset'   => 'utf-8',
+    'newline'   => "\r\n",
+);
 
 $config['institute'] = 'HNDE';
 $config['app_name'] = 'HNDE Student Portal';
+$config['admin_email'] = 'portaladmin@hnde.lk';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -10,9 +10,12 @@
                 
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <label for="batch_id">Course</label>
+                        <label for="batch_id">Batch</label>
                         <select name="batch_id"  class="form-control">
                             <option value="">All</option>
+                            <?php foreach($courses as $course) { ?>
+                                <option value="<?php echo $course->id?>"><?=$course->name;?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -47,7 +50,7 @@
 
                      <div class="form-group col-sm-4">
                         <br/>
-                        <button class="btn btn-primary" type="submit" value="submit">View</button>
+                        <button class="btn btn-primary" type="submit" name="btn_view" value="submit">View</button>
                     </div>
                 </div>
 
@@ -81,7 +84,8 @@
                         <td>
                             <a class="btn btn-sm btn-primary" href="/staff/assignment/edit/<?=$assignment->id?>">Edit&nbsp;&nbsp;<a>
                             <?php if($assignment->status == 1) {?>
-                                <a class="btn btn-sm btn-success" href="/staff/staff_assignment/list_submissions/<?=$assignment->id?>">View Submissions</a>
+                                <a class="btn btn-sm btn-success" 
+                                href="/staff/staff_assignment/list_submissions/<?=$assignment->id?>">View Submissions</a>
                             <?php } ?>
                         </td>
                     </tr>
@@ -110,4 +114,17 @@
             minDate: moment().toString()
         });
     });
+
+
+
+ $(document).ready(function(){
+        $('.btn-_view').on('click', function(list_submissions) {
+            var lid = $(this).data('assignment');
+            bootbox.confirm('This is late Submissions ', function(confirm) {
+                
+
+            })
+        });
+    });
+
 </script>

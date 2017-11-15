@@ -39,13 +39,14 @@ class Staff_model extends CI_Model
     }
 
     public function get_stffs() {
-        $query = $this->db->select('staff.*, user.full_name, user.email, user.mobile_no, sd.designation')
+        $query = $this->db->select('staff.*, user.full_name, user.email, user.mobile_no, sd.designation, user.status')
+            ->from($this->table)
             ->join('users user', 'staff.user_id =  user.id', 'inner')
             ->join('staff_designations sd', 'sd.id = staff.staff_designation_id', 'left')
             ->where('user.user_type_id', 2)
             ->where('user.status', 1)
             ->order_by('user.full_name')
-            ->get('staff');
+            ->get();
       
         return $query->result();
     }

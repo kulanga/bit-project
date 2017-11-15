@@ -34,15 +34,19 @@ class MY_Controller extends CI_Controller
 
 	protected function show_student_welcome_page() {
 
-		if($this->session->userdata('user_id') > 0 && $this->session->userdata('user_type_id') == 3 && !in_array($this->uri->segment('2'), array('welcome', 'logout'))) {
+		if($user_id = $this->session->userdata('user_id')) {
+
 			$this->load->model('user_model');
-			$user = $this->user_model->get($this->session->userdata('user_id'));
+			$user = $this->user_model->get($user_id);
 
-			if(is_object($user) && $user->status == 4) {
+			if(is_object($user) && $user->user_type_id == 3 && !in_array($this->uri->segment('2'), array('welcome', 'logout', 'verify_email', 'resend_verify_email'))) {
 
-				redirect('student/welcome');
+				if($user->status == 4 || $user->is_email_verified == 0) {
+
+					redirect('student/welcome');
+				}
+
 			}
-
 		}
 	}
 

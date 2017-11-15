@@ -37,7 +37,7 @@ class Course_model extends CI_Model {
         $sql  = "SELECT courses.* ";
         $sql .= "FROM courses ";
         $sql .= "WHERE $where_status ";
-        $sql .= "ORDER BY status, name, code";
+        $sql .= "ORDER BY status, name";
 
         $query = $this->db->query($sql);
         return $query->result();

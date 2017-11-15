@@ -62,5 +62,31 @@ class Student_model extends CI_Model
         $st = $res->first_row();
         return is_object($st) ? $st->student_count : 0;
     }
-	
+
+    public function get_accedemic_profile($user_id) {
+
+        $sql  = "SELECT st.course_id, st.user_id, sub.name AS subject, sub.code AS subject_code, ";
+        $sql .= "cs.semester_year, cs.semester_number ";
+        $sql .= "FROM students st ";
+        $sql .= "LEFT JOIN course_semesters cs ON cs.course_id = st.course_id ";
+        $sql .= "LEFT JOIN course_subjects csub ON csub.course_semester_id = cs.id ";
+        $sql .= "LEFT JOIN subjects sub ON sub.id = csub.subject_id ";
+        $sql .= "WHERE st.user_id = ? ";
+        $sql .= "ORDER BY semester_year ASC, semester_number ASC";
+
+        $query = $this->db->query($sql, array($user_id));
+        $res = $query->result();
+
+        $result = array();
+        foreach ($res as $row) {
+            $key = $row->semester_year .'-' . $row->semester_number;
+            $title = ' Semester ' .  $row->semester_number . " of Year " .$row->semester_year;
+            
+            $row->title = $title;
+
+            $result[$key]['title'] = $title;
+            $result[$key]['rows'][] = $row;
+        }
+        return $result;
+    }
 }

@@ -1,7 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <link rel="stylesheet" href="<?php echo asset_url();?>js/fullcalendar-2.9.1/fullcalendar.min.css">
+<link rel="stylesheet" href="<?php echo asset_url();?>js/bootstrap-slider/bootstrap-slider.min.css">
+
 <script type="text/javascript" src="<?php echo asset_url();?>js/fullcalendar-2.9.1/fullcalendar.min.js"></script>
+<script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-slider/bootstrap-slider.min.js"></script>
 
 
 <div class="col-md-10">
@@ -10,15 +13,30 @@
         <div class="timetable-filters dataTable_wrapper">
             <form name="timetable_fileters_form" id="timetable_fileters_form" method="get" action="/admin/timetable">
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label>Batch</label>
                         <select name="filter_course_id" id="filter_course_id" class="form-control">
-                            <?php foreach($courses as $cs) {?>
-                                <option  value="<?=$cs->id?>" <?=$cs->id == $course_id ? 'selected="selected"' : '' ?>><?=course_name($cs)?></option>
+                            <?php foreach ($courses as $cs) {?>
+                                <?php if (in_array($cs->status, array(1,2))) {?>
+                                    <option  value="<?=$cs->id?>" <?=$cs->id == $course_id ? 'selected="selected"' : '' ?>>
+                                    <?=$cs->name;?></option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
-                    
+
+                    <div class="form-group col-md-4">
+                        <label>Semester</label>
+                        <select name="filter_semester_id" id="filter_semester_id" class="form-control">
+                            <option  value="0">-</option>
+                            <?php foreach ($semesters as $sem) {?>
+                                <option  value="<?=$sem->id?>" 
+                                <?=$sem->id == $current_semester_id ? 'selected="selected"' : '' ?>>
+                                <?= 'Year ' . $sem->semester_year . ' Semester#' . $sem->semester_number;?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>&nbsp;</label><br/>
                         <button class="btn btn-primary">View</button>
@@ -46,11 +64,11 @@
                     <div class="form-group col-md-6 pad-left-0">
                         <label>Batch:</label><br/>
                         <input type="hidden" name="batch_id" value="<?=$course_id?>">
-                        <span><?=course_name($course)?></span>
+                        <span><?=$course->name?></span>
                     </div>
 
                     <div class="form-group col-md-6 pad-left-0">
-                        <label>Subject</label>
+                        <label>Subject <span class="required">*</span></label>
                         <select id="subject_id" name="subject_id" class="form-control">
                             <?php foreach($subjects as $subject) {?>
                                 <option value="<?=$subject->id?>"><?=$subject->code . '-' . $subject->name?></option>
@@ -59,7 +77,7 @@
                     </div>
 
                     <div class="form-group col-md-6 pad-left-0">
-                        <label>Lecturer</label>
+                        <label>Lecturer <span class="required">*</span></label>
                         <select id="lecturer_id" name="lecturer_id" class="form-control">
                             <option value="0">-</option>
                             <?php foreach($lecturers as $lecturer) {?>
@@ -69,7 +87,7 @@
                     </div>
 
                     <div class="form-group col-md-6 pad-left-0">
-                        <label>Location</label>
+                        <label>Location <span class="required">*</span></label>
                         <select id="location_id" name="location_id" class="form-control">
                             <option value="">-</option>
                             <?php foreach($locations as $location) {?>
@@ -79,7 +97,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Date</label>
+                        <label>Date <span class="required">*</span></label>
                         <div>
                             <div class='input-group date' id='form_datetime'>
                                 <input type='text' id="event_date" name="event_date" class="form-control" />
@@ -91,28 +109,30 @@
                     </div>
 
                     <div class="form-group" style="overflow:hidden">
-                        <label class="col-sm-12 pad-left-0">Time</label>
+                        <label class="col-sm-6 pad-left-0">Start Time <span class="required">*</span></label>
+                        <label class="col-sm-6 pad-left-0">End Time <span class="required">*</span></label>
                         
                         <div class="col-sm-12 pad-left-0">
-                            <div class='col-sm-6 pad-left-0 input-groupx datex' id=''>
-                                <input type='text' id="event_start_time" name="event_start_time" class="form-control"  placeholder="From"/>
+                            <div class='col-sm-6 pad-left-0 input-groupx' id=''>
+                                <input type='text' id="event_start_time" name="event_start_time" class="form-control"  readonly="readonly" />
+
+                                &nbsp; &nbsp;<input id="event_start_time_picker" data-slider-id='event_start_time_slider' type="text" data-slider-min="510" data-slider-max="975" data-slider-step="15" data-slider-value="510"/>
                             </div>
 
-                            <div class='col-sm-6 pad-left-0 input-x datex'>
-                                <input type='text' id="event_end_time" data-date-format="hh:mm A" data-date-start-date="<?=date('Y-m-d')?>" name="event_end_time" class="form-control" placeholder="To"/>
+                            <div class='col-sm-6 pad-left-0 input-x'>
+                                <input type='text' id="event_end_time" name="event_end_time" class="form-control" readonly="readonly" />
+
+                                &nbsp;<input id="event_end_time_picker" data-slider-id='event_end_time_slider' type="text" data-slider-min="510" data-slider-max="975" data-slider-step="15" data-slider-value="510"/>
                             </div>
                         </div>
                     </div>
-
-                    <div class="control-group">
-   
 
                     <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" id="is_repeatable" name="is_repeatable" value="1">&nbsp;Is Repeat Event</label>
                     </div>
 
-                    <div class="form-group col-md-6 pad-left-0">
-                        <label>Repeat Until</label>
+                    <div class="form-group col-md-6 pad-left-0 event-repeat-settings hide">
+                        <label>Repeat Until <span class="required">*</span></label>
                         <div>
                             <div class='input-group'>
                                 <input type='text' id="repeat_end_date" name="repeat_end_date" class="form-control" />
@@ -123,8 +143,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-6 pad-left-0">
-                        <label>Repeat Frequency</label>
+                    <div class="form-group col-md-6 pad-left-0 event-repeat-settings hide">
+                        <label>Repeat Frequency <span class="required">*</span></label>
                         <div>
                             <select id="event_repeat_frequency" name="event_repeat_frequency" class="form-control">
                                 <option value="">-</option>
@@ -165,7 +185,7 @@
         });
     }
 
-    $(document).ready(function() {
+    $(document).ready(function() {   
 
         $('#filter_course_id').on('change', function(){
             $('#timetable_fileters_form').submit();
@@ -173,7 +193,6 @@
 
         $('#modal-btn-save-event').on('click', function() {
             var $content = $('#careate_timetable_event_form');
-
           
             if($content.find('#subject_code').val() == '') {
                 alert("Please enter subject code.");
@@ -190,32 +209,52 @@
             minDate: moment().toString()
         });
 
-        $('#event_start_time').datetimepicker({
-            format : "hh:mm",
-            startView: 0,
-            viewSelect: 'hour',
-            autoclose: true,
-        })
-        .on('show', function(){
-            $("#event_start_time").datetimepicker("setDate", new Date);
-        });
-
-        
-        $('#event_end_time').datetimepicker({
-            format : "hh:mm",
-            startView: 0,
-            viewSelect: 'hour',
-            autoclose: true,
-        })
-        .on('show', function(){
-            $("#event_end_time").datetimepicker("setDate", new Date);
-        });
-
         $('#repeat_end_date').datetimepicker({
             format: "dd-mm-yyyy",
             minView : 2,
             autoclose: true,
             daysOfWeekDisabled: [0, 6]
+        });
+
+        $('#is_repeatable').on('click', function() {
+            if($(this).is(':checked') && $(this).val() == '1') {
+                $('.event-repeat-settings').removeClass('hide');
+            } else {
+                $('.event-repeat-settings').addClass('hide');
+            }
+        });
+
+        $('#event_start_time_picker').slider({
+            formatter: function(value) {
+                var hour = Math.floor(value/60);
+                var mins =  (value%60);
+                if(hour < 10) {
+                    hour = '0' + hour;
+                }
+                if(mins == 0) {
+                    mins = '00';
+                }
+                var val = hour + ':' + mins;
+                $('#event_start_time').val(val);
+                return val;
+            }
+        });
+
+        $('#event_end_time_picker').slider({
+            formatter: function(value) {
+                var hour = Math.floor(value/60);
+                var mins =  (value%60);
+                if(hour < 10) {
+                    hour = '0' + hour;
+                }
+                if(mins == 0) {
+                    mins = '00';
+                }
+                var val = hour + ':' + mins;
+
+                $('#event_end_time').val(val);
+                return  val;
+            }
         });
     
         $('#calendar').fullCalendar({

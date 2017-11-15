@@ -1,9 +1,9 @@
-<div class="container" style="padding:50px 0;">
+<div class="container" style="padding:50px 0;background-color: #F5F5F5">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             
             <h3 class="text-muted">
-               Student Signup
+                Student Sign Up
             </h3>
 
             <?php if(validation_errors()) {?>
@@ -12,12 +12,7 @@
                 </div>
             <?php } ?>
 
-            <form role="form" name="manage_ac_user_form" method="post" action="/student/signup">
-
-                <div class="form-group">
-                    <label for="reg_no">Student Reg No.<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="reg_no" name="reg_no" value="<?=set_value('full_name')?>"/>
-                </div>
+            <form role="form" class="form-horizontal" name="manage_ac_user_form" method="post" action="/student/signup">
 
                 <div class="form-group">
                     <label for="name">Full Name<span class="required">*</span></label>
@@ -35,17 +30,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="course_id">Course<span class="required">*</span></label>
+                    <label for="reg_no">Student Reg No.<span class="required">*</span></label>
+                    <input type="text" class="form-control" placeholder="The reg.no that, mentioned on your student id card"id="reg_no" name="reg_no" value="<?=set_value('reg_no')?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="course_id">Course Category<span class="required">*</span></label>
                     <select name="course_id" id="course_id"  class="form-control">
                         <option value="">Select</option>
-                        <?php foreach($courses as $course) {?>
+                        <?php foreach($course_category as $course) {?>
                             <option  value="<?=$course->id?>" <?=$course->id == set_value('course_id') ? 'selected="selected"' : '' ?>>
-                                <?=$course->name . ' ' . date('Y', strtotime($course->start_date))?>
+                                <?=$course->name?>
                             </option>couse_id
                         <?php } ?>
                     </select>
                 </div>
 
+                
                 <div class="form-group">
                     <label for="password">Password<span class="required">*</span></label>
                     <input type="password" class="form-control" id="password" name="password" autocomplete="off" />
@@ -55,11 +56,15 @@
                     <label for="confirm_password">Confirm Password<span class="required">*</span></label>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" autocomplete="off"/>
                 </div>
-               
-                <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
-                <button type="submit" name="btn_signup" value="signupcouse_id" class="btn btn-primary">Signup</button>
+
+                <div class="row"></div>
+                
+                <div class="form-group float-right">
+                    <a href="/" class="btn btn-lg btn-default">Cancel</a>&nbsp;&nbsp;
+                    <button type="submit" name="btn_signup" value="signupcouse_id" class="btn btn-lg btn-primary">Signup</button>
+                </div>
             </form>
         </div>
     </div>
-</div>
+</div> <br/><br/>
 

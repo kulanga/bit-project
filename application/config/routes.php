@@ -77,6 +77,8 @@ $route['student/home'] = 'student/student_home/index';
 $route['student/timetable'] = 'student/student_home/view_timetable';
 $route['student/assignment'] = 'student/student_assignment/index';
 $route['student/assignment/submit/(:num)'] = 'student/student_assignment/submit/$1';
+$route['student/acc_profile'] = 'student/student_home/my_acc_profile';
+
 
 
 $route['assets/(:any)'] = 'assets/$1';

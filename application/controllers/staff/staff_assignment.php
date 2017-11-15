@@ -30,7 +30,6 @@ class Staff_assignment extends MY_Controller {
         $data['assignment'] = $this->assignment_model->get($assignment_id);
         $data['assignment_submissions'] = $this->assignment_submission_model->get_submissions($assignment_id);
 
-        //print_r($data['assignment_submissions']);die;
         if(count($data['assignment_submissions']) > 0 ) {
             foreach($data['assignment_submissions'] as &$asub) {
                 $asub->student = $this->student_model->get_by_userid($asub->student_user_id);
@@ -39,7 +38,6 @@ class Staff_assignment extends MY_Controller {
         }
 
         $this->layout->view('/staff/assignment/submissions', $data);
-
     }
     
     public function create($assignment_id = 0) {
@@ -62,12 +60,11 @@ class Staff_assignment extends MY_Controller {
             $this->form_validation->set_rules('batch_id', 'Batch', 'trim|required|xss_clean');
             $this->form_validation->set_rules('subject_id', 'Subject', 'trim|required|xss_clean');
             $this->form_validation->set_rules('description', 'Description', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
             $this->form_validation->set_rules('due_date', 'Duedate', 'trim|required|xss_clean');
+           // $this->form_validation->set_rules
 
-            $this->form_validation->set_rules('attachment', 'Attachment', 'callback_check_upload');
-
-
-            if (empty($_FILES['attachment']['name'])){
+            if(count($attchments) <= 0 && empty($_FILES['attachment']['name'])) {
                 $this->form_validation->set_rules('attachment', 'Attachment', 'required|callback_check_upload');
             }
 
@@ -82,6 +79,7 @@ class Staff_assignment extends MY_Controller {
                         'description' => $this->input->post('description'),
                         'updated_at' => date('Y-m-d H:i:s'),
                         'due_date' => convert_db_date_format($this->input->post('due_date')),
+                        'title' => $this->input->post('title'),
                     );
 
                     //publish assignent
@@ -100,6 +98,7 @@ class Staff_assignment extends MY_Controller {
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s'),
                         'due_date' => convert_db_date_format($this->input->post('due_date')),
+                        'title' => $this->input->post('title'),
                         'status' => '0',
                     );
                     $assignment_id = $this->assignment_model->insert($save_data);
@@ -142,6 +141,7 @@ class Staff_assignment extends MY_Controller {
             $file_ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
 
             $expensions = array("jpeg","jpg","png", "doc", "pdf", 'docx');
+
 
             if(!in_array($file_ext, $expensions)) {
                 $this->form_validation->set_message('check_upload', 'Extension not allowed.');

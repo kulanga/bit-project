@@ -60,8 +60,23 @@ class Student_home extends MY_Controller {
         if(is_object($user) && $user->status == 1) {
             redirect('student/timetable');
         }
-        $this->layout->view('/student/home/welcome');
+        $this->layout->view('/student/home/welcome', array('user' => $user));
     }
 
+    public function my_acc_profile() {
+
+        $this->load->model('student_model');
+
+        $user_id = $this->session->userdata('user_id');
+        $res = $this->student_model->get_accedemic_profile($user_id);
+
+
+        // echo '<pre>';
+        // print_r($res);die;
+
+        $this->layout->view('/student/home/acc_profile', array('data' => $res));
+
+
+    }
 
 }
