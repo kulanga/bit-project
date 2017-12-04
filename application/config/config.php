@@ -377,7 +377,7 @@ $config['email'] = array(
     'newline'   => "\r\n",
 );
 
-$config['institute'] = 'HNDE';
+$config['institute'] = 'HNDE Adavanced Technological institute, Mattakkuliya.';
 $config['app_name'] = 'HNDE Student Portal';
 $config['admin_email'] = 'portaladmin@hnde.lk';
 

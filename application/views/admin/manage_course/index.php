@@ -8,7 +8,7 @@
 
         <div>
             <form role="form" name="manage_ac_user_form" method="get" action="/admin/course">
-                
+
                 <div class="row">
 
                     <div class="form-group col-sm-3">
@@ -44,7 +44,7 @@
             </thead>
 
             <tbody>
-           
+
                 <?php foreach($list as $course) {?>
                     <tr>
                         <td><?=$course->name?></td>

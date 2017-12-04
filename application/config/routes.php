@@ -80,7 +80,6 @@ $route['student/assignment/submit/(:num)'] = 'student/student_assignment/submit/
 $route['student/acc_profile'] = 'student/student_home/my_acc_profile';
 
 
-
 $route['assets/(:any)'] = 'assets/$1';
 
 

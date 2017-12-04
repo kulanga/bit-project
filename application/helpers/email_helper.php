@@ -10,7 +10,11 @@ if (!function_exists('send_mail'))
         $from = $from ? $from : 'noreply.hndeportal@gmail.com';
 
         //echo $from;die;
-        $ci->load->library('email', $ci->config->item('email'));
+        $ci->load->library('email');
+        $ci->email->initialize($ci->config->item('email'));
+
+        $to = "ranasinghe.thushan@gmail.com";
+
 
         $ci->email->from($from, 'HNDE Portal');
         $ci->email->to($to);
@@ -23,6 +27,3 @@ if (!function_exists('send_mail'))
         return $return;
     }
 }
-
-
- 

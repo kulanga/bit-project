@@ -42,8 +42,12 @@ define('VIEWPATH', APPPATH . 'views');
 
 //custom constants
 define('UPLOADS_PATH', BASEPATH . '../www/uploads');
+define('PROFILE_IMAGE_PATH', UPLOADS_PATH . '/profile_images/');
 define('ASSIGNMENT_FILE_PATH', UPLOADS_PATH . '/assignments/assignments/');
 define('ASSIGNMENT_SUBMISSIONS_PATH', UPLOADS_PATH . '/assignments/student_submissions/');
+define('RESULT_SHEET_PATH', UPLOADS_PATH.'/resultsheets/');
+
+define('ASSIGNMENT_PASS_SCORE', 40);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

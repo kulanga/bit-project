@@ -9,7 +9,7 @@ class Subject_model extends CI_Model
 	}
 
 	public function get($id = 0) {
-        
+
         if (is_array($id)) {
             if (count($id) <= 0) {
                 return array();
@@ -54,6 +54,15 @@ class Subject_model extends CI_Model
 		$query = $this->db->get($this->table);
 		return $query->result();
 	}
+
+    public function get_subject_id_by_code($subject_code) {
+
+        $query = $this->db->where('code', $subject_code)
+            ->get($this->table);
+
+        $res = $query->first_row();
+        return count($res) == 1 ? $res->id : 0;
+    }
 
 
 }

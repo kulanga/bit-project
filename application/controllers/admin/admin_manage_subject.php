@@ -36,7 +36,7 @@ class Admin_manage_subject extends MY_Controller {
     }
 
     public function edit() {
-        
+
     }
 
     public function save() {
@@ -61,7 +61,7 @@ class Admin_manage_subject extends MY_Controller {
             $save_data['code'] = $this->input->post('subject_code');
             $save_subject_cat = $this->input->post('course_cat');
             $save_subject_staff = $this->input->post('assigned_staff');
-            
+
             $ret = false;
             if($subject_id > 0 ) {
                 $ret = $this->subject_model->update($subject_id, $save_data);

@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>Location</th>
-                        
+
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -18,11 +18,11 @@
                 <tbody>
                     <?php foreach($list as $l) {?>
                         <tr id='row-<?=$l->id?>'>
-                            <td><?=$l->name?></td>                           
-                            
+                            <td><?=$l->name?></td>
+
                             <td>
                                 <a href="#"   data-location-id="<?=$l->id?>" role="button" class="btn btn-sm btn-danger btn-delete">Delete</a>
-                                
+
                             </td>
                         </tr>
                     <?php } ?>

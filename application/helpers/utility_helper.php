@@ -7,8 +7,6 @@ if (!function_exists('asset_url()'))
     {
         return base_url().'assets/';
     }
-
-
 }
 
 if (!function_exists('convert_db_date_format'))
@@ -16,22 +14,24 @@ if (!function_exists('convert_db_date_format'))
     function convert_db_date_format($date) {
         return date('Y-m-d', strtotime($date));
     }
-
 }
 
 if (!function_exists('assignment_status_in_text'))
 {
-    function assignment_status_in_text($status_id) {
+    function assignment_status_in_text($status_id, $due_date = '') {
         $status = '';
 
         if($status_id == 0) {
-            $status = "Drafted";
+            $status = "Draft";
 
         } elseif($status_id == 1) {
-            $status = "Live";
-
+            if(time() > strtotime($due_date)) {
+                $status = "Closed";
+            } else {
+                $status = "Live";
+            }
         } elseif($status_id == 2) {
-            $status = "Completed";
+            $status = "Closed";
         }
 
         return $status;
@@ -88,4 +88,20 @@ if (!function_exists('couser_status'))
 }
 
 
- 
+if (!function_exists('profile_image'))
+{
+    function profile_image($user_id) {
+        $ci =& get_instance();
+        $ci->load->model('user_model');
+
+        $user = $ci->user_model->get($user_id);
+
+        if($user->profile_image) {
+            $profile_image = base_url().'uploads/profile_images/'.$user->profile_image;
+        } else {
+            $profile_image = base_url().'uploads/default-profile.png';
+        }
+
+        return $profile_image;
+    }
+}

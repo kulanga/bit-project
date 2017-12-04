@@ -23,19 +23,19 @@ class Admin_manage_timetable extends MY_Controller {
 
         $data['locations'] = $this->location_model->get_locations();
         $data['courses'] = $this->course_model->get_course_list();
-        
+
         if((int)$course_id <= 0 && count($data['courses']) > 0 ) {
             $first_course = reset($data['courses']);
             $course_id = $first_course->id;
         }
 
         $data['course_id'] = $course_id;
-     
+
         if($course_id > 0 ) {
             $data['course'] = $this->course_model->get($course_id);
             $data['lecturers'] = $this->staff_model->get_stffs();
             $data['semesters'] = $this->course_semester_model->get_by_course($course_id);
-            
+
             $data['current_semester_id'] = 0;
 
             if(is_object($data['course'])) {
@@ -48,7 +48,7 @@ class Admin_manage_timetable extends MY_Controller {
                 }
             }
         }
-       
+
         $this->layout->view('/admin/timetable/index', $data);
 
     }
@@ -56,10 +56,10 @@ class Admin_manage_timetable extends MY_Controller {
     public function load_events() {
 
         $this->load->model('timetable_model');
-        
+
         $response =  [];
         $course_id = $this->input->post('course_id');
-       
+
         $event_data_all = $this->timetable_model->get_events($course_id);
 
         $events = [];
@@ -83,7 +83,7 @@ class Admin_manage_timetable extends MY_Controller {
     }
 
     public function save_event() {
-        
+
         $this->load->library('form_validation');
         $this->load->model('timetable_model');
 
@@ -159,7 +159,7 @@ class Admin_manage_timetable extends MY_Controller {
 
             $parent_event_id = 0;
             foreach($save_events as $key => $event) {
-                
+
                 $event['parent_event_id'] = $parent_event_id;
                 $eid = $this->timetable_model->insert($event);
 
@@ -181,7 +181,7 @@ class Admin_manage_timetable extends MY_Controller {
     }
 
     public function delete($event_id = 0) {
-        
+
         if($event_id > 0 ) {
             $this->load->model('timetable_model');
             $this->timetable_model->delete($event_id);

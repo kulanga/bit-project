@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 
 		// Site global resources
-		$this->layout->title('HNDE Stduents Portal');
+		$this->layout->title('HNDE Students Portal');
 
 		$check_session = true;
 		if($this->uri->segment(1) == 'login') {
@@ -45,7 +45,6 @@ class MY_Controller extends CI_Controller
 
 					redirect('student/welcome');
 				}
-
 			}
 		}
 	}
@@ -53,5 +52,5 @@ class MY_Controller extends CI_Controller
 	protected function set_topnav($top_nav) {
 		$this->layout->top_nav($top_nav);
 	}
-	
+
 }

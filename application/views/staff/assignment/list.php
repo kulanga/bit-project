@@ -7,7 +7,7 @@
 
         <div>
             <form role="form" name="manage_ac_user_form" method="get" action="/staff/assignment" enctype="multipart/form-data">
-                
+
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="batch_id">Batch</label>
@@ -30,7 +30,7 @@
                         <label for="subject_id">Status</label>
                         <select name="subject_id"  class="form-control">
                             <option value="">All</option>
-                            <option value="0">Drafted</option>
+                            <option value="0">Draft</option>
                             <option value="1">Live</option>
                             <option value="2">Completed</option>
                         </select>
@@ -80,18 +80,18 @@
                         <td><?=$assignment->title?></td>
                         <td><?=$assignment->subject_name?></td>
                         <td><?=date('d-m-Y', strtotime($assignment->due_date))?></td>
-                        <td><?=assignment_status_in_text($assignment->status);?></td>
+                        <td><?=assignment_status_in_text($assignment->status, $assignment->due_date);?></td>
                         <td>
                             <a class="btn btn-sm btn-primary" href="/staff/assignment/edit/<?=$assignment->id?>">Edit&nbsp;&nbsp;<a>
                             <?php if($assignment->status == 1) {?>
-                                <a class="btn btn-sm btn-success" 
+                                <a class="btn btn-sm btn-success"
                                 href="/staff/staff_assignment/list_submissions/<?=$assignment->id?>">View Submissions</a>
                             <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
-         
+
         </table>
     </div>
 </div>
@@ -121,7 +121,7 @@
         $('.btn-_view').on('click', function(list_submissions) {
             var lid = $(this).data('assignment');
             bootbox.confirm('This is late Submissions ', function(confirm) {
-                
+
 
             })
         });

@@ -3,13 +3,11 @@
 
 <script type="text/javascript" src="/assets/js/admin_course.js"></script>
 
-<div class="container-fluid">
+<div class="container-fluid col-md-offset-2">
     <div class="row">
 
-        <h2 class="text-muted admin-page-title">
+        <h2 style="text-align:left;" class="text-muted admin-page-title">
             <?php echo isset($course->id) && $course->id > 0  ? 'Update Course' : 'Create a New Course'?>
-
-            
         </h2><br/>
 
         <div class="col-md-8">
@@ -18,32 +16,50 @@
                     <?php echo validation_errors(); ?>
                 </div>
             <?php } ?>
-            
-            <form role="form" name="manage_ac_user_form" method="post" action="/admin/admin_manage_course/save_course/<?=is_object($course) ? $course->id : '';?>" style="padding-bottom:65px;">
-                
 
-                <div class="form-group">
-                    <?php if(isset($course->id) && $course->id >0) {?>
-                            <label >Course:</label> 
-                            <label ><?php  echo $course->name ?></label>                   
-                    <?php } else { ?>
-                        <label for="course_cat_id">Course Type<span class="required">*</span></label>
-                        <select name="course_cat_id" id="course_cat_id"  class="form-control">
-                            <option value="">Select</option>
-                            <?php foreach($course_category as $course_cat) {?>
-                                <option  value="<?=$course_cat->id?>" <?=$course_cat->id == set_value('course_id') ? 'selected="selected"' : '' ?>>
-                                    <?=$course_cat->name?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    <?php } ?>
+            <form role="form" name="manage_ac_user_form" method="post" action="/admin/admin_manage_course/save_course/<?=is_object($course) ? $course->id : '';?>" style="padding-bottom:65px;">
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <?php if(isset($course->id) && $course->id >0) {?>
+                                <label >Course:</label>
+                                <label ><?php echo $course->name ?></label>
+                        <?php } else { ?>
+                            <label for="course_cat_id">Course Category<span class="required">*</span></label>
+                            <select name="course_cat_id" id="course_cat_id"  class="form-control">
+                                <option value="">Select</option>
+                                <?php foreach($course_category as $course_cat) {?>
+                                    <option  value="<?=$course_cat->id?>" <?=$course_cat->id == set_value('course_id') ? 'selected="selected"' : '' ?>>
+                                        <?=$course_cat->name?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        <?php } ?>
+                    </div>
                 </div>
+
+                <?php if(isset($course->id) && $course->id > 0 ) {?>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label for="course_start_date">Current Semester<span class="required">*</span></label>
+                            <select class="form-control col-md-3" name="current_semester_id">
+                                <option>-</option>
+                                <?php foreach($course_semesters as $cs) {?>
+                                    <option value="<?=$cs->id?>" <?php echo $course->current_semester_id == $cs->id ? 'selected="selected"': '';?>>
+                                        Semester <?=$cs->semester_number?> of Year <?=$cs->semester_year?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php } ?>
 
 
                 <div class="form-group row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="course_start_date">Start Date <span class="required">*</span></label>
-                        <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date" value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" autocomplete="off" required/>
+                        <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date"
+                            value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" autocomplete="off" required/>
                     </div>
                 </div>
 
@@ -58,7 +74,7 @@
 
                          <div class="col-md-6 pad-left-0">
                             <span style="font-weight:normal;"><small>Months</small></span>
-                            <input type="number"  min="0" max="12" value="<?=set_value('course_duration_months', is_object($course) ? floor($course->duration%12) : '')?>" class="form-control" id="course_duration_months" name="course_duration_months"/>
+                            <input type="number"  min="0" max="11" value="<?=set_value('course_duration_months', is_object($course) ? floor($course->duration%12) : '')?>" class="form-control" id="course_duration_months" name="course_duration_months"/>
                          </div>
                     </div>
                 </div>
@@ -76,11 +92,11 @@
 
                 <?php if(isset($course->id) && $course->id > 0) {?>
                     <div class="form-group">
-                        
-                    </div>   
+
+                    </div>
                 <?php } ?>
 
-            </form> 
+            </form>
         </div>
     </div>
 </div>
@@ -89,7 +105,7 @@
 <?php if(isset($course->id) && $course->id > 0 ) {?>
 
     <div id="course_semsters_container">
-    
+
     </div>
 
     <div class="modal fade" id="manage_semeter_dialog" tabindex="-1" role="dialog">
@@ -132,7 +148,7 @@
 
                         <div id="add_subject_container">
                             <div class="form-group">
-                              
+
                             </div>
 
                             <div class="form-group">
@@ -151,7 +167,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="add_subject_dialog" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -162,10 +178,10 @@
 
                 <div class="modal-body">
                     <form id="add_subject_form" name="add_subject_form" role="form" method="post" action="/admin/course/add_subjects_to_semester">
-                        
+
                         <input type="hidden" id="subject_semester_id" name="subject_semester_id" value="0">
                         <input type="hidden" id="subject_course_id" name="subject_course_id" value="<?=$course->id?>">
-                        
+
 
                         <div class="row">
                             <div class="form-group col-sm-6">
@@ -185,7 +201,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <ul class="list-group" id="subjects_added">
-                                   
+
                                 </ul>
                             </div>
                         </div>

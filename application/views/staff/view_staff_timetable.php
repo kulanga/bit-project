@@ -16,11 +16,11 @@
                         <select name="filter_course_id" id="filter_course_id" class="form-control">
                             <option value="-1">All</option>
                             <?php foreach($courses as $course) {?>
-                                <option  value="<?=$course->id?>" <?=$course->id == $course_id ? 'selected="selected"' : '' ?>><?=$course->name . ' ' . date('Y', strtotime($course->start_date))?></option>
+                                <option value="<?=$course->id?>" <?=$course->id == $course_id ? 'selected="selected"' : '' ?>><?=$course->name?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    
+
                 </div><br/>
             </form>
         </div>
@@ -29,17 +29,17 @@
     </div>
 </div>
 
-    
+
 <script type="text/javascript">
     var timetable_course_id = '<?=$course_id?>';
 
     $(document).ready(function() {
-        
+
         $('#filter_course_id').on('change', function() {
             timetable_course_id = $(this).val();
             reload_events(timetable_course_id);
         });
-        
+
         $('#calendar').fullCalendar({
             customButtons: {
             },
@@ -48,7 +48,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-        
+
             weekends: false,
             defaultDate: moment().format(),
             defaultView: 'agendaWeek',
@@ -75,7 +75,7 @@
         }
 
         $('#calendar').fullCalendar( 'removeEventSource', events);
-        $('#calendar').fullCalendar( 'addEventSource', events);         
+        $('#calendar').fullCalendar( 'addEventSource', events);
         $('#calendar').fullCalendar( 'refetchEvents' );
     }
 

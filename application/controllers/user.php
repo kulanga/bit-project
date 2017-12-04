@@ -13,7 +13,7 @@ class User extends MY_Controller
 	}
 
 	public function index()
-	{	
+	{
 		if($this->session->userdata('user_type_id') == 1) { //admin
 			redirect('/admin/course');
 

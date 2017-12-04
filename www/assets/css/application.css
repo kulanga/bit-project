@@ -110,6 +110,9 @@ body > .container {
 .profile-info {
     padding-top: 15px;
 }
+.repeat-assignment td {
+    background-color: #ffd6d6;
+}
 
 
 

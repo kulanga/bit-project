@@ -47,7 +47,7 @@ class Layout
 
         return $output;
     }
-    
+
     function title($title)
     {
         $this->title = $title;

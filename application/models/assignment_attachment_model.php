@@ -31,4 +31,10 @@ class Assignment_attachment_model extends CI_Model {
             ->get($this->table);
         return $query->result();
     }
+
+    public function delete($id, $assignment_id) {
+        return $this->db->where('id', $id)
+                ->where('assignment_id', $assignment_id)
+                ->delete($this->table);
+    }
 }

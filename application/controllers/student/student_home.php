@@ -26,7 +26,7 @@ class Student_home extends MY_Controller {
         $this->load->model('student_model');
 
         $student = $this->student_model->get_by_userid($this->session->userdata('user_id'));
-      
+
         $response =  [];
         $event_data_all = $this->timetable_model->get_events($student->course_id, 0);
 
@@ -63,16 +63,20 @@ class Student_home extends MY_Controller {
         $this->layout->view('/student/home/welcome', array('user' => $user));
     }
 
-    public function my_acc_profile() {
+    public function my_acc_profile($id = 0) {
 
         $this->load->model('student_model');
 
-        $user_id = $this->session->userdata('user_id');
+        $user_typeid = $this->session->userdata('user_type_id');
+
+        //Allow admin and lecturers to view accedemic profile.
+        if(in_array($user_typeid, array(1,2))) {
+            $user_id = $id;
+        } else {
+            $user_id = $this->session->userdata('user_id');
+        }
+
         $res = $this->student_model->get_accedemic_profile($user_id);
-
-
-        // echo '<pre>';
-        // print_r($res);die;
 
         $this->layout->view('/student/home/acc_profile', array('data' => $res));
 

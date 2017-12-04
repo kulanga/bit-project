@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <h2 class="text-muted">Add Submission</h2><br/>
+        <h2 style="text-align:left;" class="text-muted">Add Submission</h2><br/>
 
         <div class="col-md-8">
             <?php if(validation_errors()) {?>
@@ -12,10 +12,10 @@
                     <?php echo validation_errors(); ?>
                 </div>
             <?php } ?>
-            
+
             <?php if(is_object($assignment) && $assignment->id  > 0) {?>
                 <form role="form" name="manage_ac_user_form" method="post" action="/student/student_assignment/submit/<?=$assignment->id?>" enctype="multipart/form-data" style="padding-bottom:65px;">
-                 
+
                     <div class="form-group">
                         <label>Title:</label><br/>
                         <label style="font-weight:normal"><?=$subject->name?> - <?=$assignment->title?></label>
@@ -27,22 +27,21 @@
                     </div>
                     <div class="form-group">
                         <label style="vertical-align: top;">Description:</label><br/>
-                        <label>
+                        <label style="font-weight:normal;">
                             <?=nl2br($assignment->description)?>
                         </label>
                     </div>
 
-                    <div class="form-group">
-                        <label for="attachment">Uploaded Attachments</span></label>
-                        <ul>
+                    <div class="form-group pad-left-0">
+                        <ul class="pad-left-0">
                             <?php foreach($assignment_attachments as $attachment) { ?>
-                                <li><a href="<?=base_url() . 'uploads/assignments/assignments/' . $attachment->file_name?>" title="<?=$attachment->original_file_name?>">Download<a></li>
+                                <li><a target="_blank" href="<?=base_url() . 'uploads/assignments/assignments/' . $attachment->file_name?>" title="<?=$attachment->original_file_name?>">Download Assignment<a></li>
                             <?php } ?>
                         </ul>
                     </div>
 
                     <div class="form-group">
-                        <a href="/student/assignment" role="button" class="btn btn-danger">&nbsp;&nbsp;Back&nbsp;&nbsp;</a>&nbsp;&nbsp;
+                        <a href="/student/assignment" role="button" class="btn btn-default">&nbsp;&nbsp;Back&nbsp;&nbsp;</a>&nbsp;&nbsp;
                     </div>
 
                 </form>

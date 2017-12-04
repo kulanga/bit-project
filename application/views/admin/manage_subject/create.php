@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
-            
+
             <h3 class="text-muted">
                 Add New Subject
             </h3>
@@ -20,7 +20,7 @@
                         <input type="text" class="form-control" id="subject_code" name="subject_code" required=""/>
                     </div>
 
-                   
+
                     <button type="submit" class="btn btn-primary">Create</button>&nbsp;&nbsp;
                      <button type="submit" class="btn btn-primary">Create & Exit</button>&nbsp;&nbsp;
                     <button type="submit" class="btn btn-danger">Cancel</button>

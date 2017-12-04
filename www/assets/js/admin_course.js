@@ -3,11 +3,11 @@ $(document).ready(function() {
     $('#').on('click', function() {
         admin_edit_semester_name();
     });
-    
+
     $('#create_subject_form').on('show.bs.modal', function (event) {
         var id = $(event.relatedTarget).data('id');
         var subject_form = $(this).find('form').trigger('reset');
-        
+
         //populate existing data
         subject_form.find('#subject_id').val(id);
 
@@ -22,14 +22,14 @@ $(document).ready(function() {
             subject_form.find('#subject_code').val(subject_to_edit.find('.subject-code').text());
 
             course_cat = subject_to_edit.find('.course-cat li.cc-item');
-            
+
             $.each(course_cat, function(i, v) {
                 cat_id = $(v).data('cat-id');
                 $('input#course_cat_id_' + cat_id).prop('checked', true);
             });
 
             staff_subject = subject_to_edit.find('.assigned-to li.staff-item');
-            
+
             $.each(staff_subject, function(i, v) {
                 ss_id = $(v).data('staff-id');
                 $('input#staff_' + ss_id).prop('checked', true);
@@ -58,7 +58,7 @@ $(document).ready(function() {
             alert("Please enter subject code.");
             return false;
         }
-        
+
         save_subject($content.serialize());
     });
 
@@ -86,7 +86,7 @@ $(document).ready(function() {
                 admin_course_remove_semster(course_sem_id);
             }
         })
-        
+
     });
 
     $('#course_semsters_container').on('click', '.btn-delete-semester-subject', function() {
@@ -96,7 +96,7 @@ $(document).ready(function() {
                 admin_course_remove_subject(course_subject_id);
             }
         })
-        
+
     })
 
     $('#course_start_date').datetimepicker({
@@ -192,20 +192,20 @@ function admin_course_save_subject(post_data) {
                 bootbox.alert(data.errors);
             }
         }
-    }); 
+    });
 }
 
 function save_subject(data) {
-    
+
     $.ajax({
         url: '/admin/subject/save/',
         type: 'post',
         dataType: 'json',
         data: data,
         success: function(res) {
-            
+
             if(res.success == '1') {
-                if(res.action == 'insert' ) {   
+                if(res.action == 'insert' ) {
                     var row = "<tr id='subject-row-"+res.subject.id+"' class='subject-row' data-id='"+res.subject.id+"'>";
                     row += "<td class='subject-code'>" + res.subject.code + "</td>";
                     row += "<td class='subject-name'>" + res.subject.name + "</td>";
@@ -221,7 +221,7 @@ function save_subject(data) {
 
                 $('#create_subject_form').modal('hide');
                 window.location.href = '/admin/subject/index';
-                
+
             } else {
                 $('#create_subject_form .validation-errors')
                     .removeClass('hide')

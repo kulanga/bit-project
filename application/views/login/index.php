@@ -1,3 +1,6 @@
+
+<script type="text/javascript" src="<?php echo asset_url();?>js/jquery.smartmarquee.js"></script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -5,16 +8,48 @@
         </div>
     </div>
     <div class="row row-login-form">
-        <div class="col-md-8">
-            <h3>What is Lorem Ipsum?</h3>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-            </p>
-            <div>
-                <img src="https://dummyimage.com/600x300/cccccc/fff">
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div style="overflow:hidden;">
+                        <img src="https://dummyimage.com/600x300/cccccc/fff">
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-xs-12">
+                    <div>
+                        <h1 class="h4">What's New</h1>
+                    </div>
+                    <div class="smartmarquee example">
+                        <ul class="container">
+                            <li> Item 1 </li>
+                            <li> Item 2 </li>
+                            <li> Item 3 </li>
+                            <li> Item 4 </li>
+                            <li> Item 5 </li>
+                            <li> Item 1 </li>
+                            <li> Item 2 </li>
+                            <li> Item 3 </li>
+                            <li> Item 4 </li>
+                            <li> Item 5 </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div><br/>
         </div>
-        <div class="col-md-4">
+
+        <div class="col-md-3">
             <div class="row">
 
                 <div class="login-panel panel panel-default">
@@ -39,14 +74,12 @@
                                 <label for="inputPassword">Password</label>
                                 <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                             </div>
-                            
+
                             <a href="javascript:alert('Implement me...')">Forget password?</a>
                             <button type="submit" style="float:right;" class="btn btn-primary">Login</button>
                         </form>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="row">
@@ -71,4 +104,52 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    .smartmarquee {
+        position: relative;
+        overflow: hidden;
+    }
+    .smartmarquee .container {
+        position: absolute;
+    }
+
+    a { cursor: pointer }
+
+    .example {
+      height: 200px;
+      /*width: 300px;*/
+      -moz-box-shadow: 1px 1px 5px #999;
+      -webkit-box-shadow: 1px 1px 5px #999;
+      box-shadow: 1px 1px 5px #999;
+    }
+
+    .example .container {
+      margin: 0;
+      padding: 0;
+    }
+
+    .example .container li {
+      width: 285px;
+      margin: 0 0 0 5px;
+      padding: 5px 0 5px 0;
+      border-bottom: 1px dotted #999
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".example").smartmarquee({
+            // animate duration
+            duration: 1000,
+            // auto loop
+            loop : true,
+            // interval duration
+            interval : 2000,
+            axis : "vertical",
+        });
+    });
+
+</script>
 

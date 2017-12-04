@@ -2,7 +2,7 @@
 
 <script type="text/javascript" src="/assets/js/admin_course.js"></script>
 
-<div class="col-md-6">
+<div class="col-md-12">
 
 
 <h3 class="text-muted">Manage Subjects</h3>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="modal-body" style="overflow:hidden;">
-                
+
                 <div class="validation-errors hide"></div>
 
                 <form role="form" method="post" action="/admin/subject/save">

@@ -15,13 +15,13 @@ class Student_signup extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('student_model');
 
-        //$data['courses'] = $this->course_model->get_course_list();
-        $data['course_category'] = $this->course_category_model->get_course_list();
+        $data['courses'] = $this->course_model->get_course_list(array('status' => 1));
+        //$data['course_category'] = $this->course_category_model->get_course_list();
         //print_r($data['course_category']);die;
         $cmd_post = $this->input->post('btn_signup');
 
         if($cmd_post != "") {
-           
+
             $this->form_validation->set_rules('reg_no', 'Student Reg No.', 'trim|required|xss_clean|is_unique[students.reg_no]');
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
@@ -44,6 +44,9 @@ class Student_signup extends MY_Controller {
                     'updated_at' => date('Y-m-d H:i:d'),
                 );
 
+                $this->db->trans_start();
+                $this->db->trans_strict(true);
+
                 $user_id = $this->user_model->insert($user_data);
 
                 if($user_id  > 0 ) {
@@ -55,22 +58,31 @@ class Student_signup extends MY_Controller {
 
                     $stu_id = $this->student_model->insert($stu_data);
 
-                    if($stu_id > 0 ) {
+                    $this->db->trans_complete();
 
-                        $session = array(
-                            'user_id' => $user_id,
-                            'user_type_id' => 3,
-                            'username' =>  $user_data['username'],
-                            'email'   =>  $user_data['email'],
-                            'full_name' =>  $user_data['full_name']
-                        );
-                        $this->session->set_userdata($session);
+                    if ($this->db->trans_status() === false) {
+                        $this->db->trans_rollback();
 
-                        //send email verification email
-                        $this->load->model('user_email_verification_model');
-                        $this->user_email_verification_model->send($user_id);
+                    } else {
 
-                        redirect('user', 'refresh');
+                        $this->db->trans_commit();
+
+                        if($stu_id > 0 ) {
+                            $session = array(
+                                'user_id' => $user_id,
+                                'user_type_id' => 3,
+                                'username' =>  $user_data['username'],
+                                'email'   =>  $user_data['email'],
+                                'full_name' =>  $user_data['full_name']
+                            );
+                            $this->session->set_userdata($session);
+
+                            //send email verification email
+                            $this->load->model('user_email_verification_model');
+                            $this->user_email_verification_model->send($user_id);
+
+                            redirect('user', 'refresh');
+                        }
                     }
                 }
             }

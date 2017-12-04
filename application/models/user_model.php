@@ -4,7 +4,7 @@ class User_model extends CI_Model
 	//allowed login types.
 	private $login_types = array('student', 'lecturer', 'admin');
 	private $table = 'users';
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -32,7 +32,7 @@ class User_model extends CI_Model
 
 		$this->db->where('id', $user_id);
 		$query = $this->db->get($this->table);
-		
+
 		$row = $query->first_row();
 		return $row->is_email_verified || 0;
 

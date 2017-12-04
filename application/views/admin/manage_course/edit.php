@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-?>
+/*
 
 <script type="text/javascript" src="/assets/js/admin_course.js"></script>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
-            
+
             <h2 class="text-muted admin-page-title">
                 Update Course
             </h2><br/>
@@ -36,7 +36,7 @@
                         <input type="number" min="0" max="10" class="form-control col-md-3" id="no_of_semesters" name="no_of_semesters"/>
                     </div>
                 </div>
-                
+
                 <div class="row col-md-6">
                     <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp;
                     <button type="submit" class="btn btn-danger">Cancel</button>
@@ -48,7 +48,7 @@
             </form><br/><br/>
 
             <h5 class="section-title">Semsters and Subjects Settings</h5>
-           
+
             <fieldset>
                 <?php //foreach($semsters as $semester) {?>
                     <?php $semster_id = 1; //@TODO?>
@@ -60,7 +60,7 @@
                                 <a href="javascript:void(0);" data-semster-id="<?=$semster_id?>" class="btn-sm btn-success btn-add-subject">+ Add Subject</a>
                             </label><br/><br/>
                         </div>
-                       
+
                         <div class="table-responsive">
                             <table id="semester-subjects-table-<?=$semster_id?>" class="semester-subjects-table table table-hover">
                                 <thead>
@@ -90,3 +90,4 @@
 </div>
 
 <div id="mymodal"></div>
+*/?>

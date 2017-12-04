@@ -34,7 +34,7 @@
                     </tr>
                 <?php } ?>
             </tbody>
-         
+
         </table>
     </div>
 </div>
@@ -44,16 +44,14 @@
  $(document).ready(function() {
 
     $('.btn-delete').on('click', function() {
-            var id = $(this).data('id');
-            var btn = $(this);
-            bootbox.confirm("Are you sure?", function(confirm){
-                if(confirm) {
-                    admin_staff_update_status(id, 3, 'delete', btn);
-                }
-            })
-            
-        });
-
+        var id = $(this).data('id');
+        var btn = $(this);
+        bootbox.confirm("Are you sure?", function(confirm){
+            if(confirm) {
+                admin_staff_update_status(id, 3, 'delete', btn);
+            }
+        })
+    });
 
      function admin_staff_update_status(id, status, newstatus, btn) {
             $.ajax({

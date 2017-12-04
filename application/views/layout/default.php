@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="<?php echo asset_url();?>css/application.css">
 
-    <?php // var_dump($user);die('x');?>
     <?php echo $css_for_layout ?>
 </head>
 
@@ -52,15 +51,25 @@
                                         <li><a href="/admin/staff">List Staff</a></li>
                                     </ul>
                                 </li>
+
+                                <li class="<?php echo $top_nav == 'manage_student' ? 'active' : ''?>">
+                                    <a href="/admin/student/list">Students</a>
+                                </li>
+
                                 <li class="dropdown <?php echo $top_nav == 'course' ? 'active' : '';?>">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false">Course<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/admin/course/new">Create a Course</a></li>
-                                        <li><a href="/admin/course">List Courses</a></li>
+                                        <li><a href="/admin/course">List</a></li>
                                         <li><a href="/admin/subject/index">Mange Subjects</a></li>
                                     </ul>
                                 </li>
+
+                                <li class="<?php echo $top_nav == 'manage_timetable' ? 'active' : ''?>">
+                                    <a href="/admin/timetable">Timetables</a>
+                                </li>
+
                                 <li class="dropdown <?php echo $top_nav == 'location' ? 'active' : '';?>">
                                     <!-- <a href="/admin/admin_manage_location/list_location">Manage Locations</a> -->
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Locations<span class="caret"></span></a>
@@ -69,11 +78,18 @@
                                         <li><a href="/admin/admin_manage_location/add_location">Add New</a></li>
                                     </ul>
                                 </li>
-                                <li class="<?php echo $top_nav == 'manage_timetable' ? 'active' : ''?>">
-                                    <a href="/admin/timetable">Timetables</a>
+
+                                <li class="dropdown <?php echo $top_nav == 'manage_results' ? 'active' : '';?>">
+                                    <!-- <a href="/admin/admin_manage_location/list_location">Manage Locations</a> -->
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Results<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/admin/admin_manage_result">View Results</a></li>
+                                        <li><a href="/admin/admin_manage_result/import_result">Import Results</a></li>
+                                    </ul>
                                 </li>
-                                <li class="<?php echo $top_nav == 'manage_student' ? 'active' : ''?>">
-                                    <a href="/admin/student/list">Students</a>
+
+                                <li class="dropdown <?php echo $top_nav == 'attendance_sheet' ? 'active' : '';?>">
+                                    <a href="/admin/admin_attendance_sheet/search">Print Attendance Sheet</a>
                                 </li>
 
                             <?php } elseif ($this->session->userdata('user_type_id') == 2) { ?>
@@ -86,6 +102,10 @@
                                         <li><a href="/staff/assignment/create">Create</a></li>
                                         <li><a href="/staff/assignment">List</a></li>
                                     </ul>
+                                </li>
+
+                                <li class="dropdown <?php echo $top_nav == 'attendance_sheet' ? 'active' : '';?>">
+                                    <a href="/admin/admin_attendance_sheet/search">Print Attendance Sheet</a>
                                 </li>
 
                             <?php } elseif ($this->session->userdata('user_type_id') == 3) { ?>
@@ -102,9 +122,15 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false"><?php echo $user['full_name']; ?> <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
+
+                                        <?php if($this->session->userdata('user_type_id') == 2) {?>
+                                            <li><a href="/staff/staff_manage/change_password">Change Password</a></li>
+
+                                        <?php } elseif($this->session->userdata('user_type_id') == 3) {?>
+                                            <li><a href="/student/student_manage/change_password">Change Password</a></li>
+                                        <?php } ?>
+
                                         <li><?php echo anchor('user/logout', 'Logout', "title='Logout'");?></li>
-                                        <li><a href="/">Edit Profile</a></li>
-                                        <li><a href="/">Change Password</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -116,23 +142,47 @@
     <?php } ?>
 
     <div id="main-content-wrap" class="container-fuild <?=$this->uri->segment('2') != 'welcome' ? 'main-content-wrap' : '' ?>">
+        <?php
+            if(!isset($full_page_layout)) {
+                $full_page_layout = false;
+            }
+
+            $flash_success_message = $this->session->flashdata('success_message');
+            $flash_error_message   = $this->session->flashdata('success_message');
+
+        ?>
+
+        <!-- Display Success/Error message top of the page-->
         <div class="rowx">
-            <?php if (!empty($user['user_id'])) { ?>
+            <?php if($flash_success_message) {?>
+                <div style="text-align:center;" class="alert alert-success">
+                    <strong>Success!</strong> <?=$flash_success_message;?>
+                </div>
+            <?php } elseif($flash_error_message) {?>
+                <div style="text-align:center;" class="alert alert-danger">
+                    <strong>Error!</strong> <?=$flash_error_message;?>
+                </div>
+            <?php } ?>
+        </div>
+        <!-- End display flash message -->
+
+        <div class="rowx">
+            <?php if (!empty($user['user_id']) && $full_page_layout == false) { ?>
                 <div id="left-nav" class="col-xs-2">
                     <ul class="nav navbar-nav">
                         <?php if ($user['user_type_id'] == 3) {?>
                             <div class="profile-info">
                                 <div>
-                                    <img width="100" src="https://yuvaksoga2017.org/wp-content/uploads/2017/01/dummy-profile-pic-female-300n300.jpg">
+                                    <img width="100" src="<?=profile_image($user['user_id'])?>">
                                 </div>
                                 <span>
-                                    <a>Edit Profile</a><br/>
+                                    <a href="/student/student_manage/edit_profile">Edit Profile</a><br/>
                                     <a href="/student/acc_profile">My Accedamic Profile</a>
                                 </span>
                             </div>
                         <?php } ?>
                         <?php if ($user['user_type_id'] == 10) {?>
-                                
+
                             <?php if($top_nav == 'course') {?>
                                 <li><a href="/admin/course/new">Create a Course</a></li>
                                 <li><a href="/admin/course">View Courses</a></li>
@@ -164,9 +214,9 @@
             <?php } ?>
         </div>
     </div>
-  
+
     <footer>
-        <p style="color:#9f9f9f;padding-top:20px;">&copy; Copyright <?php echo date('Y'); ?> 
+        <p style="color:#9f9f9f;padding-top:20px;">&copy; Copyright <?php echo date('Y'); ?>
             <?php echo $this->config->item('institute'); ?>
         </p>
     </footer>

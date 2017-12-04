@@ -43,30 +43,34 @@ class Admin_manage_course extends MY_Controller {
     public function save_course($course_id = 0) {
         $data = array();
         $this->load->model('course_model');
-        $this->load->model('course_category_model');        
-        
+        $this->load->model('course_category_model');
+
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-           
+
             $this->load->helper(array('form'));
-   
-          if($course_id <= 0){
-            $this->form_validation->set_rules('course_cat_id', 'Course category ', 'trim|required|xss_clean');
+
+            if($course_id <= 0){
+                $this->form_validation->set_rules('course_cat_id', 'Course Category ', 'trim|required|xss_clean');
             }
-            
+
             $this->form_validation->set_rules('course_duration_years', 'Years in duration', 'trim|required|numeric|xss_clean');
             $this->form_validation->set_rules('course_duration_months', 'Months in duration', 'trim|required|numeric|xss_clean');
             $this->form_validation->set_rules('course_start_date', 'Course Start Date', 'trim|required|xss_clean');
 
+            if($course_id > 0) {
+                $this->form_validation->set_rules('current_semester_id', 'Current Semester', 'trim|required|xss_clean');
+            }
 
-    
             if ($this->form_validation->run() == true) {
                 $course_cat = $this->course_category_model->get($this->input->post('course_cat_id'));
-                
+
                 $insert['course_category_id'] = $this->input->post('course_cat_id');
                 $insert['duration'] = $this->input->post('course_duration_years') * 12 + $this->input->post('course_duration_months');
 
                 $date_int = strtotime($this->input->post('course_start_date'));
                 $insert['start_date'] =  date('Y-m-d', $date_int);
+
+                $insert['current_semester_id'] = $this->input->post('current_semester_id');
 
                 $course_year = date('Y', $date_int);
                 if($course_id <= 0){
@@ -94,16 +98,17 @@ class Admin_manage_course extends MY_Controller {
     }
 
     public function edit($course_id) {
-       
+
         $data = array();
         $this->load->model('course_model');
         $this->load->model('subject_model');
+        $this->load->model('course_semester_model');
 
         $data['course'] = $this->course_model->get($course_id);
         $data['subjects'] = $this->subject_model->get_list();
-
+        $data['course_semesters'] = $this->course_semester_model->get_by_course($course_id);
         $data['no_of_semesters'] =  5;
-      
+
         $this->layout->view('/admin/manage_course/create', $data);
     }
 
@@ -123,6 +128,7 @@ class Admin_manage_course extends MY_Controller {
             $save_data['semester_number'] = $this->input->post('semester_number');
             $save_data['start_date'] = $this->input->post('start_date');
             $save_data['start_date'] = date('Y-m-d', strtotime($save_data['start_date']));
+
 
             $this->load->model('course_semester_model');
             $this->course_semester_model->insert($save_data);
@@ -156,7 +162,7 @@ class Admin_manage_course extends MY_Controller {
 
         $this->load->model('course_subject_model');
         $response = array('success' => false, 'errors' => '');
-        
+
         $course_id = $this->input->post('subject_course_id');
         $semester_id = $this->input->post('subject_semester_id');
         $subjects = $this->input->post('subjects');

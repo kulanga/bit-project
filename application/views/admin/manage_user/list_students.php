@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
 
-<div class="col-md-10">
+<div class="col-md-12">
     <h3 class="text-muted">Manage Students</h3>
     <div class="dataTable_wrapper">
 
         <div>
             <form role="form" name="manage_ac_user_form" method="get" action="/admin/student/list">
-                
+
                 <div class="row">
 
                     <div class="form-group col-sm-3">
@@ -41,10 +41,8 @@
                     </div>
 
                 </div>
-
             </form>
         </div>
-
 
         <table class="table table-striped table-hover" id="subjects-table">
             <thead>
@@ -55,7 +53,7 @@
                     <th>Mobile No</th>
                     <th>Enrolled Course</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
 
@@ -69,14 +67,17 @@
                         <td><?=$student->course_name?></td>
                         <td class="stu-status"><?=user_status($student->user_status)?></td>
                         <td>
-                            <a href="#" class="btn-sm btn-primary">Edit</a>
+                            <a href="/admin/admin_manage_user/edit_student/<?=$student->user_id?>" class="btn-sm btn-primary">Edit</a>&nbsp;
+                            <a href="/student/student_home/my_acc_profile/<?=$student->user_id?>" target="_blank" class="btn-sm btn-info " data-id="<?=$student->user_id;?>">View Accedmaic profile</a>
+
                             <?php if($student->user_status == 4 ) {?>
-                                <a href="javascript:void(0)" id="btn-approve-<?=$student->user_id;?>" class="btn-sm btn-success btn-approve" data-id="<?=$student->user_id;?>">Approve</a>
+                                <a href="javascript:void(0)" id="btn-approve-<?=$student->user_id;?>" class="btn-sm btn-success btn-approve" data-id="<?=$student->user_id;?>">Approve</a>&nbsp;
                             <?php }?>
 
                             <?php if($student->user_status != 3) {?>
                                 <a href="#" class="btn-sm btn-danger btn-delete" data-id="<?=$student->user_id;?>">Delete</a>
                             <?php } ?>
+
                         </td>
                     </tr>
                 <?php } ?>
@@ -101,9 +102,7 @@
                     admin_student_update_status(id, 3, 'delete', btn);
 
                 }
-
             })
-            
         });
 
         function admin_student_update_status(id, status, newstatus, btn) {
@@ -122,12 +121,12 @@
                         } else if(newstatus == 'delete') {
                             newstatus_text = 'Deleted';
                             $('#btn-approve-'+ id).hide();
-                           
+
                         }
                         $('#stu-row-' + id).find('.stu-status').html(newstatus_text);
                         btn.hide();
 
-                    } 
+                    }
                     else {
                         alert('An error occured. Please refresh the page and try.');
                     }

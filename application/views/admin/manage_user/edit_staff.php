@@ -1,11 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
+<?php
+    $titles = array(
+        '', 'Prof.', 'Mr.', 'Mrs.', 'Miss'
+    );
+?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
-            
+
             <h3 class="text-muted">
-               Update Staff Profile.
+               Update Staff Profile
             </h3>
 
             <?php if(validation_errors()) {?>
@@ -15,6 +21,15 @@
             <?php } ?>
 
             <form role="form" name="manage_ac_user_form" method="post" action="/admin/staff/update/<?=$staff->user_id?>"/>
+
+                <div class="form-group">
+                    <label for="full_name">Title<span class="required">*</span></label>
+                    <select class="form-control" name="title" style="max-width:150px;">
+                        <?php foreach($titles as $title) {?>
+                            <option value="<?=$title?>" <?php echo $staff->title == $title ? 'selected="selected"' : '';?>><?=$title?></option>
+                        <?php } ?>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="full_name">Full Name<span class="required">*</span></label>
@@ -42,14 +57,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="mobile_no">Subject<span class="required">*</span></label>
-                    
+                    <label for="status">Status<span class="required">*</span></label>
+                    <select class="form-control" name="status" id="status">
+                        <option value="1" <?= $staff->status == 1 ? 'selected="selected"' : '';?>>Active</option>
+                        <option value="2" <?=$staff->status == 3 ? 'selected="selected"' : '';?>>Deleted</option>
+                    </select>
                 </div>
 
-                 
                 <a href="/admin/staff" class="btn btn-danger">Exit</a>&nbsp;&nbsp;
                 <button type="submit" class="btn btn-primary">Update</button>
-               
+
             </form>
         </div>
     </div>

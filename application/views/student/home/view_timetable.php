@@ -19,17 +19,17 @@
     </div>
 </div>
 
-    
+
 <script type="text/javascript">
     var timetable_course_id = '<?=$course_id?>';
 
     $(document).ready(function() {
-        
+
         $('#filter_course_id').on('change', function() {
             timetable_course_id = $(this).val();
             reload_events(timetable_course_id);
         });
-        
+
         $('#calendar').fullCalendar({
             customButtons: {
             },
@@ -38,7 +38,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-        
+
             weekends: false,
             defaultDate: moment().format(),
             defaultView: 'agendaWeek',
@@ -47,7 +47,7 @@
             businessHours: {
                 start: '08:30',
                 end: '16:15',
-            },
+            }
         });
 
         reload_events($('#filter_course_id').val());
@@ -65,7 +65,7 @@
         }
 
         $('#calendar').fullCalendar( 'removeEventSource', events);
-        $('#calendar').fullCalendar( 'addEventSource', events);         
+        $('#calendar').fullCalendar( 'addEventSource', events);
         $('#calendar').fullCalendar( 'refetchEvents' );
     }
 
