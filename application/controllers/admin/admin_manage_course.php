@@ -48,9 +48,23 @@ class Admin_manage_course extends MY_Controller {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
             $this->load->helper(array('form'));
+            $ccatid = $this->input->post('course_cat_id');
+            $course_cat = null;
 
-            if($course_id <= 0){
+            if($ccatid > 0) {
+                $course_cat = $this->course_category_model->get($ccatid);
+            }
+
                 $this->form_validation->set_rules('course_cat_id', 'Course Category ', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('course_year', 'Course Year ', 'trim|required|xss_clean|numeric');
+
+                if(is_object($course_cat)) {
+                    $cname = $course_cat->name . '-' . $this->input->post('course_year');
+                    $_POST['course_name'] = $cname;
+
+                    $this->form_validation->set_rules('course_name', 'Course', 'trim|required|xss_clean|is_unique[courses.name]');
+                    $this->form_validation->set_message('is_unique', $cname .' is already created.');
+                }
             }
 
             $this->form_validation->set_rules('course_duration_years', 'Years in duration', 'trim|required|numeric|xss_clean');
@@ -58,7 +72,7 @@ class Admin_manage_course extends MY_Controller {
             $this->form_validation->set_rules('course_start_date', 'Course Start Date', 'trim|required|xss_clean');
 
             if($course_id > 0) {
-                $this->form_validation->set_rules('current_semester_id', 'Current Semester', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('current_semester_id', 'Current Semester', 'trim|required|numeric|xss_clean');
             }
 
             if ($this->form_validation->run() == true) {
@@ -71,15 +85,16 @@ class Admin_manage_course extends MY_Controller {
                 $insert['start_date'] =  date('Y-m-d', $date_int);
 
                 $insert['current_semester_id'] = $this->input->post('current_semester_id');
+                $insert['updated_at'] = date('Y-m-d H:i:s');
 
-                $course_year = date('Y', $date_int);
                 if($course_id <= 0){
+                    $course_year = $this->input->post('course_year');
                     $insert['name'] = $course_cat->name  . '-' . $course_year;
                 }
+
                 if($course_id > 0 ) {
                     $this->course_model->update($course_id, $insert);
                 } else {
-                    //set course status as draft when creating a course.
                     $insert['status'] = 2;
                     $course_id = $this->course_model->insert($insert);
                 }

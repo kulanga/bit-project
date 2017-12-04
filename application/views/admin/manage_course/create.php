@@ -38,12 +38,31 @@
                     </div>
                 </div>
 
+                <?php if(empty($course->id)) {?>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="course_year">Course Year<span class="required">*</span></label>
+                        <select class="form-control col-md-3" id="course_year" name="course_year">
+                            <option value="">-</option>
+
+                            <?php
+                            $i = date('Y');
+                            $j = $i + 6;
+                            for(;$i <= $j; $i++) {?>
+                                <option value="<?=$i?>"><?=$i?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <?php } ?>
+
+
                 <?php if(isset($course->id) && $course->id > 0 ) {?>
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="course_start_date">Current Semester<span class="required">*</span></label>
                             <select class="form-control col-md-3" name="current_semester_id">
-                                <option>-</option>
+                                <option value="0">-</option>
                                 <?php foreach($course_semesters as $cs) {?>
                                     <option value="<?=$cs->id?>" <?php echo $course->current_semester_id == $cs->id ? 'selected="selected"': '';?>>
                                         Semester <?=$cs->semester_number?> of Year <?=$cs->semester_year?>
@@ -57,7 +76,7 @@
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="course_start_date">Start Date <span class="required">*</span></label>
+                        <label for="course_start_date">Course Start Date <span class="required">*</span></label>
                         <input type="text" class="form-control col-md-3" id="course_start_date" name="course_start_date"
                             value="<?php echo set_value('start_date', is_object($course) ? date('d-m-Y', strtotime($course->start_date)) : '')?>" autocomplete="off" required/>
                     </div>

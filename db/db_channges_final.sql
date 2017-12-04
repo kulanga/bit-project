@@ -51,3 +51,9 @@ ALTER TABLE `exam_results`
 ADD COLUMN `year_semester` VARCHAR(10) NULL DEFAULT NULL COMMENT 'year - semester' AFTER `semester_id`;
 
 
+-----------------------------2017-12-05-------------------
+ALTER TABLE `studentsPortal`.`courses` 
+ADD UNIQUE INDEX `name` (`name` ASC);
+
+
+
