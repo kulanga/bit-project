@@ -44,6 +44,7 @@ class Admin_manage_course extends MY_Controller {
         $data = array();
         $this->load->model('course_model');
         $this->load->model('course_category_model');
+        $this->load->model('course_semester_model');
 
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
@@ -55,6 +56,7 @@ class Admin_manage_course extends MY_Controller {
                 $course_cat = $this->course_category_model->get($ccatid);
             }
 
+            if($course_id <= 0) {
                 $this->form_validation->set_rules('course_cat_id', 'Course Category ', 'trim|required|xss_clean');
                 $this->form_validation->set_rules('course_year', 'Course Year ', 'trim|required|xss_clean|numeric');
 
@@ -106,8 +108,8 @@ class Admin_manage_course extends MY_Controller {
         }
 
         $data['course'] = $this->course_model->get($course_id);
+        $data['course_semesters'] = $this->course_semester_model->get_by_course($course_id);
         $data['course_category'] = $this->course_category_model->get_course_list();
-        //print_r($data['course'] );die;
 
         $this->layout->view('admin/manage_course/create', $data);
     }
@@ -230,7 +232,7 @@ class Admin_manage_course extends MY_Controller {
 
         if(!empty($btn_save)) {
             $save_data = array();
-            $save_data['current_semester_id'] = $this->input->post('current_semester_id');
+            $save_data['current_semester_id'] = (int)$this->input->post('current_semester_id');
             $save_data['status'] = $this->input->post('status');
             $this->course_model->update($course_id, $save_data);
             redirect('/admin/course');

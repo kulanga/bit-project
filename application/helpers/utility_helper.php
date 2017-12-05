@@ -105,3 +105,13 @@ if (!function_exists('profile_image'))
         return $profile_image;
     }
 }
+
+if (!function_exists('get_student_course_data'))
+{
+    function get_student_course_data($user_id) {
+        $ci =& get_instance();
+        $ci->load->model('student_model');
+        $data = $ci->student_model->get_course($user_id);
+        return $data;
+    }
+}

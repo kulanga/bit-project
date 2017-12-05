@@ -3,6 +3,11 @@
 
 <div class="col-md-12">
     <h3 class="text-muted">Manage Students</h3>
+
+    <div class="print-btn-wrap">
+        <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
+    </div>
+
     <div class="dataTable_wrapper">
 
         <div>
@@ -35,7 +40,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-3 no-print">
                         <br/>
                         <button class="btn btn-primary" type="submit" value="submit">View</button>
                     </div>
@@ -53,7 +58,7 @@
                     <th>Mobile No</th>
                     <th>Enrolled Course</th>
                     <th>Status</th>
-                    <th>&nbsp;</th>
+                    <th class="no-print">&nbsp;</th>
                 </tr>
             </thead>
 
@@ -66,7 +71,7 @@
                         <td><?=$student->mobile_no;?></td>
                         <td><?=$student->course_name?></td>
                         <td class="stu-status"><?=user_status($student->user_status)?></td>
-                        <td>
+                        <td class="no-print">
                             <a href="/admin/admin_manage_user/edit_student/<?=$student->user_id?>" class="btn-sm btn-primary">Edit</a>&nbsp;
                             <a href="/student/student_home/my_acc_profile/<?=$student->user_id?>" target="_blank" class="btn-sm btn-info " data-id="<?=$student->user_id;?>">View Accedmaic profile</a>
 

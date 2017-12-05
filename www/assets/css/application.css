@@ -114,6 +114,31 @@ body > .container {
     background-color: #ffd6d6;
 }
 
+.print-btn-wrap {
+    position: absolute;
+    top: 28px;
+    right: 50px;
+}
+.print-btn-wrap .print-btn {
+    font-weight: bold;
+    position: relative;
+    color: #fff;
+    background-color: #b2aeae;
+    padding: 5px 15px;
+    text-decoration: none;
+    border: 1px solid #888;
+    text-transform: uppercase;
+}
+
+/*
+* PRINT CSS
+*/
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
 
 
 

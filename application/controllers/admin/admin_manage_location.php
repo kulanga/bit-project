@@ -11,14 +11,15 @@ class Admin_manage_location extends MY_Controller {
 
         $this->load->model('location_model');
         $this->load->library('form_validation');
-        
-        $btn = $this->input->post('btn_create');       
-        
+
+        $btn = $this->input->post('btn_create');
+
         if(!empty($btn))
         {
             $this->form_validation->set_rules('location_name', 'Location', 'trim|required|xss_clean');
             $data['name'] = $this->input->post('location_name');
             $this->location_model->insert($data);
+            redirect('/admin/admin_manage_location/list_location');
         }
 
         $this->layout->view('/admin/manage_location/add');
@@ -27,7 +28,7 @@ class Admin_manage_location extends MY_Controller {
     public function list_location() {
         $this->load->model('location_model');
         $data = array();
-        $data['list'] = $this->location_model->get_locations(); 
+        $data['list'] = $this->location_model->get_locations();
 
         $this->layout->view('/admin/manage_location/list', $data);
     }

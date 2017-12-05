@@ -1,7 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
 <div class="col-md-10">
-    <h3 class="text-muted">List Results</h3>
+    <h3 class="text-muted">Exam Results</h3>
+
+    <div class="print-btn-wrap">
+        <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
+    </div>
+
     <div class="dataTable_wrapper">
 
         <div>
@@ -31,7 +36,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-3 no-print">
                         <br/>
                         <button class="btn btn-primary" type="submit" value="submit">View</button>&nbsp;
                         <button class="btn btn-default" id="btn_clear_filters" type="reset">Clear Search</button>

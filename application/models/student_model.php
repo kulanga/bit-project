@@ -64,6 +64,12 @@ class Student_model extends CI_Model
         return $row;
     }
 
+    public function get_course($user_id) {
+        $sql = "SELECT c.name FROM students s LEFT JOIN courses c ON c.id = s.course_id WHERE s.user_id = ?";
+        $query = $this->db->query($sql, array($user_id));
+        return $query->first_row();
+    }
+
     public function get_student_count_bycourse($course_id) {
         $sql = "SELECT COUNT(id) AS student_count FROM students WHERE course_id = ? GROUP BY course_id";
 
@@ -80,17 +86,15 @@ class Student_model extends CI_Model
         $sql .= "LEFT JOIN course_semesters cs ON cs.course_id = st.course_id ";
         $sql .= "LEFT JOIN course_subjects csub ON csub.course_semester_id = cs.id ";
         $sql .= "LEFT JOIN subjects sub ON sub.id = csub.subject_id ";
-        //$sql .= "LEFT JOIN exam_results er ON er.student_user_id = st.user_id ";
         $sql .= "WHERE st.user_id = ? ";
         $sql .= "ORDER BY semester_year ASC, semester_number ASC";
 
         $query = $this->db->query($sql, array($user_id));
         $res = $query->result();
 
-
         //Get result data for current student.
         $sql  = "SELECT er.* FROM exam_results er ";
-        $sql .= " WHERE er.student_user_id = ? ORDER BY id DESC";
+        $sql .= "WHERE er.student_user_id = ? ORDER BY id DESC";
 
         $query = $this->db->query($sql, array($user_id));
         $resultdata = $query->result();
@@ -100,6 +104,9 @@ class Student_model extends CI_Model
             $result_key = $row->student_user_id . '-' . $row->subject_id;
             $results_data[$row->year_semester][$result_key] =  $row;
         }
+
+        //Get Assignmnet data.
+        $as_result_data = $this->get_assignment_result_data($user_id);
 
         $result = array();
 
@@ -118,9 +125,9 @@ class Student_model extends CI_Model
                 $row->grade = $result_row->grade;
 
                 if($result_row->semester_id == $row->semester_id) {
-                   $row->attempt = '1<sup>st</sup> attempt'; 
+                   $row->attempt = '1<sup>st</sup> attempt';
                 } else {
-                    $row->attempt = 'repeat';
+                    $row->attempt = '2<sup>nd</sup> attempt';
                 }
 
             } else {
@@ -129,10 +136,45 @@ class Student_model extends CI_Model
 
             $result[$key]['title'] = $title;
             $result[$key]['rows'][] = $row;
+
+            //Process assignment data
+            $as_result_row = !empty($as_result_data[$key][$result_key]) ? $as_result_data[$key][$result_key] : null;
+            $asrow = new stdClass;
+
+            if($as_result_row && $as_result_row->subject_id == $row->subject_id) {
+                $asrow->title = $as_result_row->title;
+                $asrow->score = $as_result_row->score;
+                $asrow->is_repeat = $as_result_row->is_repeat_assignment;
+                $asrow->status = $as_result_row->score >= ASSIGNMENT_PASS_SCORE ? 'Pass' : 'Fail';
+                $asrow->subject = $row->subject;
+
+                $result[$key]['asrows'][] = $asrow;
+            }
         }
 
-        // echo '<pre>';
-        // print_r($result);die;
+        //echo '<pre>';
+        //print_r($result);die;
         return $result;
+    }
+
+    private function get_assignment_result_data($student_user_id) {
+
+        $sql  = "SELECT asub.*, a.title, a.subject_id, a.is_repeat_assignment, cs.semester_year, cs.semester_number ";
+        $sql .= "FROM assignment_submissions asub ";
+        $sql .= "LEFT JOIN assignments a ON a.id = asub.assignment_id ";
+        $sql .= "LEFT JOIN course_semesters cs ON cs.id = a.semester_id ";
+        $sql .= "WHERE asub.student_user_id = ? ";
+        $sql .= "ORDER BY a.due_date ASC ";
+
+        $query = $this->db->query($sql, array($student_user_id));
+        $ares = $query->result();
+
+        $results_data = array();
+        foreach($ares as $row) {
+            $year_semester = $row->semester_year . '-' . $row->semester_number;
+            $result_key = $row->student_user_id . '-' . $row->subject_id;
+            $results_data[$year_semester][$result_key] = $row;
+        }
+        return $results_data;
     }
 }

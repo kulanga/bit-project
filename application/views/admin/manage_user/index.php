@@ -1,7 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="col-md-10">
-    <h3 class="text-muted">Manage Users</h3>
+    <h3 class="text-muted">Manage Acedamic Staff</h3>
+
+    <div class="print-btn-wrap">
+        <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
+    </div>
+
     <div class="dataTable_wrapper">
         <table class="table table-striped table-hover" id="subjects-table">
             <thead>
@@ -11,7 +16,7 @@
                     <th>Email</th>
                     <th>Mobile</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th class="no-print">Action</th>
 
                 </tr>
             </thead>
@@ -24,7 +29,7 @@
                         <td><?=$staff->email?></td>
                         <td><?=$staff->mobile_no?></td>
                         <td class="staff-status"><?=user_status($staff->status)?></td>
-                        <td>
+                        <td class="no-print">
                             <a class="btn btn-sm btn-primary" href="/admin/staff/edit/<?=$staff->user_id?>">Edit&nbsp;&nbsp;<a>
                             <?php if($staff->status != 3) {?>
                                 <a href="#" class="btn-sm btn-danger btn-delete" data-id="<?=$staff->user_id;?>">Delete</a>

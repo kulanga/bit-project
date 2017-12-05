@@ -4,6 +4,11 @@
 
 <div class="col-md-10">
     <h3 class="text-muted">Manage Courses</h3>
+
+    <div class="print-btn-wrap">
+        <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
+    </div>
+
     <div class="dataTable_wrapper">
 
         <div>
@@ -21,7 +26,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-3 no-print">
                         <br/>
                         <button class="btn btn-primary" type="submit" value="submit">View</button>
                     </div>
@@ -39,7 +44,7 @@
                     <th>Status</th>
                     <th style="text-align:right">Duration(Months)</th>
                     <th style="text-align:right">No of Students</th>
-                    <th style="text-align:center">Action</th>
+                    <th style="text-align:center" class="no-print">Action</th>
                 </tr>
             </thead>
 
@@ -61,7 +66,7 @@
                         </td>
                         <td align="center"><?=$course->duration?></td>
                         <td align="center"><?=$course->student_count?></td>
-                        <td align="center">
+                        <td align="center" class="no-print">
                             <a href="/admin/course/edit/<?=$course->id?>" class="btn btn-sm btn-primary">Edit</a>
                              <a href="/admin/course/settings/<?=$course->id?>" class="btn btn-sm btn-success">Settings</a>
 

@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<div class="container-fluid">
+<div class="container-fluid col-md-6 col-md-offset-2">
     <div class="row">
     <h2 class="text-muted admin-page-title">
-            Location list
+            Locations
         </h2><br/>
         <div class="dataTable_wrapper">
          <table class="table table-striped table-hover" id="subjects-table">
@@ -29,6 +29,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </div>
 
 <script type="text/javascript">

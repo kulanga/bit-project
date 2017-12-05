@@ -10,7 +10,10 @@
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-dialog.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/moment.min.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/toastr.min.js"></script>
+
     <script type="text/javascript" src="<?php echo asset_url();?>js/main.js"></script>
+
 
     <?php echo $js_for_layout ?>
 
@@ -18,6 +21,7 @@
     <link rel="stylesheet" href="<?php echo asset_url();?>css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="<?php echo asset_url();?>css/bootstrap-dialog.min.css">
     <link rel="stylesheet" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="<?php echo asset_url();?>css/toastr.min.css">
     <link rel="stylesheet" href="<?php echo asset_url();?>css/application.css">
 
     <?php echo $css_for_layout ?>
@@ -176,8 +180,10 @@
                                     <img width="100" src="<?=profile_image($user['user_id'])?>">
                                 </div>
                                 <span>
+                                    <?php $stcourse = get_student_course_data($user['user_id'])?>
+                                    <strong><?=$stcourse->name;?></strong><br/>
                                     <a href="/student/student_manage/edit_profile">Edit Profile</a><br/>
-                                    <a href="/student/acc_profile">My Accedamic Profile</a>
+                                    <a href="/student/acc_profile">My Acedamic Profile</a>
                                 </span>
                             </div>
                         <?php } ?>

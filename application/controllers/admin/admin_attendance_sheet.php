@@ -8,11 +8,12 @@ class Admin_attendance_sheet extends MY_Controller {
 		parent::__construct();
         $this->set_topnav('attendance_sheet');
 
-        if(!in_array($this->session->userdata('user_type_id'), array(1,2))) {
+        $user_typeids = array(1, 2);
+        $user_type_id = $this->session->userdata('user_type_id');
+
+        if(!in_array($user_type_id, $user_typeids)) {
             die('Access Denied');
         }
-
-        $this->load->library('form_validation');
 	}
 
     public function search() {
@@ -50,7 +51,4 @@ class Admin_attendance_sheet extends MY_Controller {
 
         $this->load->view('/admin/attendance_sheet/printview', $data);
     }
-
-
-
 }

@@ -3,10 +3,10 @@
 
 <script type="text/javascript" src="/assets/js/admin_course.js"></script>
 
-<div class="container-fluid col-md-offset-2">
+<div class="container-fluid">
     <div class="row">
 
-        <h2 style="text-align:left;" class="text-muted admin-page-title">
+        <h2 style="text-align:left;padding-left:75px;" class="text-muted admin-page-title">
             <?php echo isset($course->id) && $course->id > 0  ? 'Update Course' : 'Create a New Course'?>
         </h2><br/>
 

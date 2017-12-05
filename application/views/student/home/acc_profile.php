@@ -3,10 +3,10 @@
 <div class="col-md-10">
     <h3 class="text-muted"></h3>
 
-
     <div >
-        <label>Your current semesrer(s):</label>
+        <!-- <label>Your current semesrer(s):</label> -->
     </div>
+x`
     <div class="panel-group" id="accordion">
 
         <?php foreach($data as $key => $items) { ?>
@@ -25,7 +25,6 @@
                         </ul>
 
                         <div class="tab-content">
-
                             <div id="exams-<?=$key?>" class="dataTable_wrapper tab-pane fade in active">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -38,7 +37,9 @@
                                     </thead>
 
                                     <tbody>
-                                        <?php foreach ($items['rows'] as $row) {?>
+                                        <?php foreach ($items['rows'] as $row) {
+                                                if(empty($row->subject)) continue;
+                                            ?>
                                             <tr>
                                                 <td><?=$row->subject . '(' . $row->subject_code . ')' ?></td>
                                                 <td><?=$row->grade;?></td>
@@ -51,27 +52,39 @@
                             </div>
 
                             <div id="assignments-<?=$key?>" class="dataTable_wrapper tab-pane fade">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Subject</th>
-                                            <th>Assignment</th>
-                                            <th>Marks</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
+                                <?php if(isset($items['asrows'])) { ?>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Subject</th>
+                                                <th>Assignment</th>
+                                                <th>Marks</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                        <tbody>
+                                            <?php
+                                            foreach($items['asrows'] as $row) {?>
+                                                <tr>
+                                                    <td><?=$row->subject;?></td>
+                                                    <td><?=$row->title?></td>
+                                                    <td><?=$row->score <= 0 ? 'Pending' : $row->score?></td>
+                                                    <td>
+                                                        <?=$row->status?>
+                                                        <?php if($row->is_repeat) {?>
+                                                            <span>(Repeat Attempt)</span>>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+
+                                <?php } else { ?>
+                                    <span>No Assignments</span>
+                                <?php } ?>
                             </div>
-
                         </div>
                     </div>
                 </div>
