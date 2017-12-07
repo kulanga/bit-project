@@ -87,6 +87,9 @@ class Admin_manage_user extends MY_Controller {
                     } else {
                         $this->db->trans_commit();
                         $this->notify_to_user($user_id, $this->input->post('password'));
+
+                        $this->session->set_flashdata('success_message', "New staff member has been successfully created.");
+                        redirect('/admin/staff');
                     }
                 }
 
@@ -235,10 +238,12 @@ class Admin_manage_user extends MY_Controller {
         $user = $this->user_model->get($user_id);
         $staff = $this->staff_model->get_staff_profile($user_id);
 
+        $link = base_url() . 'login';
+
         $subject  = "Welcome to HNDE Students Portal";
         $message  = "<p>Dear " . $staff->title . ' ' . $user->full_name . '</p>';
         $message .= "<p>You have been added as a " . $staff->designation . " on HNDE Students Portal. Please use below credentials to Login.</p>";
-        $message .= "<p>Username: " . $user->username ."<br/>Password: ".  $plain_password ."<br/>Url: ". base_url() . 'login' ."<p/>";
+        $message .= "<p>Username: " . $user->username ."<br/>Password: ".  $plain_password ."<br/>Url: <a href='$link'>$link</a><p/>";
         $message .= "<p>Please change your password as soon as logged in.</p>";
         $message .= "<p>If you have any question, please send an email to " . $this->config->item('admin_email') . ".</p>";
 

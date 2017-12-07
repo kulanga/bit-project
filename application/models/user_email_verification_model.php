@@ -74,7 +74,7 @@ class User_email_verification_model extends CI_Model
         $message  = "<p>Hello " . $user->full_name . "</p>";
         $message .= "<p>You have been successfully sign up to HNDE Students Portal.</p>";
         $message .= "<p>We want to verify that you are indeed '" . $user->full_name . "'. If you wish to continue, please follow the link below:</p>";
-        $message .= "<p/>$url</p>";
+        $message .= "<p/><a href='$url'>$url</a></p>";
         $message .= "If you're not ".  $user->full_name ." or didn't request verification, you can ignore this email.";
 
         return send_mail($user->email, $subject, $message);

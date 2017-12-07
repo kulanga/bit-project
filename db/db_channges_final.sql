@@ -52,8 +52,17 @@ ADD COLUMN `year_semester` VARCHAR(10) NULL DEFAULT NULL COMMENT 'year - semeste
 
 
 -----------------------------2017-12-05-------------------
-ALTER TABLE `studentsPortal`.`courses` 
+ALTER TABLE `courses` 
 ADD UNIQUE INDEX `name` (`name` ASC);
+
+CREATE TABLE `user_password_recoveries` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `reset_key` VARCHAR(250) NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `index2` (`user_id` ASC),
+  INDEX `index3` (`reset_key` ASC));
 
 
 

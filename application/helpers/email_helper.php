@@ -13,9 +13,6 @@ if (!function_exists('send_mail'))
         $ci->load->library('email');
         $ci->email->initialize($ci->config->item('email'));
 
-        $to = "ranasinghe.thushan@gmail.com";
-
-
         $ci->email->from($from, 'HNDE Portal');
         $ci->email->to($to);
         $ci->email->subject($subject);

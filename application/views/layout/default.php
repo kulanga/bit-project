@@ -152,12 +152,12 @@
             }
 
             $flash_success_message = $this->session->flashdata('success_message');
-            $flash_error_message   = $this->session->flashdata('success_message');
+            $flash_error_message   = $this->session->flashdata('error_message');
 
         ?>
 
         <!-- Display Success/Error message top of the page-->
-        <div class="rowx">
+        <div class="rowx" id="flash-message-wrap">
             <?php if($flash_success_message) {?>
                 <div style="text-align:center;" class="alert alert-success">
                     <strong>Success!</strong> <?=$flash_success_message;?>
@@ -174,7 +174,7 @@
             <?php if (!empty($user['user_id']) && $full_page_layout == false) { ?>
                 <div id="left-nav" class="col-xs-2">
                     <ul class="nav navbar-nav">
-                        <?php if ($user['user_type_id'] == 3) {?>
+                        <?php if ($user['user_type_id'] == 3 && $this->uri->segment(1) !== 'login') {?>
                             <div class="profile-info">
                                 <div>
                                     <img width="100" src="<?=profile_image($user['user_id'])?>">
@@ -226,5 +226,13 @@
             <?php echo $this->config->item('institute'); ?>
         </p>
     </footer>
+
+    <!-- Hide Flash Message -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#flash-message-wrap').fadeOut(5000);
+        });
+    </script>
+
 </body>
 </html>

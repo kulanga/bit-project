@@ -368,8 +368,10 @@ $config['proxy_ips'] = '';
 //Email config
 $config['email'] = array(
     'protocol'  => 'smtp',
-    'smtp_host' => 'ssl://smtp.gmail.com',
-    'smtp_port' => 465,
+    //'smtp_host' => 'ssl://smtp.gmail.com',
+    //'smtp_port' => 465,
+    'smtp_host' => 'localhost',
+    'smtp_port' => 2525,
     'smtp_user' => 'hndeportal',
     'smtp_pass' => 'Test@1234',
     'mailtype'  => 'html',

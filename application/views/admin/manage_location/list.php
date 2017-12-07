@@ -21,7 +21,7 @@
                             <td><?=$l->name?></td>
 
                             <td>
-                                <a href="#"   data-location-id="<?=$l->id?>" role="button" class="btn btn-sm btn-danger btn-delete">Delete</a>
+                                <a href="#" data-location-id="<?=$l->id?>" role="button" class="btn btn-sm btn-danger btn-delete">Delete</a>
 
                             </td>
                         </tr>

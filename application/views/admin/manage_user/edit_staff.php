@@ -65,7 +65,7 @@
                 </div>
 
                 <a href="/admin/staff" class="btn btn-danger">Exit</a>&nbsp;&nbsp;
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button><br/><br/><br/>
 
             </form>
         </div>

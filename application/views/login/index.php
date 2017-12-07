@@ -52,34 +52,62 @@
         <div class="col-md-3">
             <div class="row">
 
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title" style="font-size:25px;"><?php echo $login_as ?> - Sign In</h2>
+                <?php if(empty($panel) || !empty($panel) && $panel == 'login') {?>
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title" style="font-size:23px;"><?php echo $login_as ?> - Sign In</h2>
+                        </div>
+                        <div class="panel-body">
+
+                            <?php if(validation_errors()) {?>
+                                <div class="validation-errors">
+                                    <?php echo validation_errors();?>
+                                </div>
+                            <?php } ?>
+
+                            <form action="/login/index" method="post" accept-charset="utf-8">
+                                <div class="form-group">
+                                    <label for="inputEmail">Username</label>
+                                    <input type="test" class="form-control" id="username" name="username" placeholder="username">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                                </div>
+
+                                <a href="/login/forget_password">Forget password?</a>
+                                <button type="submit" style="float:right;" class="btn btn-primary">Login</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="panel-body">
+                <?php } ?>
 
-                        <?php if(validation_errors()) {?>
-                            <div class="validation-errors">
-                                <?php echo validation_errors();?>
-                            </div>
-                        <?php } ?>
+                <?php if(!empty($panel) && $panel == 'forget_password') {?>
+                    <div class="recover-pwd-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title" style="font-size:23px;">Recover Password</h2>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/login/forget_password" method="post" accept-charset="utf-8">
+                                <div class="form-group">
+                                    <p>
+                                        Enter the email address you used when you created the account.
+                                        You will receive an email with the information you need to change your password.
+                                    </p>
+                                </div>
 
-                        <form action="/login/index" method="post" accept-charset="utf-8">
-                            <div class="form-group">
-                                <label for="inputEmail">Username</label>
-                                <input type="test" class="form-control" id="username" name="username" placeholder="username">
-                            </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
+                                </div>
 
-                            <div class="form-group">
-                                <label for="inputPassword">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
-                            </div>
-
-                            <a href="javascript:alert('Implement me...')">Forget password?</a>
-                            <button type="submit" style="float:right;" class="btn btn-primary">Login</button>
-                        </form>
+                                <a href="/login">Back to login</a>
+                                <button type="submit" style="float:right;" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
+
             </div>
 
             <div class="row">
@@ -90,17 +118,19 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-body">
-                        <?php if (isset($is_lecturer_login) && $is_lecturer_login == 1) { ?>
-                            <a href="/login/index" class="btn btn-lg btn-success">Sigin In as a Student</a>
-                        <?php } else {?>
-                            <a href="/login/lecturer" class="btn btn-lg btn-success">Sigin In as a Lecturer</a>
-                        <?php } ?>
+            <?php if(empty($panel) || !empty($panel) && $panel == 'login') {?>
+                <div class="row">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-body">
+                            <?php if (isset($is_lecturer_login) && $is_lecturer_login == 1) { ?>
+                                <a href="/login/index" class="btn btn-lg btn-success">Sigin In as a Student</a>
+                            <?php } else {?>
+                                <a href="/login/lecturer" class="btn btn-lg btn-success">Sigin In as a Lecturer</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </div>

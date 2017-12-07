@@ -38,12 +38,27 @@ class User_model extends CI_Model
 
 	}
 
+    public function recover_password($email) {
+        $this->db->where('email', $email);
+        $this->db->where_in('status', array(1, 4));
+        $this->db->limit(1);
+
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+
 	function login($username, $password)
 	{
 		$this->db->select('id, user_type_id, username, password, full_name, email');
 		$this->db->from('users');
 		$this->db->where('username', $username);
 		$this->db->where('password', md5($password));
+        $this->db->where_in('status', array(1, 4));
 		$this->db->limit(1);
 
 		$query = $this->db->get();

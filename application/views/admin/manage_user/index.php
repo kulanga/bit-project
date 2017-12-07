@@ -30,7 +30,7 @@
                         <td><?=$staff->mobile_no?></td>
                         <td class="staff-status"><?=user_status($staff->status)?></td>
                         <td class="no-print">
-                            <a class="btn btn-sm btn-primary" href="/admin/staff/edit/<?=$staff->user_id?>">Edit&nbsp;&nbsp;<a>
+                            <a class="btn-sm btn-primary" href="/admin/staff/edit/<?=$staff->user_id?>">Edit&nbsp;&nbsp;<a>
                             <?php if($staff->status != 3) {?>
                                 <a href="#" class="btn-sm btn-danger btn-delete" data-id="<?=$staff->user_id;?>">Delete</a>
                             <?php } ?>

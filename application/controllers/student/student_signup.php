@@ -22,7 +22,7 @@ class Student_signup extends MY_Controller {
 
         if($cmd_post != "") {
 
-            $this->form_validation->set_rules('reg_no', 'Student Reg No.', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('reg_no', 'Student Reg No.', 'trim|required|xss_clean|is_unique[students.reg_no]');
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
             $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|xss_clean|numeric');
