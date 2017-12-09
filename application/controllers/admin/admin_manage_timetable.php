@@ -101,9 +101,8 @@ class Admin_manage_timetable extends MY_Controller {
         $this->form_validation->set_rules('batch_id', 'Batch', 'trim|required|xss_clean');
         //$this->form_validation->set_rules('semester_id', 'Semester', 'trim|required|xss_clean');
         $this->form_validation->set_rules('subject_id', 'Subject', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('lecturer_id', 'Lecturer', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('lecturer_id', 'LecturerX', 'trim|required|xss_clean|numeric');
         $this->form_validation->set_rules('location_id', 'Location', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('lecturer_id', 'Lecturer', 'trim|required|xss_clean');
         $this->form_validation->set_rules('event_date', 'Date', 'trim|required|xss_clean');
         $this->form_validation->set_rules('event_start_time', 'Start Time', 'trim|required|xss_clean');
         $this->form_validation->set_rules('event_end_time', 'End Time', 'trim|required|xss_clean|callback_event_end_time');

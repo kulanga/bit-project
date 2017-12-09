@@ -89,7 +89,7 @@
                     <div class="form-group col-md-6 pad-left-0">
                         <label>Lecturer <span class="required">*</span></label>
                         <select id="lecturer_id" name="lecturer_id" class="form-control">
-                            <option value="0">-</option>
+                            <option value="">-</option>
                             <?php foreach($lecturers as $lecturer) {?>
                                 <option value="<?=$lecturer->user_id?>"><?=$lecturer->full_name?></option>
                             <?php } ?>
