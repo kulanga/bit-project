@@ -10,7 +10,7 @@
     <div class="dataTable_wrapper">
 
         <div>
-            <form role="form" name="view_result_form" method="get" action="/admin/admin_manage_result">
+            <form role="form" name="view_result_form" method="get" action="/admin/admin_manage_result" class="no-print">
 
                 <div class="row">
 
@@ -39,7 +39,7 @@
                     <div class="form-group col-sm-3 no-print">
                         <br/>
                         <button class="btn btn-primary" type="submit" value="submit">View</button>&nbsp;
-                        <button class="btn btn-default" id="btn_clear_filters" type="reset">Clear Search</button>
+                        <button class="btn btn-default" id="btn_clear_filters" type="reset">Clear filter</button>
 
                     </div>
                 </div>

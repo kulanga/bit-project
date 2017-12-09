@@ -12,7 +12,7 @@
     <div class="dataTable_wrapper">
 
         <div>
-            <form role="form" name="manage_ac_user_form" method="get" action="/admin/course">
+            <form role="form" name="manage_ac_user_form" method="get" action="/admin/course" class="no-print">
 
                 <div class="row">
 

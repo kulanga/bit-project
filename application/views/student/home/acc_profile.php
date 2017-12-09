@@ -6,7 +6,7 @@
     <div >
         <!-- <label>Your current semesrer(s):</label> -->
     </div>
-x`
+
     <div class="panel-group" id="accordion">
 
         <?php foreach($data as $key => $items) { ?>
@@ -32,7 +32,7 @@ x`
                                             <th>Subject</th>
                                             <th>Grade</th>
                                             <th>Attempt</th>
-                                            <th>Status</th>
+                                            
                                         </tr>
                                     </thead>
 
@@ -44,7 +44,7 @@ x`
                                                 <td><?=$row->subject . '(' . $row->subject_code . ')' ?></td>
                                                 <td><?=$row->grade;?></td>
                                                 <td><?=$row->attempt;?></td>
-                                                <td>N/A</td>
+                                                
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -73,7 +73,7 @@ x`
                                                     <td>
                                                         <?=$row->status?>
                                                         <?php if($row->is_repeat) {?>
-                                                            <span>(Repeat Attempt)</span>>
+                                                            <span>(Repeat Attempt)</span>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>

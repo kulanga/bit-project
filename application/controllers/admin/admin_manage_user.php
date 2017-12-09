@@ -18,9 +18,20 @@ class Admin_manage_user extends MY_Controller {
 
     public function index() {
         $this->load->model('staff_model');
+        $this->load->model('staff_designation_model');
+
         $data = array();
-        $data['list'] = $this->staff_model->get_stffs();
+        $params = array(
+        'keyword' => $this->input->get('keyword'),
+        'desg' => $this->input->get('designation')
+        );
+
+        $data['list'] = $this->staff_model->get_stffs($params);
+        $data['designations']=$this->staff_designation_model->get_disgnations_list();
+
+        //print_r($data['designations']);die;
         $this->layout->view('/admin/manage_user/index', $data);
+        
     }
 
 	//create/edit accedmic user.
@@ -66,6 +77,9 @@ class Admin_manage_user extends MY_Controller {
 
                         $this->user_model->update($user_id, $save_data);
                         $this->staff_model->update_by_userid($user_id, $staff_data);
+
+                        $this->session->set_flashdata('success_message', "update staff member has been successfully.");
+                        redirect('/admin/staff');
                     }
                 } else {
 
@@ -109,6 +123,7 @@ class Admin_manage_user extends MY_Controller {
 
         $data['designations'] = $this->staff_designation_model->get_disgnations_list();
         $data['staff'] =  $this->staff_model->get_staff_profile($user_id, false);
+
         $this->layout->view('/admin/manage_user/edit_staff', $data);
     }
 

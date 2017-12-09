@@ -26,20 +26,44 @@ class Assignment_model extends CI_Model {
         return $this->db->update($this->table, $data);
 	}
 
-    public function get_assigment_details($lecturer_id) {
+    public function get_assigment_details($args) {
+
+        $where_status = "1";
+        if(!empty($args['status']))
+        {
+            $today = date('Y-m-d') . ' 23:59:59';
+
+            if($args['status'] == 1) //live
+            {
+                $where_status = "a.due_date > '$today'";
+            }
+            elseif($args['status'] == 2) //closed
+            {
+              $where_status = "a.due_date < '$today'";  
+            }
+            else //draft
+            {
+               $where_status = "a.status='{$args['status']}'"; 
+            }        
+            
+        }
+
         $sql  = "SELECT a.*, aa.file_name, s.name subject_name, c.name course_name, c.start_date course_start FROM assignments a ";
         $sql .= "LEFT JOIN assignment_attachments aa ON aa.assignment_id = a.id ";
         $sql .= "LEFT JOIN subjects s ON s.id = a.subject_id ";
         $sql .= "LEFT JOIN courses c ON c.id =  a.batch_id ";
         $sql .= "WHERE a.lecturer_id = ? ";
+        $sql .="AND $where_status ";
 
-        $query = $this->db->query($sql, array($lecturer_id));
+        $query = $this->db->query($sql, array($args['user_id']));
+
+        //echo $this->db->last_query();die;
 
         return $query->result();
     }
 
     public function get_by_student($student_user_id) {
-
+ 
         $sql = "SELECT course_id FROM students WHERE user_id = ?  LIMIT 1";
         $query = $this->db->query($sql, array($student_user_id));
         $stu = $query->row();

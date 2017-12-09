@@ -44,8 +44,8 @@
                             </ul>
                         </td>
                         <td>
-                            <a href="#" data-toggle="modal" data-id="<?=$subject->id?>" data-target="#create_subject_form">edit</a> |
-                            <a>remove</a>
+                            <a href="#" data-toggle="modal" data-id="<?=$subject->id?>" data-target="#create_subject_form">edit</a> 
+                            
                         </td>
                     </tr>
                 <?php } ?>

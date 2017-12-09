@@ -42,15 +42,40 @@ class Staff_model extends CI_Model
         return $query->row();
     }
 
-    public function get_stffs() {
-        $query = $this->db->select('staff.*, user.full_name, user.email, user.mobile_no, sd.designation, user.status')
+    public function get_stffs($params = array()) {
+
+        $where_keyword = "1";
+        
+        $this->db->select('staff.*, user.full_name, user.email, user.mobile_no, sd.designation, user.status')
             ->from($this->table)
             ->join('users user', 'staff.user_id =  user.id', 'inner')
             ->join('staff_designations sd', 'sd.id = staff.staff_designation_id', 'left')
             ->where('user.user_type_id', 2)
-            ->where('user.status', 1)
-            ->order_by('user.full_name')
-            ->get();
+            ->where('user.status', 1);
+            
+
+            //echo $params['desg'];die;
+
+
+            if(!empty($params['keyword'])) {
+                $keyword = $params['keyword'];
+                $this->db->where('user.mobile_no LIKE', "%{$keyword}%");
+                $this->db->or_where('user.email LIKE', "%{$keyword}%");
+                $this->db->or_where('user.full_name LIKE', "%{$keyword}%");
+ 
+            }
+
+            if(!empty($params['desg'])){
+                $this->db->where('staff.staff_designation_id', $params['desg']);
+            }
+            
+
+            $this->db->order_by('user.full_name');
+            $query = $this->db->get();
+            
+
+
+            //echo $this->db->last_query();die;
 
         return $query->result();
     }

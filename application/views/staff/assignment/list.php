@@ -6,7 +6,7 @@
     <div class="dataTable_wrapper">
 
         <div>
-            <form role="form" name="manage_ac_user_form" method="get" action="/staff/assignment" enctype="multipart/form-data">
+            <form role="form" name="manage_ac_user_form" method="get" action="/staff/assignment" >
 
                 <div class="row">
                     <div class="form-group col-sm-4">
@@ -28,16 +28,16 @@
 
                     <div class="form-group col-sm-4">
                         <label for="subject_id">Status</label>
-                        <select name="subject_id"  class="form-control">
+                        <select name="status"  class="form-control">
                             <option value="">All</option>
                             <option value="0">Draft</option>
                             <option value="1">Live</option>
-                            <option value="2">Completed</option>
+                            <option value="2">Closed</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="due_date_from">Due Date From</label>
                         <input type="text" id="due_date_from" name="due_date_from"  class="form-control">
@@ -47,13 +47,13 @@
                         <label for="due_date_to">Due Date To</label>
                         <input type="text" id="due_date_to" name="due_date_to"  class="form-control">
                     </div>
-
+-->
                      <div class="form-group col-sm-4">
                         <br/>
                         <button class="btn btn-primary" type="submit" name="btn_view" value="submit">View</button>
                     </div>
                 </div>
-
+ 
             </form>
         </div>
 
@@ -76,7 +76,7 @@
                         ?>
                     <tr>
 
-                        <td><?=$assignment->course_name , '-' .  date('Y', strtotime($assignment->course_start))?></td>
+                        <td><?=$assignment->course_name ?></td>
                         <td><?=$assignment->title?></td>
                         <td><?=$assignment->subject_name?></td>
                         <td><?=date('d-m-Y', strtotime($assignment->due_date))?></td>

@@ -3,6 +3,18 @@
 <div class="col-md-10">
     <h3 class="text-muted">Assignments</h3>
     <div class="dataTable_wrapper">
+    <form role="form" name="manage_ac_user_form" method="get" action="/student/assignment" enctype="multipart/form-data">
+
+         <div class="row">
+             <div class="form-group col-sm-4">
+                        <label for="subject_id">Status</label>
+                        <select name="subject_id"  class="form-control">
+                            <option value="">All</option>
+                            <option value="0">Open</option>
+                            <option value="1">Closed</option>
+                        </select>
+                    </div>
+         </div>
 
         <?php if(count($assignments) > 0 ) {?>
             <table class="table table-striped table-hover" id="subjects-table">
@@ -19,8 +31,11 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach($assignments as $ass) {?>
-
+                    <?php foreach($assignments as $ass) {
+                        if(isset($ass->show_repeat_assignment) && $ass->show_repeat_assignment == 0) {
+                            continue;
+                        }
+                    ?>
                         <tr class="<?= isset($ass->show_repeat_assignment) && $ass->show_repeat_assignment == 1 ? 'repeat-assignment' : '';?>">
                             <td><?=$ass->title?></td>
                             <td><?=$ass->subject_code?>:<?=$ass->subject_name?></td>

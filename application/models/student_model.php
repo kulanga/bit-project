@@ -43,7 +43,7 @@ class Student_model extends CI_Model
         $sql .= "LEFT JOIN users u ON u.id = stu.user_id ";
         $sql .= "LEFT JOIN courses c ON c.id = stu.course_id ";
         $sql .= "WHERE $where_keyword AND $where_batch_id ";
-        $sql .= "ORDER BY u.full_name ASC, u.created_at DESC";
+        $sql .= "ORDER BY stu.reg_no ASC, u.created_at DESC";
 
         $res = $this->db->query($sql);
         return $res->result();

@@ -12,9 +12,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3>What is Lorem Ipsum?</h3>
+                    <h3>ATI Mattakkuliya</h3>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        Since 1986 the Higher National Diploma in Engineering (HNDE) program has been the pioneer in producing incorporated engineers for the local and international industry. The demand in the industry for HNDE students and the knowledge to work with internationally recognized modern equipments shows the quality and the standard of the course. Compared to local universities offering engineering degrees, ours as an engineering diploma awarding institute has a lot to be proud of in terms of the curriculum, facilities and employ-ability. The course content ensures that those who complete this program are satisfactorily employed both inside Sri Lanka and abroad...
                     </p>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div style="overflow:hidden;">
-                        <img src="https://dummyimage.com/600x300/cccccc/fff">
+                        <img src="<?=base_url()?>assets/images/image.jpg">
                     </div>
                 </div>
 
@@ -32,16 +32,11 @@
                     </div>
                     <div class="smartmarquee example">
                         <ul class="container">
-                            <li> Item 1 </li>
-                            <li> Item 2 </li>
-                            <li> Item 3 </li>
-                            <li> Item 4 </li>
-                            <li> Item 5 </li>
-                            <li> Item 1 </li>
-                            <li> Item 2 </li>
-                            <li> Item 3 </li>
-                            <li> Item 4 </li>
-                            <li> Item 5 </li>
+                            <li> 14th Diplma Awarding Ceremony</li>
+                            <li> Blood Donation </li>
+                            <li> New Intake  </li>
+                            <li> Inter ATI Sportmeet </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -65,7 +60,7 @@
                                 </div>
                             <?php } ?>
 
-                            <form action="/login/index" method="post" accept-charset="utf-8">
+                            <form action="/login/index" method="post" accept-charset="utf-8" autocomplete="off">
                                 <div class="form-group">
                                     <label for="inputEmail">Username</label>
                                     <input type="test" class="form-control" id="username" name="username" placeholder="username">
@@ -73,7 +68,7 @@
 
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" autocomplete="off">
                                 </div>
 
                                 <a href="/login/forget_password">Forget password?</a>

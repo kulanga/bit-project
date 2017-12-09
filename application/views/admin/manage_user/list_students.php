@@ -2,7 +2,7 @@
 
 
 <div class="col-md-12">
-    <h3 class="text-muted">Manage Students</h3>
+    <h3 class="text-muted">Students List</h3>
 
     <div class="print-btn-wrap">
         <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
@@ -11,7 +11,7 @@
     <div class="dataTable_wrapper">
 
         <div>
-            <form role="form" name="manage_ac_user_form" method="get" action="/admin/student/list">
+            <form role="form" name="manage_ac_user_form" method="get" action="/admin/student/list" class="no-print">
 
                 <div class="row">
 

@@ -38,6 +38,7 @@ class Student_assignment extends MY_Controller {
             }
         }
         $data['assignments'] = $assignments;
+        //echo '<pre>';print_r($data['assignments']);die;
         $this->layout->view('/student/assignment/index', $data);
     }
 

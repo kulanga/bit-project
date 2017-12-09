@@ -8,12 +8,20 @@ class Staff_assignment extends MY_Controller {
 	}
 
     public function index() {
-        $this->load->model('assignment_model');
+        $this->load->model('assignment_model'); 
         $this->load->model('course_model');
 
-        $data = array();
+         $params = array(
+        'status' => $this->input->get('status'),
+        'user_id' => $this->session->userdata('user_id')
+        );
+
+        $data = array();       
         $data['courses'] = $this->course_model->get_course_list();
-        $data['assignments'] = $this->assignment_model->get_assigment_details($this->session->userdata('user_id'));
+        $data['assignments'] = $this->assignment_model->get_assigment_details($params);
+        
+
+        //$data['list'] = $this->assignment_model->get_assigment_details($params);
 
         $this->layout->view('/staff/assignment/list', $data);
     }

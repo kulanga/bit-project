@@ -57,7 +57,7 @@ class Student_home extends MY_Controller {
 
         $user = $this->user_model->get($user_id);
 
-        if(is_object($user) && $user->status == 1) {
+        if(is_object($user) && $user->status == 1 && $user->is_email_verified == 1) {
             redirect('student/timetable');
         }
         $this->layout->view('/student/home/welcome', array('user' => $user));
