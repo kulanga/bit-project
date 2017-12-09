@@ -14,6 +14,7 @@ class Admin_manage_timetable extends MY_Controller {
         $course_id = (int)$this->input->get('filter_course_id');
         $semester_id = (int)$this->input->get('semester_id');
         $sem_id =  (int)$this->input->get('filter_semester_id');
+        $filter_lecturer_id = (int)$this->input->get('filter_lecturer_id');
 
         $this->load->model('course_model');
         $this->load->model('course_semester_model');
@@ -42,12 +43,13 @@ class Admin_manage_timetable extends MY_Controller {
 
                 $data['current_semester_id'] = $sem_id > 0 ? $sem_id : $data['course']->current_semester_id;
                 $data['semester'] = $this->course_semester_model->get($data['current_semester_id']);
-                // show_error($data['current_semester_id']);
                 if(is_object($data['semester'])) {
                     $data['subjects'] = $this->course_subject_model->get_by_semester($data['semester']->id);
                 }
             }
         }
+
+        $data['params'] = $this->input->get();
 
         $this->layout->view('/admin/timetable/index', $data);
 
@@ -59,20 +61,27 @@ class Admin_manage_timetable extends MY_Controller {
 
         $response =  [];
         $course_id = $this->input->post('course_id');
+        $sem_id = $this->input->post('sem_id');
+        $lecturer_id = $this->input->post('lecturer_id');
 
-        $event_data_all = $this->timetable_model->get_events($course_id);
+        $event_data_all = $this->timetable_model->get_events($course_id, $lecturer_id, $sem_id);
 
         $events = [];
         foreach($event_data_all as $event) {
 
+            $is_recurring = $this->timetable_model->chek_is_recurring_event($event->id);
+
             $title  = $event->subject_name ;
             $title .= ' ' . $event->location_name;
+            $title .= ' Lecturer:' . $event->full_name;
             $events[] = array(
                 'id' => $event->id,
                 'title' => $title,
                 'start' => $event->date . 'T' . $event->time_from,
                 'end' => $event->date . 'T' . $event->time_to,
-                'allDay' => false
+                'allDay' => false,
+                'borderColor' => $is_recurring ? 'red' : '',
+                'has_child_events' => $is_recurring ?  1 : 0,
             );
         }
 
@@ -90,6 +99,7 @@ class Admin_manage_timetable extends MY_Controller {
         $data = [];
 
         $this->form_validation->set_rules('batch_id', 'Batch', 'trim|required|xss_clean');
+        //$this->form_validation->set_rules('semester_id', 'Semester', 'trim|required|xss_clean');
         $this->form_validation->set_rules('subject_id', 'Subject', 'trim|required|xss_clean');
         $this->form_validation->set_rules('lecturer_id', 'Lecturer', 'trim|required|xss_clean');
         $this->form_validation->set_rules('location_id', 'Location', 'trim|required|xss_clean');
@@ -123,7 +133,8 @@ class Admin_manage_timetable extends MY_Controller {
                 'time_to' => $this->input->post('event_end_time'),
                 'lecturer_id' => $this->input->post('lecturer_id'),
                 'location_id' => $this->input->post('location_id'),
-                'parent_event_id' => 0
+                'semester_id' => $this->input->post('semester_id'),
+                'parent_event_id' => 0,
             );
 
             $save_events[0] = $save_event;
@@ -157,16 +168,24 @@ class Admin_manage_timetable extends MY_Controller {
                 } while ($next_date < $repeat_end_date);
             }
 
+            $validation_errors = $this->validate_events_before_save($save_events);
             $parent_event_id = 0;
-            foreach($save_events as $key => $event) {
 
-                $event['parent_event_id'] = $parent_event_id;
-                $eid = $this->timetable_model->insert($event);
+            if($validation_errors == '') {
 
-                //parent event
-                if($key == 0) {
-                    $parent_event_id = $eid;
+                foreach($save_events as $key => $event) {
+
+                    $event['parent_event_id'] = $parent_event_id;
+                    $eid = $this->timetable_model->insert($event);
+
+                    //parent event
+                    if($key == 0) {
+                        $parent_event_id = $eid;
+                    }
                 }
+            } else {
+               $data['success'] = 0;
+               $data['errors'] = $validation_errors;
             }
 
             if($parent_event_id > 0 ) {
@@ -180,11 +199,16 @@ class Admin_manage_timetable extends MY_Controller {
         exit;
     }
 
-    public function delete($event_id = 0) {
+    public function delete($event_id = 0, $remove_childs = 0) {
 
         if($event_id > 0 ) {
             $this->load->model('timetable_model');
             $this->timetable_model->delete($event_id);
+
+            //Delete all repeat events
+            if($remove_childs == 1 ) {
+                $this->timetable_model->delete_by_parentid($event_id);
+            }
             echo '1'; die;
         }
         echo '0'; die;
@@ -201,5 +225,27 @@ class Admin_manage_timetable extends MY_Controller {
             return false;
         }
         return true;
+    }
+
+    private function validate_events_before_save($events) {
+
+        $this->load->model('timetable_model');
+
+        $error = '';
+
+        foreach($events as $event) {
+
+            $ret = $this->timetable_model->check_lecturer_is_availeble($event['lecturer_id'], $event['date'], $event['time_from'], $event['time_to']);
+            if(!$ret) {
+                $error = "<p>Selected Lecturer is not available from {$event['time_from']} to {$event['time_to']} on {$event['date']}</p>";
+                break;
+            }
+
+
+
+        }
+
+        return $error;
+
     }
 }

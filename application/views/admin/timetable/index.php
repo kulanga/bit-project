@@ -13,7 +13,7 @@
         <div class="timetable-filters dataTable_wrapper">
             <form name="timetable_fileters_form" id="timetable_fileters_form" method="get" action="/admin/timetable">
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label>Batch</label>
                         <select name="filter_course_id" id="filter_course_id" class="form-control">
                             <?php foreach ($courses as $cs) {?>
@@ -25,14 +25,24 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label>Semester</label>
                         <select name="filter_semester_id" id="filter_semester_id" class="form-control">
                             <option  value="0">-</option>
                             <?php foreach ($semesters as $sem) {?>
-                                <option  value="<?=$sem->id?>" 
+                                <option  value="<?=$sem->id?>"
                                 <?=$sem->id == $current_semester_id ? 'selected="selected"' : '' ?>>
                                 <?= 'Year ' . $sem->semester_year . ' Semester#' . $sem->semester_number;?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3 pad-left-0">
+                        <label for="filter_lecturer_id">Lecturer <span class="required">*</span></label>
+                        <select id="filter_lecturer_id" name="filter_lecturer_id" class="form-control">
+                            <option value="0">-</option>
+                            <?php foreach($lecturers as $lecturer) {?>
+                                <option <?php echo isset($params['filter_lecturer_id']) && $params['filter_lecturer_id'] == $lecturer->user_id ? 'selected="selected"' : '';?>  value="<?=$lecturer->user_id?>"><?=$lecturer->full_name?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -60,7 +70,7 @@
             <div class="modal-body">
                 <div class="validation-errors" style="display:none;"></div>
                 <form id="careate_timetable_event_form" name="careate_timetable_event_form" role="form" method="post" action="/admin/admin_manage_timetable/save_event">
-                    
+
                     <div class="form-group col-md-6 pad-left-0">
                         <label>Batch:</label><br/>
                         <input type="hidden" name="batch_id" value="<?=$course_id?>">
@@ -111,7 +121,7 @@
                     <div class="form-group" style="overflow:hidden">
                         <label class="col-sm-6 pad-left-0">Start Time <span class="required">*</span></label>
                         <label class="col-sm-6 pad-left-0">End Time <span class="required">*</span></label>
-                        
+
                         <div class="col-sm-12 pad-left-0">
                             <div class='col-sm-6 pad-left-0 input-groupx' id=''>
                                 <input type='text' id="event_start_time" name="event_start_time" class="form-control"  readonly="readonly" />
@@ -166,7 +176,12 @@
 
 <script type="text/javascript">
     var timetable_course_id = '<?=$course_id?>';
+    var filter_semester_id = '<?php if(isset($params['filter_semester_id'])) { echo $params['filter_semester_id']; } else {echo $current_semester_id;}?>'
+    var filter_lecturer_id = '<?=isset($params['filter_lecturer_id']) ? $params['filter_lecturer_id'] : 0?>'
+
     function save_timetable_event(post_data) {
+
+        post_data.push({name:'semester_id', value:filter_semester_id});
         $.ajax({
             url: '/admin/admin_manage_timetable/save_event',
             type: 'post',
@@ -185,7 +200,7 @@
         });
     }
 
-    $(document).ready(function() {   
+    $(document).ready(function() {
 
         $('#filter_course_id').on('change', function(){
             $('#timetable_fileters_form').submit();
@@ -193,12 +208,12 @@
 
         $('#modal-btn-save-event').on('click', function() {
             var $content = $('#careate_timetable_event_form');
-          
+
             if($content.find('#subject_code').val() == '') {
                 alert("Please enter subject code.");
                 return false;
             }
-            save_timetable_event($content.serialize());
+            save_timetable_event($content.serializeArray());
         });
 
         $('#form_datetime').datetimepicker({
@@ -256,7 +271,7 @@
                 return  val;
             }
         });
-    
+
         $('#calendar').fullCalendar({
              customButtons: {
                 myCustomButton: {
@@ -272,7 +287,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-        
+
             weekends: false,
             defaultDate: moment().format(),
             defaultView: 'agendaWeek',
@@ -282,7 +297,7 @@
                 start: '08:30',
                 end: '16:15',
             },
-            
+
             eventSources: [
                 // your event source
                 {
@@ -290,9 +305,12 @@
                     type: 'POST',
                     data: {
                         course_id: timetable_course_id,
+                        sem_id: filter_semester_id,
+                        lecturer_id: filter_lecturer_id
+
                     },
                     error: function() {
-                        alert('there was an error while fetching events!');
+                        alert('there was an error occurred while fetching events!');
                     },
                     color: '#AEE6EA',   // a non-ajax option
                     textColor: 'black' // a non-ajax option
@@ -302,7 +320,17 @@
             eventRender: function(event, element) {
                 element.find('.fc-content').prepend("<span style='float:right;margin:2px;' class='delete-event label label-danger'>X</span>" );
                 element.find(".delete-event").click(function() {
-                    bootbox.confirm("Are you sure, You want to delete this from timetable ?", function(confirm) {
+
+                    var is_parent = event.has_child_events;
+
+                    var confirm_popup_html = "Are you sure, You want to delete this from timetable ?";
+                    if(is_parent == 1) {
+                        confirm_popup_html  = "<p>Are you sure, You want to delete this from timetable ?</p>";
+                        confirm_popup_html += "<p>Please note that, this event has repeat events.</p>";
+                        confirm_popup_html += "<p><input type='checkbox' value='1' id='delete_all'/> <strong>Delete all repeate event of this event.</strong></p>"
+                    }
+
+                    bootbox.confirm(confirm_popup_html, function(confirm) {
                         if(confirm) {
                             delete_timetable_event(event._id);
                         }
@@ -313,12 +341,14 @@
     });
 
     function delete_timetable_event(id) {
+        var remove_childs = $('#delete_all').is(':checked') ? 1 : 0;
         $.ajax({
-            url: '/admin/admin_manage_timetable/delete/' + id,
+            url: '/admin/admin_manage_timetable/delete/' + id + '/' + remove_childs,
             type: 'get',
             success: function(data) {
                 if(data == '1') {
-                    $('#calendar').fullCalendar('removeEvents', id);
+                    $('#calendar').fullCalendar( 'refetchEvents' );
+                    //$('#calendar').fullCalendar('removeEvents', id);
                 } else {
                     bootbox.alert('An error occured. Please reload page the page and try again.')
                 }

@@ -5,7 +5,11 @@
 <div class="col-md-12">
 
 
-<h3 class="text-muted">Manage Subjects</h3>
+    <h3 class="text-muted">Manage Subjects</h3>
+
+    <div class="print-btn-wrap">
+        <a href="javascript:window.print()" class="print-btn no-print">&nbsp;&nbsp;Print&nbsp;&nbsp;</a>
+    </div>
 
     <div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create_subject_form" data-id="0">Add New</button>
@@ -19,14 +23,14 @@
                     <th>Subject</th>
                     <th>Course Categories</th>
                     <th>Assigned To</th>
-                    <th>Acton</th>
+                    <th class="no-print">Acton</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($list as $subject) { ?>
                     <tr id="subject-row-<?=$subject->id?>" class="subject-row" data-id="<?=$subject->id?>">
-                        <td class="subject-name" ><?=$subject->code;?></td>
-                        <td class="subject-code" ><?=$subject->name;?></td>
+                        <td class="subject-code" ><?=$subject->code;?></td>
+                        <td class="subject-name" ><?=$subject->name;?></td>
                         <td class="course-cat">
                             <ul>
                                 <?php foreach($subject->category as $cc) { ?>
@@ -43,9 +47,9 @@
                                 <?php } ?>
                             </ul>
                         </td>
-                        <td>
-                            <a href="#" data-toggle="modal" data-id="<?=$subject->id?>" data-target="#create_subject_form">edit</a> 
-                            
+                        <td class="no-print">
+                            <a href="#" data-toggle="modal" data-id="<?=$subject->id?>" data-target="#create_subject_form">edit</a>
+                            <!-- <a>remove</a> -->
                         </td>
                     </tr>
                 <?php } ?>
@@ -86,7 +90,7 @@
                     <input type="hidden" value="" name="subject_id" id="subject_id">
 
                     <div class="form-group">
-                        <label for="subject_code">Leturers<span class="required">*</span></label>
+                        <label>Leturers<span class="required">*</span></label>
                         <div class="col-md-12" style="max-height:160px;overflow-y:scroll;">
                             <?php foreach($staff as $stf) {?>
                                 <input type="checkbox" name="assigned_staff[]" id="staff_<?php echo $stf->id?>" value="<?=$stf->id?>"/>

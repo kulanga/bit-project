@@ -65,4 +65,5 @@ CREATE TABLE `user_password_recoveries` (
   INDEX `index3` (`reset_key` ASC));
 
 
-
+ALTER TABLE `timetables`
+ADD COLUMN `semester_id` INT NOT NULL DEFAULT 0 AFTER `course_id`;
