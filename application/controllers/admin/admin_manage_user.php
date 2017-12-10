@@ -194,7 +194,8 @@ class Admin_manage_user extends MY_Controller {
         $params = array(
             'keyword' => $this->input->get('keyword'),
             'batch_id' => $this->input->get('batch_id'),
-            'user_status' => $this->input->get('user_status')
+            'user_status' => $this->input->get('user_status'),
+            'course_status' => $this->input->get('course_status')
         );
 
         $data['students'] = $this->student_model->list_students($params);

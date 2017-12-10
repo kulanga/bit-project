@@ -38,11 +38,16 @@ class Student_model extends CI_Model
             $where_batch_id = "u.status = '{$params['user_status']}'";
         }
 
+        $where_course_status = "1";
+        if(!empty($params['course_status'])) {
+            $where_course_status = "c.status = '{$params['course_status']}'";
+        }
+
         $sql  = "SELECT stu.*, u.full_name, u.email, u.mobile_no, u.status AS user_status, c.name AS course_name ";
         $sql .= "FROM students stu ";
         $sql .= "LEFT JOIN users u ON u.id = stu.user_id ";
         $sql .= "LEFT JOIN courses c ON c.id = stu.course_id ";
-        $sql .= "WHERE $where_keyword AND $where_batch_id ";
+        $sql .= "WHERE $where_keyword AND $where_batch_id AND $where_course_status ";
         $sql .= "ORDER BY stu.reg_no ASC, u.created_at DESC";
 
         $res = $this->db->query($sql);

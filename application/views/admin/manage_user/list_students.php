@@ -30,7 +30,16 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-2">
+                        <label for="course_status">Course Status</label>
+                        <select name="course_status"  class="form-control">
+                            <option value="">All</option>
+                            <option value="1" <?= $search_params['course_status'] == 1 ? 'selected="selected"' : '';?>>Live</option>
+                            <option value="2" <?= $search_params['course_status'] == 2 ? 'selected="selected"' : '';?>>Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-2">
                         <label for="user_status">Status</label>
                         <select name="user_status"  class="form-control">
                             <option value="">All Status</option>
@@ -40,7 +49,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-sm-3 no-print">
+                    <div class="form-group col-sm-2 no-print">
                         <br/>
                         <button class="btn btn-primary" type="submit" value="submit">View</button>
                     </div>
